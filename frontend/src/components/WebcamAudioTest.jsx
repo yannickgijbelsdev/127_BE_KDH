@@ -79,10 +79,21 @@ const WebcamAudioTest = () => {
         microphone: audioDevice?.label || 'Default Microphone',
       });
 
+      setShowPermissionRequest(false);
       setIsRunning(true);
     } catch (error) {
       console.error('Error accessing media devices:', error);
-      alert('Kon geen toegang krijgen tot camera/microfoon. Controleer uw permissies.');
+      
+      let errorMessage = 'Kon geen toegang krijgen tot camera/microfoon.';
+      if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+        errorMessage = 'Toestemming geweigerd. Geef toestemming voor camera en microfoon in uw browserinstellingen.';
+      } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+        errorMessage = 'Geen camera of microfoon gevonden. Controleer uw apparaten.';
+      } else if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+        errorMessage = 'Camera of microfoon wordt al gebruikt door een ander programma.';
+      }
+      
+      setPermissionError(errorMessage);
     }
   };
 
