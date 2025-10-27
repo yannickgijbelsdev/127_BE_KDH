@@ -38,49 +38,6 @@ const HalloweenDecoration = () => {
 
   return (
     <>
-      {/* Animated spider */}
-      <div 
-        className="fixed left-1/2 pointer-events-none z-50"
-        style={{ 
-          top: `${spiderY}px`,
-          transform: 'translateX(-50%)',
-          transition: 'top 0.05s linear'
-        }}
-      >
-        {/* Spider web thread */}
-        <div 
-          className="absolute left-1/2 bg-[#9aa0a6] opacity-30"
-          style={{
-            width: '1px',
-            height: `${spiderY + 50}px`,
-            bottom: '20px',
-            transform: 'translateX(-50%)'
-          }}
-        />
-        
-        {/* Spider */}
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          {/* Body */}
-          <ellipse cx="20" cy="20" rx="8" ry="10" fill="#1a1a1a" />
-          <ellipse cx="20" cy="14" rx="6" ry="7" fill="#2a2a2a" />
-          
-          {/* Legs */}
-          <path d="M 12 18 Q 5 15, 2 12" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 12 20 Q 4 20, 1 20" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 12 22 Q 5 25, 2 28" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 12 24 Q 6 28, 3 32" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          
-          <path d="M 28 18 Q 35 15, 38 12" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 28 20 Q 36 20, 39 20" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 28 22 Q 35 25, 38 28" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          <path d="M 28 24 Q 34 28, 37 32" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-          
-          {/* Eyes */}
-          <circle cx="17" cy="13" r="1.5" fill="#ff0000" />
-          <circle cx="23" cy="13" r="1.5" fill="#ff0000" />
-        </svg>
-      </div>
-
       {/* Floating Ghosts */}
       {ghosts.map((ghost, index) => (
         <div
