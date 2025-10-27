@@ -396,7 +396,66 @@ const PasswordGenerator = () => {
                   <p className="text-xs text-[#9aa0a6] mt-1 text-right">{strength.score}/100</p>
                 </div>
 
+                {/* Autosoft01 Warning */}
+                {isAutosoftPassword && (
+                  <div className="bg-[#FF0000] bg-opacity-20 border-2 border-[#FF0000] rounded-lg p-4 animate-pulse">
+                    <div className="flex items-center gap-2 mb-2">
+                      <AlertTriangle className="w-5 h-5 text-[#FF0000]" />
+                      <h3 className="text-[#FF0000] font-bold">WAARSCHUWING: Test Wachtwoord Gedetecteerd!</h3>
+                    </div>
+                    <p className="text-[#e8eaed] text-sm mb-3">
+                      Dit is een test wachtwoord dat niet veilig is. Verander dit onmiddellijk naar een sterker wachtwoord.
+                    </p>
+                    <button
+                      onClick={() => setShowMemorableForm(true)}
+                      className="w-full px-4 py-2 bg-[#FF0000] hover:bg-[#CC0000] text-white rounded-lg font-medium transition-colors"
+                    >
+                      Maak een veilig wachtwoord
+                    </button>
+                  </div>
+                )}
+
+                {/* Weak/Medium Password Suggestion */}
+                {!isAutosoftPassword && strength.score < 60 && strength.score > 0 && (
+                  <div className="bg-[#FFA500] bg-opacity-20 border border-[#FFA500] rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Lightbulb className="w-5 h-5 text-[#FFA500]" />
+                      <h3 className="text-[#FFA500] font-semibold">Suggestie</h3>
+                    </div>
+                    <p className="text-[#e8eaed] text-sm mb-3">
+                      Je wachtwoord is niet sterk genoeg. Probeer een van deze opties:
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={generateSuggestion()}
+                          readOnly
+                          className="flex-1 bg-[#202124] text-[#e8eaed] px-3 py-2 rounded-lg border border-[#5f6368] font-mono text-xs"
+                        />
+                        <button
+                          onClick={() => {
+                            const suggestion = generateSuggestion();
+                            setCustomPassword(suggestion);
+                            copyToClipboard(suggestion);
+                          }}
+                          className="px-3 py-2 bg-[#FFA500] hover:bg-[#FF8C00] text-[#202124] rounded-lg transition-colors text-sm font-medium"
+                        >
+                          Gebruik dit
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => setShowMemorableForm(true)}
+                        className="w-full px-4 py-2 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors text-sm"
+                      >
+                        Of maak een memorabel wachtwoord
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {/* Strength Tips */}
+                {!isAutosoftPassword && (
                 <div className="bg-[#202124] rounded-lg p-4 border border-[#5f6368]">
                   <h3 className="text-sm font-semibold text-[#e8eaed] mb-2">Tips voor sterker wachtwoord:</h3>
                   <ul className="text-xs text-[#9aa0a6] space-y-1">
@@ -406,8 +465,9 @@ const PasswordGenerator = () => {
                     <li>• Gebruik geen veelvoorkomende woorden</li>
                   </ul>
                 </div>
+                )}
 
-                {strength.score >= 80 && (
+                {!isAutosoftPassword && strength.score >= 80 && (
                   <div className="bg-[#9C27B0] bg-opacity-20 border border-[#9C27B0] rounded-lg p-4">
                     <p className="text-[#e8eaed] text-center font-semibold">
                       Uitstekend wachtwoord!
