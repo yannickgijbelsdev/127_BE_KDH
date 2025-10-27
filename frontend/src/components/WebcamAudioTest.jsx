@@ -48,8 +48,13 @@ const WebcamAudioTest = () => {
   const handleClick = async () => {
     if (showInstructions) {
       setShowInstructions(false);
-      await startCamera();
+      setShowPermissionRequest(true);
     }
+  };
+
+  const requestPermissions = async () => {
+    setPermissionError('');
+    await startCamera();
   };
 
   const startCamera = async () => {
