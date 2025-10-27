@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Progress } from './ui/progress';
+import { ArrowLeft } from 'lucide-react';
 
 // Build version - Update this with each change
 const BUILD_VERSION = '1.1.6';
