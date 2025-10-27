@@ -159,17 +159,26 @@ const PixelTest = () => {
   const currentColorObj = colors.find(c => c.value === currentColor);
 
   return (
-    <div 
-      onClick={handleClick}
-      className="relative min-h-screen"
-      style={{ 
-        backgroundColor: currentColorObj.hex,
-        cursor: isFullscreen ? 'none' : 'pointer',
-        transition: 'none'
-      }}
-    >
-      {/* Instructions when not in fullscreen */}
-      {!isFullscreen && (
+    <>
+      <style>{`
+        .no-transition,
+        .no-transition * {
+          transition: none !important;
+          -webkit-transition: none !important;
+          -moz-transition: none !important;
+          -o-transition: none !important;
+        }
+      `}</style>
+      <div 
+        onClick={handleClick}
+        className="relative min-h-screen no-transition"
+        style={{ 
+          backgroundColor: currentColorObj.hex,
+          cursor: isFullscreen ? 'none' : 'pointer'
+        }}
+      >
+        {/* Instructions when not in fullscreen */}
+        {!isFullscreen && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
           <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 max-w-md border border-[#5f6368]">
             <div className="mb-6 flex flex-col items-center">
