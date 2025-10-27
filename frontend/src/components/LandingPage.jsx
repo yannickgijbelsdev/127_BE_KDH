@@ -53,17 +53,22 @@ const LandingPage = () => {
               : 'shadow-lg hover:shadow-2xl'
           }`}
         >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Zoek naar tools..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              className="w-full pl-14 pr-4 py-4 text-base bg-[#303134] border border-[#5f6368] text-[#e8eaed] rounded-full focus:outline-none focus:border-[#8ab4f8] transition-all placeholder-gray-400"
-            />
+          <div className="relative group">
+            {/* Gradient border on hover */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full opacity-0 group-hover:opacity-75 blur-sm transition-opacity duration-300"></div>
+            
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
+              <input
+                type="text"
+                placeholder="Zoek naar tools..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="relative w-full pl-14 pr-4 py-4 text-base bg-[#303134] border border-[#5f6368] text-[#e8eaed] rounded-full focus:outline-none focus:border-[#8ab4f8] transition-all placeholder-gray-400"
+              />
+            </div>
           </div>
 
           {/* Search Results Dropdown */}
