@@ -62,6 +62,7 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-[#202124] flex flex-col items-center justify-center px-6">
+      <HalloweenDecoration />
       {/* Logo */}
       <div className="mb-8 animate-fade-in">
         <img 
