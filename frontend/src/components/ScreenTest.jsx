@@ -41,17 +41,6 @@ const ScreenTest = () => {
       return { vendor: 'Unknown', renderer: 'Unknown' };
     };
 
-    // Estimate brightness (browsers cannot measure exact nits)
-    const estimateBrightness = () => {
-      // Most modern displays range from 250-500 nits
-      // We can only detect if HDR is supported, not exact nits
-      const hdrSupported = window.matchMedia('(dynamic-range: high)').matches;
-      if (hdrSupported) {
-        return '500+ nits (HDR)';
-      }
-      return '~300 nits (geschat)';
-    };
-
     const gpu = getGPUInfo();
     const info = {
       resolution: `${window.screen.width} x ${window.screen.height}`,
@@ -59,7 +48,6 @@ const ScreenTest = () => {
       colorDepth: `${window.screen.colorDepth}-bit`,
       pixelRatio: window.devicePixelRatio,
       orientation: window.screen.orientation?.type || 'Unknown',
-      brightness: estimateBrightness(),
       gpuVendor: gpu.vendor,
       gpuRenderer: gpu.renderer,
     };
