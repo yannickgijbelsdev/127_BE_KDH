@@ -188,7 +188,7 @@ const PrinterTest = () => {
         <div class="header">
           <img src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" alt="127 Logo" />
           <h1>Printer Kwaliteitstest</h1>
-          <p><strong>Pagina ${i} van ${numPages}</strong> | 127.be Printer Tester</p>
+          <p><strong>Pagina ${i} van ${numPages}</strong></p>
         </div>
       `;
 
@@ -196,7 +196,7 @@ const PrinterTest = () => {
       if (includeText) {
         content += `
           <div class="test-section">
-            <h2>📝 Tekstkwaliteitstest</h2>
+            <h2>Tekstkwaliteitstest</h2>
             <div class="text-sample">
               <p style="font-size: 8px;"><strong>Extra Klein (8px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
               <p style="font-size: 10px;"><strong>Klein (10px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
@@ -213,7 +213,7 @@ const PrinterTest = () => {
       if (includeColorBars) {
         content += `
           <div class="test-section">
-            <h2>🎨 Kleurenkwaliteitstest</h2>
+            <h2>Kleurenkwaliteitstest</h2>
             <div class="color-label">Rood (RGB: 255, 0, 0)</div>
             <div class="color-bar" style="background: rgb(255, 0, 0);"></div>
             
@@ -242,7 +242,7 @@ const PrinterTest = () => {
       if (includeLines) {
         content += `
           <div class="test-section">
-            <h2>📏 Lijn- en Rechtuidheidstest</h2>
+            <h2>Lijn- en Rechtuidheidstest</h2>
             <div class="test-lines">
               <div class="line-label">Dunne lijn (1px)</div>
               <div class="line" style="height: 1px;"></div>
@@ -267,7 +267,7 @@ const PrinterTest = () => {
       if (includeAlignment) {
         content += `
           <div class="test-section">
-            <h2>⊞ Uitlijnings- en Margetest</h2>
+            <h2>Uitlijnings- en Margetest</h2>
             <p style="font-size: 12px; margin-bottom: 10px;">Test de uitlijning en marges van uw printer. Alle cellen moeten gelijk zijn.</p>
             <div class="alignment-grid">
               <div class="grid-lines">
