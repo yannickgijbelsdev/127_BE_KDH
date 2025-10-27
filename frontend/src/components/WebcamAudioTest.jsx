@@ -5,7 +5,7 @@ import { ArrowLeft, Video, Mic, Download, Circle, Square } from 'lucide-react';
 import { Button } from './ui/button';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.0';
+const BUILD_VERSION = '1.3.1';
 
 const WebcamAudioTest = () => {
   const [isLoading, setIsLoading] = useState(true);
