@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Monitor, Printer, Activity, Video } from 'lucide-react';
+import { Search, Monitor, Printer, Activity, Video, Lock } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.5';
+const BUILD_VERSION = '1.3.6';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -43,6 +43,14 @@ const LandingPage = () => {
       keywords: ['webcam', 'camera', 'audio', 'microfoon', 'mic', 'opname', 'video', 'geluid'],
       path: '/wea',
       icon: Video,
+    },
+    {
+      id: 'password',
+      name: 'Password Generator',
+      description: 'Maak sterke wachtwoorden en test de sterkte van uw wachtwoord',
+      keywords: ['password', 'wachtwoord', 'generator', 'sterkte', 'security', 'beveiliging', 'generator'],
+      path: '/password',
+      icon: Lock,
     },
   ];
 
