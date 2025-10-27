@@ -4,7 +4,7 @@ import { Progress } from './ui/progress';
 import { ArrowLeft } from 'lucide-react';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.2.6';
+const BUILD_VERSION = '1.2.7';
 
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);
