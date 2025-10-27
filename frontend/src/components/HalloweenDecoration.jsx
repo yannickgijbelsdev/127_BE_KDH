@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 const HalloweenDecoration = () => {
   const [spiderY, setSpiderY] = useState(-50);
+  const [ghosts, setGhosts] = useState([
+    { id: 1, x: 10, y: 20, speed: 0.5, direction: 1 },
+    { id: 2, x: 80, y: 50, speed: 0.7, direction: -1 },
+    { id: 3, x: 50, y: 80, speed: 0.6, direction: 1 },
+  ]);
 
   useEffect(() => {
     // Animate spider down
@@ -18,103 +23,33 @@ const HalloweenDecoration = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    // Animate ghosts floating
+    const animateGhosts = () => {
+      setGhosts(prev => prev.map(ghost => {
+        let newX = ghost.x + (ghost.speed * ghost.direction);
+        let newDirection = ghost.direction;
+        
+        // Bounce off edges
+        if (newX > 95 || newX < 5) {
+          newDirection = -ghost.direction;
+          newX = ghost.x + (ghost.speed * newDirection);
+        }
+        
+        return {
+          ...ghost,
+          x: newX,
+          direction: newDirection,
+        };
+      }));
+    };
+
+    const interval = setInterval(animateGhosts, 50);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      {/* Spider webs in corners */}
-      <div className="fixed top-0 left-0 w-48 h-48 opacity-30 pointer-events-none z-50">
-        <svg viewBox="0 0 200 200" className="w-full h-full">
-          <path
-            d="M 10 10 Q 50 30, 100 10 T 190 10"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 10 Q 30 50, 10 100 T 10 190"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 10 L 100 100"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 30 Q 40 40, 80 30"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 10 50 Q 50 55, 90 50"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 30 10 Q 35 40, 30 80"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 50 10 Q 55 50, 50 90"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-        </svg>
-      </div>
-
-      <div className="fixed top-0 right-0 w-48 h-48 opacity-30 pointer-events-none z-50" style={{ transform: 'scaleX(-1)' }}>
-        <svg viewBox="0 0 200 200" className="w-full h-full">
-          <path
-            d="M 10 10 Q 50 30, 100 10 T 190 10"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 10 Q 30 50, 10 100 T 10 190"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 10 L 100 100"
-            stroke="#9aa0a6"
-            strokeWidth="1"
-            fill="none"
-          />
-          <path
-            d="M 10 30 Q 40 40, 80 30"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 10 50 Q 50 55, 90 50"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 30 10 Q 35 40, 30 80"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-          <path
-            d="M 50 10 Q 55 50, 50 90"
-            stroke="#9aa0a6"
-            strokeWidth="0.5"
-            fill="none"
-          />
-        </svg>
-      </div>
-
       {/* Animated spider */}
       <div 
         className="fixed left-1/2 pointer-events-none z-50"
@@ -157,6 +92,73 @@ const HalloweenDecoration = () => {
           <circle cx="23" cy="13" r="1.5" fill="#ff0000" />
         </svg>
       </div>
+
+      {/* Floating Ghosts */}
+      {ghosts.map((ghost, index) => (
+        <div
+          key={ghost.id}
+          className="fixed pointer-events-none z-50 animate-float"
+          style={{
+            left: `${ghost.x}%`,
+            top: `${ghost.y}%`,
+            animation: `float ${3 + index * 0.5}s ease-in-out infinite, sway ${2 + index * 0.3}s ease-in-out infinite`,
+            opacity: 0.7,
+          }}
+        >
+          <svg width="60" height="80" viewBox="0 0 60 80">
+            {/* Ghost body */}
+            <path
+              d="M 30 10 Q 10 10, 10 30 L 10 60 Q 10 70, 15 70 Q 20 65, 25 70 Q 30 75, 35 70 Q 40 65, 45 70 Q 50 70, 50 60 L 50 30 Q 50 10, 30 10 Z"
+              fill="#ffffff"
+              opacity="0.8"
+              filter="url(#glow)"
+            />
+            
+            {/* Eyes */}
+            <ellipse cx="22" cy="30" rx="4" ry="6" fill="#000000" />
+            <ellipse cx="38" cy="30" rx="4" ry="6" fill="#000000" />
+            
+            {/* Mouth */}
+            <path
+              d="M 25 45 Q 30 50, 35 45"
+              stroke="#000000"
+              strokeWidth="2"
+              fill="none"
+            />
+            
+            {/* Glow effect */}
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      ))}
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        
+        @keyframes sway {
+          0%, 100% {
+            transform: translateX(0px) rotate(-5deg);
+          }
+          50% {
+            transform: translateX(15px) rotate(5deg);
+          }
+        }
+      `}</style>
     </>
   );
 };
