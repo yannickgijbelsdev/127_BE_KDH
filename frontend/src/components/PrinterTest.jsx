@@ -57,59 +57,117 @@ const PrinterTest = () => {
         <title>Printer Test - 127.be</title>
         <style>
           @media print {
-            @page { margin: 0; }
-            body { margin: 1cm; }
+            @page { 
+              margin: 15mm;
+              size: A4;
+            }
+            body { 
+              margin: 0;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
           }
           body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            color: #000;
           }
           .page {
             page-break-after: always;
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
+            background: white;
           }
           .page:last-child {
             page-break-after: auto;
           }
           .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+          }
+          .header img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+          }
+          .header h1 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #000;
+          }
+          .header p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #333;
+          }
+          .test-section {
+            margin: 25px 0;
+            padding: 15px;
+            border: 2px solid #000;
+            page-break-inside: avoid;
+          }
+          .test-section h2 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            color: #000;
             border-bottom: 2px solid #000;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
           }
           .color-bar {
-            height: 50px;
-            margin: 10px 0;
+            height: 40px;
+            margin: 8px 0;
+            border: 1px solid #000;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
-          .test-lines {
-            margin: 20px 0;
+          .color-label {
+            font-size: 12px;
+            margin: 2px 0 5px 0;
+            font-weight: bold;
           }
-          .line {
+          .test-lines .line {
             height: 2px;
             background: #000;
-            margin: 20px 0;
+            margin: 15px 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .line-label {
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 3px;
           }
           .alignment-grid {
             border: 2px solid #000;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 0;
+            margin: 15px 0;
           }
           .grid-lines {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 0;
           }
           .grid-cell {
             border: 1px solid #000;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
           .text-sample {
-            margin: 20px 0;
-            line-height: 1.6;
+            margin: 10px 0;
+          }
+          .text-sample p {
+            margin: 8px 0;
+            line-height: 1.4;
           }
         </style>
       </head>
@@ -120,22 +178,25 @@ const PrinterTest = () => {
       content += `<div class="page">`;
       content += `
         <div class="header">
-          <h1>Printer Test - Pagina ${i}/${numPages}</h1>
-          <p>127.be Printer Tester</p>
+          <img src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" alt="127 Logo" />
+          <h1>Printer Kwaliteitstest</h1>
+          <p><strong>Pagina ${i} van ${numPages}</strong> | 127.be Printer Tester</p>
         </div>
       `;
 
       // Random text test
       if (includeText) {
         content += `
-          <div class="text-sample">
-            <h2>Teksttest</h2>
-            <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p style="font-size: 8px;">Extra kleine tekst (8px) - The quick brown fox jumps over the lazy dog</p>
-            <p style="font-size: 10px;">Kleine tekst (10px) - The quick brown fox jumps over the lazy dog</p>
-            <p style="font-size: 12px;">Normale tekst (12px) - The quick brown fox jumps over the lazy dog</p>
-            <p style="font-size: 14px;">Medium tekst (14px) - The quick brown fox jumps over the lazy dog</p>
-            <p style="font-size: 16px;">Grote tekst (16px) - The quick brown fox jumps over the lazy dog</p>
+          <div class="test-section">
+            <h2>📝 Tekstkwaliteitstest</h2>
+            <div class="text-sample">
+              <p style="font-size: 8px;"><strong>Extra Klein (8px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+              <p style="font-size: 10px;"><strong>Klein (10px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+              <p style="font-size: 12px;"><strong>Normaal (12px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+              <p style="font-size: 14px;"><strong>Medium (14px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+              <p style="font-size: 16px;"><strong>Groot (16px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+              <p style="font-size: 18px;"><strong>Extra Groot (18px):</strong> The quick brown fox jumps over the lazy dog. 0123456789</p>
+            </div>
           </div>
         `;
       }
@@ -143,15 +204,28 @@ const PrinterTest = () => {
       // Color bars test
       if (includeColorBars) {
         content += `
-          <div style="margin: 20px 0;">
-            <h2>Kleurentest</h2>
-            <div class="color-bar" style="background: #FF0000;"></div>
-            <div class="color-bar" style="background: #00FF00;"></div>
-            <div class="color-bar" style="background: #0000FF;"></div>
-            <div class="color-bar" style="background: #FFFF00;"></div>
-            <div class="color-bar" style="background: #FF00FF;"></div>
-            <div class="color-bar" style="background: #00FFFF;"></div>
-            <div class="color-bar" style="background: linear-gradient(to right, #000000, #FFFFFF);"></div>
+          <div class="test-section">
+            <h2>🎨 Kleurenkwaliteitstest</h2>
+            <div class="color-label">Rood (RGB: 255, 0, 0)</div>
+            <div class="color-bar" style="background: rgb(255, 0, 0);"></div>
+            
+            <div class="color-label">Groen (RGB: 0, 255, 0)</div>
+            <div class="color-bar" style="background: rgb(0, 255, 0);"></div>
+            
+            <div class="color-label">Blauw (RGB: 0, 0, 255)</div>
+            <div class="color-bar" style="background: rgb(0, 0, 255);"></div>
+            
+            <div class="color-label">Geel (RGB: 255, 255, 0)</div>
+            <div class="color-bar" style="background: rgb(255, 255, 0);"></div>
+            
+            <div class="color-label">Magenta (RGB: 255, 0, 255)</div>
+            <div class="color-bar" style="background: rgb(255, 0, 255);"></div>
+            
+            <div class="color-label">Cyaan (RGB: 0, 255, 255)</div>
+            <div class="color-bar" style="background: rgb(0, 255, 255);"></div>
+            
+            <div class="color-label">Zwart naar Wit Gradiënt</div>
+            <div class="color-bar" style="background: linear-gradient(to right, rgb(0,0,0), rgb(255,255,255));"></div>
           </div>
         `;
       }
@@ -159,14 +233,24 @@ const PrinterTest = () => {
       // Lines test
       if (includeLines) {
         content += `
-          <div class="test-lines">
-            <h2>Lijntest (rechtheid)</h2>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line" style="height: 1px;"></div>
-            <div class="line" style="height: 3px;"></div>
-            <div class="line" style="height: 5px;"></div>
+          <div class="test-section">
+            <h2>📏 Lijn- en Rechtuidheidstest</h2>
+            <div class="test-lines">
+              <div class="line-label">Dunne lijn (1px)</div>
+              <div class="line" style="height: 1px;"></div>
+              
+              <div class="line-label">Standaard lijn (2px)</div>
+              <div class="line" style="height: 2px;"></div>
+              
+              <div class="line-label">Medium lijn (3px)</div>
+              <div class="line" style="height: 3px;"></div>
+              
+              <div class="line-label">Dikke lijn (5px)</div>
+              <div class="line" style="height: 5px;"></div>
+              
+              <div class="line-label">Extra dikke lijn (8px)</div>
+              <div class="line" style="height: 8px;"></div>
+            </div>
           </div>
         `;
       }
@@ -174,25 +258,28 @@ const PrinterTest = () => {
       // Alignment test
       if (includeAlignment) {
         content += `
-          <div class="alignment-grid">
-            <h2>Uitlijningstest</h2>
-            <div class="grid-lines">
-              <div class="grid-cell">LB</div>
-              <div class="grid-cell">MB</div>
-              <div class="grid-cell">MB</div>
-              <div class="grid-cell">RB</div>
-              <div class="grid-cell">LM</div>
-              <div class="grid-cell">MM</div>
-              <div class="grid-cell">MM</div>
-              <div class="grid-cell">RM</div>
-              <div class="grid-cell">LM</div>
-              <div class="grid-cell">MM</div>
-              <div class="grid-cell">MM</div>
-              <div class="grid-cell">RM</div>
-              <div class="grid-cell">LO</div>
-              <div class="grid-cell">MO</div>
-              <div class="grid-cell">MO</div>
-              <div class="grid-cell">RO</div>
+          <div class="test-section">
+            <h2>⊞ Uitlijnings- en Margetest</h2>
+            <p style="font-size: 12px; margin-bottom: 10px;">Test de uitlijning en marges van uw printer. Alle cellen moeten gelijk zijn.</p>
+            <div class="alignment-grid">
+              <div class="grid-lines">
+                <div class="grid-cell">LB</div>
+                <div class="grid-cell">MB</div>
+                <div class="grid-cell">MB</div>
+                <div class="grid-cell">RB</div>
+                <div class="grid-cell">LM</div>
+                <div class="grid-cell">MM</div>
+                <div class="grid-cell">MM</div>
+                <div class="grid-cell">RM</div>
+                <div class="grid-cell">LM</div>
+                <div class="grid-cell">MM</div>
+                <div class="grid-cell">MM</div>
+                <div class="grid-cell">RM</div>
+                <div class="grid-cell">LO</div>
+                <div class="grid-cell">MO</div>
+                <div class="grid-cell">MO</div>
+                <div class="grid-cell">RO</div>
+              </div>
             </div>
           </div>
         `;
@@ -211,7 +298,7 @@ const PrinterTest = () => {
     
     setTimeout(() => {
       printWindow.print();
-    }, 500);
+    }, 1000);
   };
 
   if (isLoading) {
