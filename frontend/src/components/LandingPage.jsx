@@ -44,6 +44,7 @@ const LandingPage = () => {
           alt="127 Logo" 
           className="w-32 h-auto mx-auto brightness-110"
         />
+        <p className="text-xs text-[#9aa0a6] text-center mt-3">Build {BUILD_VERSION}</p>
       </div>
 
       {/* Search Container */}
