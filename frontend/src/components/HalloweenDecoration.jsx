@@ -1,37 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 const HalloweenDecoration = () => {
-  const [spiderY, setSpiderY] = useState(-50);
-  const [spiderDirection, setSpiderDirection] = useState(1); // 1 = down, -1 = up
   const [ghosts, setGhosts] = useState([
-    { id: 1, x: 10, y: 20, speed: 0.3, direction: 1, hasRedEyes: false },
-    { id: 2, x: 80, y: 50, speed: 0.4, direction: -1, hasRedEyes: true },
-    { id: 3, x: 50, y: 80, speed: 0.35, direction: 1, hasRedEyes: false },
+    { id: 1, x: 10, y: 20, speed: 0.15, direction: 1, hasRedEyes: false },
+    { id: 2, x: 80, y: 50, speed: 0.2, direction: -1, hasRedEyes: true },
+    { id: 3, x: 50, y: 80, speed: 0.18, direction: 1, hasRedEyes: false },
   ]);
-
-  useEffect(() => {
-    // Animate spider up and down
-    const animate = () => {
-      setSpiderY(prev => {
-        const screenMiddle = window.innerHeight / 2;
-        
-        if (prev >= screenMiddle && spiderDirection === 1) {
-          // Reached middle, go back up
-          setSpiderDirection(-1);
-          return prev - 1.5;
-        } else if (prev <= -50 && spiderDirection === -1) {
-          // Reached top, go back down
-          setSpiderDirection(1);
-          return prev + 1.5;
-        }
-        
-        return prev + (1.5 * spiderDirection);
-      });
-    };
-
-    const interval = setInterval(animate, 50);
-    return () => clearInterval(interval);
-  }, [spiderDirection]);
 
   useEffect(() => {
     // Animate ghosts floating (slower)
@@ -58,7 +32,7 @@ const HalloweenDecoration = () => {
       }));
     };
 
-    const interval = setInterval(animateGhosts, 50);
+    const interval = setInterval(animateGhosts, 80);
     return () => clearInterval(interval);
   }, []);
 
