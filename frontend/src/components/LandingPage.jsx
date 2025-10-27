@@ -4,7 +4,7 @@ import { Search, Monitor, Printer, Activity, Video } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.3';
+const BUILD_VERSION = '1.3.4';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
