@@ -19,6 +19,7 @@ const PixelTest = () => {
     { name: 'Cyaan', value: 'cyan', hex: '#00FFFF' },
     { name: 'Magenta', value: 'magenta', hex: '#FF00FF' },
     { name: 'Geel', value: 'yellow', hex: '#FFFF00' },
+    { name: 'Grijs', value: 'gray', hex: '#808080' },
   ];
 
   // Loading animation (2 seconds)
