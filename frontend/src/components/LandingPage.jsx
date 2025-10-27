@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Monitor, Printer, Activity, Zap } from 'lucide-react';
+import { Search, Monitor, Printer, Activity, Video } from 'lucide-react';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.2.9';
+const BUILD_VERSION = '1.3.0';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,12 +36,12 @@ const LandingPage = () => {
       icon: Activity,
     },
     {
-      id: 'benchmark',
-      name: 'GPU Benchmark',
-      description: 'Test de prestaties van uw grafische kaart met 3D rendering',
-      keywords: ['gpu', 'benchmark', 'prestaties', 'graphics', '3d', 'render', 'videokaart', 'grafisch'],
-      path: '/benchmark',
-      icon: Zap,
+      id: 'wea',
+      name: 'Webcam & Audio Test',
+      description: 'Test uw webcam en microfoon, neem op en download de opname',
+      keywords: ['webcam', 'camera', 'audio', 'microfoon', 'mic', 'opname', 'video', 'geluid'],
+      path: '/wea',
+      icon: Video,
     },
   ];
 
