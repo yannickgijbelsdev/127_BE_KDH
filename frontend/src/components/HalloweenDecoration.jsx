@@ -115,7 +115,7 @@ const HalloweenDecoration = () => {
           style={{
             left: `${ghost.x}%`,
             top: `${ghost.y}%`,
-            animation: `float ${3 + index * 0.5}s ease-in-out infinite, sway ${2 + index * 0.3}s ease-in-out infinite`,
+            animation: `float ${4 + index * 0.7}s ease-in-out infinite, sway ${3 + index * 0.5}s ease-in-out infinite`,
             opacity: 0.7,
           }}
         >
@@ -128,9 +128,39 @@ const HalloweenDecoration = () => {
               filter="url(#glow)"
             />
             
-            {/* Eyes */}
-            <ellipse cx="22" cy="30" rx="4" ry="6" fill="#000000" />
-            <ellipse cx="38" cy="30" rx="4" ry="6" fill="#000000" />
+            {/* Eyes - sometimes red for creepy effect */}
+            <ellipse 
+              cx="22" 
+              cy="30" 
+              rx="4" 
+              ry="6" 
+              fill={ghost.hasRedEyes ? "#ff0000" : "#000000"}
+            >
+              {ghost.hasRedEyes && (
+                <animate
+                  attributeName="opacity"
+                  values="1;0.3;1"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
+              )}
+            </ellipse>
+            <ellipse 
+              cx="38" 
+              cy="30" 
+              rx="4" 
+              ry="6" 
+              fill={ghost.hasRedEyes ? "#ff0000" : "#000000"}
+            >
+              {ghost.hasRedEyes && (
+                <animate
+                  attributeName="opacity"
+                  values="1;0.3;1"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
+              )}
+            </ellipse>
             
             {/* Mouth */}
             <path
