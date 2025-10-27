@@ -219,7 +219,10 @@ const PasswordGenerator = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#202124] py-8 px-4">
+    <div 
+      className="min-h-screen py-8 px-4 transition-colors duration-500"
+      style={{ backgroundColor: isAutosoftPassword ? '#3d0000' : '#202124' }}
+    >
       {/* Confetti Effect */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">
