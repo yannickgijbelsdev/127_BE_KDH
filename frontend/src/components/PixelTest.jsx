@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Monitor, Maximize, X } from 'lucide-react';
 
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [currentColor, setCurrentColor] = useState('black');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showInstructions, setShowInstructions] = useState(true);
 
   const colors = [
     { name: 'Zwart', value: 'black', hex: '#000000' },
