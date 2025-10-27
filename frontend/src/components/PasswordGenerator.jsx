@@ -479,6 +479,73 @@ const PasswordGenerator = () => {
           </div>
         </div>
 
+        {/* Memorable Password Form Modal */}
+        {showMemorableForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4">
+            <div className="bg-[#303134] rounded-lg p-6 max-w-md w-full border border-[#5f6368]">
+              <h2 className="text-xl font-bold text-[#e8eaed] mb-4">Maak een Memorabel Wachtwoord</h2>
+              <p className="text-sm text-[#9aa0a6] mb-4">
+                Vul je favoriete dingen in om een sterk maar makkelijk te onthouden wachtwoord te maken
+              </p>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm text-[#9aa0a6] mb-1">Jouw interesse of hobby</label>
+                  <input
+                    type="text"
+                    value={memorableInputs.interest}
+                    onChange={(e) => setMemorableInputs({...memorableInputs, interest: e.target.value})}
+                    placeholder="bijv. Voetbal, Muziek, Reizen"
+                    className="w-full bg-[#202124] text-[#e8eaed] px-4 py-2 rounded-lg border border-[#5f6368] text-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm text-[#9aa0a6] mb-1">Belangrijk jaar</label>
+                  <input
+                    type="text"
+                    value={memorableInputs.year}
+                    onChange={(e) => setMemorableInputs({...memorableInputs, year: e.target.value})}
+                    placeholder="bijv. 1990, 2024"
+                    maxLength="4"
+                    className="w-full bg-[#202124] text-[#e8eaed] px-4 py-2 rounded-lg border border-[#5f6368] text-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm text-[#9aa0a6] mb-1">Favoriete ding</label>
+                  <input
+                    type="text"
+                    value={memorableInputs.favorite}
+                    onChange={(e) => setMemorableInputs({...memorableInputs, favorite: e.target.value})}
+                    placeholder="bijv. Kat, Pizza, Strand"
+                    className="w-full bg-[#202124] text-[#e8eaed] px-4 py-2 rounded-lg border border-[#5f6368] text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => {
+                    setShowMemorableForm(false);
+                    setMemorableInputs({ interest: '', year: '', favorite: '' });
+                  }}
+                  className="flex-1 px-4 py-2 bg-[#5f6368] hover:bg-[#7a8086] text-[#e8eaed] rounded-lg font-medium transition-colors"
+                >
+                  Annuleren
+                </button>
+                <button
+                  onClick={handleMemorableSubmit}
+                  disabled={!memorableInputs.interest || !memorableInputs.year || !memorableInputs.favorite}
+                  className="flex-1 px-4 py-2 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Genereer
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Back Button */}
         <div className="mt-8 text-center">
           <Link to="/">
