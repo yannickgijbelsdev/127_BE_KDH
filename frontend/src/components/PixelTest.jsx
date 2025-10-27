@@ -217,7 +217,8 @@ const PixelTest = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 
