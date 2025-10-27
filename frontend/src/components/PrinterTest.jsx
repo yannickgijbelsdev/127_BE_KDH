@@ -9,7 +9,7 @@ import { Checkbox } from './ui/checkbox';
 import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.2';
+const BUILD_VERSION = '1.3.3';
 
 const PrinterTest = () => {
   const [isLoading, setIsLoading] = useState(true);
