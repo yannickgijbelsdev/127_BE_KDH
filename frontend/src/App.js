@@ -6,6 +6,7 @@ import PixelTest from './components/PixelTest';
 import PrinterTest from './components/PrinterTest';
 import ScreenTest from './components/ScreenTest';
 import WebcamAudioTest from './components/WebcamAudioTest';
+import PasswordGenerator from './components/PasswordGenerator';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/printer" element={<PrinterTest />} />
           <Route path="/sscreen" element={<ScreenTest />} />
           <Route path="/wea" element={<WebcamAudioTest />} />
+          <Route path="/password" element={<PasswordGenerator />} />
         </Routes>
       </BrowserRouter>
     </div>
