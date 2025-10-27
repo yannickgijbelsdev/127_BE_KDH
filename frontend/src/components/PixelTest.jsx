@@ -162,7 +162,12 @@ const PixelTest = () => {
       {!isFullscreen && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
           <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-w-md">
-            <div className="mb-6">
+            <div className="mb-6 flex flex-col items-center">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" 
+                alt="127 Logo" 
+                className="w-32 h-auto mb-4"
+              />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Dead Pixel Detector</h2>
               <p className="text-gray-600">Klik overal om te starten</p>
             </div>
