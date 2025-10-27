@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Copy, RefreshCw, Lock, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Copy, RefreshCw, Lock, CheckCircle, AlertTriangle, Lightbulb } from 'lucide-react';
 import { Progress } from './ui/progress';
 import HalloweenDecoration from './HalloweenDecoration';
 
-const BUILD_VERSION = '1.3.6';
+const BUILD_VERSION = '1.3.7';
 
 const PasswordGenerator = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +19,13 @@ const PasswordGenerator = () => {
   const [strength, setStrength] = useState({ score: 0, label: '', color: '' });
   const [copied, setCopied] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [isAutosoftPassword, setIsAutosoftPassword] = useState(false);
+  const [showMemorableForm, setShowMemorableForm] = useState(false);
+  const [memorableInputs, setMemorableInputs] = useState({
+    interest: '',
+    year: '',
+    favorite: '',
+  });
 
   // Loading animation
   useEffect(() => {
