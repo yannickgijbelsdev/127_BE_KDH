@@ -164,7 +164,8 @@ const PixelTest = () => {
       className="relative min-h-screen"
       style={{ 
         backgroundColor: currentColorObj.hex,
-        cursor: isFullscreen ? 'none' : 'pointer'
+        cursor: isFullscreen ? 'none' : 'pointer',
+        transition: 'none'
       }}
     >
       {/* Instructions when not in fullscreen */}
