@@ -149,9 +149,15 @@ const PixelTest = () => {
   };
 
   const handleClick = () => {
-    if (!isLoading && !isFullscreen) {
-      enterFullscreen();
+    if (!isLoading && !isFullscreen && !showGPUModal) {
+      // Show GPU modal first
+      setShowGPUModal(true);
     }
+  };
+
+  const handleGPUModalOk = () => {
+    setShowGPUModal(false);
+    enterFullscreen();
   };
 
   const handleColorChange = (colorValue) => {
