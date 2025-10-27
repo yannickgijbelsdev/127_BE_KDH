@@ -46,8 +46,14 @@ const LandingPage = () => {
     },
   ];
 
-  // Filter tools based on search query
-  const filteredTools = tools.filter(tool => {
+  // Randomly select 3 tools to display - changes on each page load
+  const displayedTools = useMemo(() => {
+    const shuffled = [...allTools].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }, []); // Empty dependency array means this only runs once per component mount
+
+  // Filter tools based on search query (search all tools)
+  const filteredTools = allTools.filter(tool => {
     if (!searchQuery.trim()) return false;
     
     const query = searchQuery.toLowerCase();
