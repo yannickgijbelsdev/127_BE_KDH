@@ -198,8 +198,8 @@ const ScreenTest = () => {
 
           {/* Display Info */}
           <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 mb-4">
-            <h3 className="text-sm font-semibold text-[#8ab4f8] mb-2">Display Informatie</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+            <h3 className="text-sm font-semibold text-[#8ab4f8] mb-3">Display Informatie</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm mb-3">
               <div>
                 <p className="text-[#9aa0a6]">Resolutie</p>
                 <p className="text-[#e8eaed] font-medium">{displayInfo.resolution}</p>
@@ -220,6 +220,15 @@ const ScreenTest = () => {
                 <p className="text-[#9aa0a6]">Oriëntatie</p>
                 <p className="text-[#e8eaed] font-medium">{displayInfo.orientation}</p>
               </div>
+              <div>
+                <p className="text-[#9aa0a6]">Snelheid</p>
+                <p className="text-[#e8eaed] font-medium">{speed}%</p>
+              </div>
+            </div>
+            <div className="border-t border-[#5f6368] pt-3">
+              <p className="text-[#9aa0a6] text-xs mb-1">GPU Informatie</p>
+              <p className="text-[#e8eaed] text-sm font-medium">{displayInfo.gpuVendor}</p>
+              <p className="text-[#9aa0a6] text-xs mt-1">{displayInfo.gpuRenderer}</p>
             </div>
           </div>
 
