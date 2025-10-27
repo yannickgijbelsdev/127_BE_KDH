@@ -11,12 +11,14 @@ const WebcamAudioTest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [showPermissionRequest, setShowPermissionRequest] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [stream, setStream] = useState(null);
   const [devices, setDevices] = useState({ camera: 'Unknown', microphone: 'Unknown' });
   const [isRecording, setIsRecording] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [recordingTime, setRecordingTime] = useState(0);
+  const [permissionError, setPermissionError] = useState('');
   
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
