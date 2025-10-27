@@ -92,7 +92,6 @@ const PixelTest = () => {
     } else if (elem.msRequestFullscreen) {
       elem.msRequestFullscreen();
     }
-    setShowInstructions(false);
   };
 
   const exitFullscreen = () => {
