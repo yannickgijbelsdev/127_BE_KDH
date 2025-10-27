@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Monitor, Printer, Activity, Video } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.4';
+const BUILD_VERSION = '1.3.5';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   // Available tools/pages
-  const tools = [
+  const allTools = [
     {
       id: 'dpd',
       name: 'Dead Pixel Detector',
