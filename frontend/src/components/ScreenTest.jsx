@@ -169,7 +169,34 @@ const ScreenTest = () => {
             </div>
             <div className="text-right">
               <div className="text-3xl font-bold text-[#8ab4f8]">{fps} FPS</div>
-              <p className="text-xs text-[#9aa0a6]">Refresh Rate</p>
+              <p className="text-xs text-[#9aa0a6]">Huidige Refresh Rate</p>
+            </div>
+          </div>
+
+          {/* Display Info */}
+          <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 mb-4">
+            <h3 className="text-sm font-semibold text-[#8ab4f8] mb-2">Display Informatie</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+              <div>
+                <p className="text-[#9aa0a6]">Resolutie</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.resolution}</p>
+              </div>
+              <div>
+                <p className="text-[#9aa0a6]">Beschikbaar</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.availableResolution}</p>
+              </div>
+              <div>
+                <p className="text-[#9aa0a6]">Kleurdiepte</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.colorDepth}</p>
+              </div>
+              <div>
+                <p className="text-[#9aa0a6]">Pixel Ratio</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.pixelRatio}x</p>
+              </div>
+              <div>
+                <p className="text-[#9aa0a6]">Oriëntatie</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.orientation}</p>
+              </div>
             </div>
           </div>
 
