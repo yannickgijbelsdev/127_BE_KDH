@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Progress } from './ui/progress';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Monitor } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.3';
+const BUILD_VERSION = '1.3.4';
 
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [currentColor, setCurrentColor] = useState('black');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showGPUModal, setShowGPUModal] = useState(false);
+  const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
 
   const colors = [
     { name: 'Zwart', value: 'black', hex: '#000000' },
