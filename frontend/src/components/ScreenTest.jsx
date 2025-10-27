@@ -7,7 +7,7 @@ import { Label } from './ui/label';
 import { Slider } from './ui/slider';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.2.7';
+const BUILD_VERSION = '1.2.8';
 
 const ScreenTest = () => {
   const [isLoading, setIsLoading] = useState(true);
