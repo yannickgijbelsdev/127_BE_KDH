@@ -8,7 +8,7 @@ import { Input } from './ui/input';
 import { Checkbox } from './ui/checkbox';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.2.0';
+const BUILD_VERSION = '1.2.1';
 
 const PrinterTest = () => {
   const [isLoading, setIsLoading] = useState(true);
