@@ -352,7 +352,7 @@ const PasswordGenerator = () => {
                 {strength.score >= 80 && (
                   <div className="bg-[#9C27B0] bg-opacity-20 border border-[#9C27B0] rounded-lg p-4">
                     <p className="text-[#e8eaed] text-center font-semibold">
-                      🎉 Uitstekend wachtwoord! 🎉
+                      Uitstekend wachtwoord!
                     </p>
                   </div>
                 )}
