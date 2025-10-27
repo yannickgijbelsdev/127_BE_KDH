@@ -62,7 +62,7 @@ const PrinterTest = () => {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Printer Test - 127.be</title>
+        <title>Printer Kwaliteitstest</title>
         <style>
           @media print {
             @page { 
