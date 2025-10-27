@@ -24,12 +24,35 @@ const ScreenTest = () => {
 
   // Get display info
   useEffect(() => {
+    // Get GPU info
+    const getGPUInfo = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+          if (debugInfo) {
+            return {
+              vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+              renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
+            };
+          }
+        }
+      } catch (e) {
+        console.error('Unable to get GPU info:', e);
+      }
+      return { vendor: 'Unknown', renderer: 'Unknown' };
+    };
+
+    const gpu = getGPUInfo();
     const info = {
       resolution: `${window.screen.width} x ${window.screen.height}`,
       availableResolution: `${window.screen.availWidth} x ${window.screen.availHeight}`,
       colorDepth: `${window.screen.colorDepth}-bit`,
       pixelRatio: window.devicePixelRatio,
       orientation: window.screen.orientation?.type || 'Unknown',
+      gpuVendor: gpu.vendor,
+      gpuRenderer: gpu.renderer,
     };
     setDisplayInfo(info);
   }, []);
