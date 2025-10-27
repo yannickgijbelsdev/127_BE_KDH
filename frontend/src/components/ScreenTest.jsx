@@ -212,12 +212,12 @@ const ScreenTest = () => {
                 <p className="text-[#e8eaed] font-medium">{displayInfo.pixelRatio}x</p>
               </div>
               <div>
-                <p className="text-[#9aa0a6]">Oriëntatie</p>
-                <p className="text-[#e8eaed] font-medium">{displayInfo.orientation}</p>
+                <p className="text-[#9aa0a6]">Helderheid</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.brightness}</p>
               </div>
               <div>
-                <p className="text-[#9aa0a6]">Snelheid</p>
-                <p className="text-[#e8eaed] font-medium">{speed}%</p>
+                <p className="text-[#9aa0a6]">Oriëntatie</p>
+                <p className="text-[#e8eaed] font-medium">{displayInfo.orientation}</p>
               </div>
             </div>
             <div className="border-t border-[#5f6368] pt-3">
