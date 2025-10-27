@@ -183,6 +183,7 @@ const PasswordGenerator = () => {
     const memorable = generateMemorablePassword();
     if (memorable) {
       setPassword(memorable);
+      setCustomPassword(memorable); // Also show in strength checker
       setShowMemorableForm(false);
       setMemorableInputs({ interest: '', year: '', favorite: '' });
     }
