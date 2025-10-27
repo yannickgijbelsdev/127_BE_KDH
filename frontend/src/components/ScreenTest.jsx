@@ -16,10 +16,23 @@ const ScreenTest = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(50);
   const [fps, setFps] = useState(0);
+  const [displayInfo, setDisplayInfo] = useState({});
   const animationFrameRef = useRef(null);
   const lastTimeRef = useRef(Date.now());
   const fpsCounterRef = useRef(0);
   const fpsLastUpdateRef = useRef(Date.now());
+
+  // Get display info
+  useEffect(() => {
+    const info = {
+      resolution: `${window.screen.width} x ${window.screen.height}`,
+      availableResolution: `${window.screen.availWidth} x ${window.screen.availHeight}`,
+      colorDepth: `${window.screen.colorDepth}-bit`,
+      pixelRatio: window.devicePixelRatio,
+      orientation: window.screen.orientation?.type || 'Unknown',
+    };
+    setDisplayInfo(info);
+  }, []);
 
   // Loading animation (2 seconds)
   useEffect(() => {
