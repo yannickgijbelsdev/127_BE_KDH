@@ -206,8 +206,23 @@ const ScreenTest = () => {
             </div>
             <div className="border-t border-[#5f6368] pt-3">
               <p className="text-[#9aa0a6] text-xs mb-1">GPU Informatie</p>
-              <p className="text-[#e8eaed] text-sm font-medium">{displayInfo.gpuVendor}</p>
-              <p className="text-[#9aa0a6] text-xs mt-1">{displayInfo.gpuRenderer}</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[#e8eaed] text-sm font-medium">{displayInfo.gpuVendor}</p>
+                  <p className="text-[#9aa0a6] text-xs mt-1">{displayInfo.gpuRenderer}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[#8ab4f8] text-sm font-medium">GPU Type</p>
+                  <p className="text-[#9aa0a6] text-xs mt-1">
+                    {displayInfo.gpuRenderer?.includes('NVIDIA') ? 'NVIDIA' : 
+                     displayInfo.gpuRenderer?.includes('AMD') ? 'AMD' :
+                     displayInfo.gpuRenderer?.includes('Intel') ? 'Intel' :
+                     displayInfo.gpuRenderer?.includes('Apple') ? 'Apple' :
+                     displayInfo.gpuRenderer?.includes('SwiftShader') ? 'Software (SwiftShader)' :
+                     'Geïntegreerd'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
