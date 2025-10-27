@@ -15,12 +15,9 @@ const ScreenTest = () => {
   const [showInstructions, setShowInstructions] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(50);
-  const [fps, setFps] = useState(0);
   const [displayInfo, setDisplayInfo] = useState({});
   const animationFrameRef = useRef(null);
   const lastTimeRef = useRef(Date.now());
-  const fpsCounterRef = useRef(0);
-  const fpsLastUpdateRef = useRef(Date.now());
 
   // Get display info
   useEffect(() => {
