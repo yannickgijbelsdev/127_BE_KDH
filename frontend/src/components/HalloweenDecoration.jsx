@@ -2,44 +2,58 @@ import React, { useEffect, useState } from 'react';
 
 const HalloweenDecoration = () => {
   const [spiderY, setSpiderY] = useState(-50);
+  const [spiderDirection, setSpiderDirection] = useState(1); // 1 = down, -1 = up
   const [ghosts, setGhosts] = useState([
-    { id: 1, x: 10, y: 20, speed: 0.5, direction: 1 },
-    { id: 2, x: 80, y: 50, speed: 0.7, direction: -1 },
-    { id: 3, x: 50, y: 80, speed: 0.6, direction: 1 },
+    { id: 1, x: 10, y: 20, speed: 0.3, direction: 1, hasRedEyes: false },
+    { id: 2, x: 80, y: 50, speed: 0.4, direction: -1, hasRedEyes: true },
+    { id: 3, x: 50, y: 80, speed: 0.35, direction: 1, hasRedEyes: false },
   ]);
 
   useEffect(() => {
-    // Animate spider down
+    // Animate spider up and down
     const animate = () => {
       setSpiderY(prev => {
-        if (prev > window.innerHeight + 50) {
-          return -50;
+        const screenMiddle = window.innerHeight / 2;
+        
+        if (prev >= screenMiddle && spiderDirection === 1) {
+          // Reached middle, go back up
+          setSpiderDirection(-1);
+          return prev - 1.5;
+        } else if (prev <= -50 && spiderDirection === -1) {
+          // Reached top, go back down
+          setSpiderDirection(1);
+          return prev + 1.5;
         }
-        return prev + 2;
+        
+        return prev + (1.5 * spiderDirection);
       });
     };
 
     const interval = setInterval(animate, 50);
     return () => clearInterval(interval);
-  }, []);
+  }, [spiderDirection]);
 
   useEffect(() => {
-    // Animate ghosts floating
+    // Animate ghosts floating (slower)
     const animateGhosts = () => {
       setGhosts(prev => prev.map(ghost => {
         let newX = ghost.x + (ghost.speed * ghost.direction);
         let newDirection = ghost.direction;
+        let hasRedEyes = ghost.hasRedEyes;
         
         // Bounce off edges
         if (newX > 95 || newX < 5) {
           newDirection = -ghost.direction;
           newX = ghost.x + (ghost.speed * newDirection);
+          // Randomly change eye color when bouncing (creepy!)
+          hasRedEyes = Math.random() > 0.5;
         }
         
         return {
           ...ghost,
           x: newX,
           direction: newDirection,
+          hasRedEyes: hasRedEyes,
         };
       }));
     };
