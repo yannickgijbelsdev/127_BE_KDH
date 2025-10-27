@@ -5,9 +5,10 @@ import { ArrowLeft, Monitor } from 'lucide-react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
+import HalloweenDecoration from './HalloweenDecoration';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.3.1';
+const BUILD_VERSION = '1.3.2';
 
 const ScreenTest = () => {
   const [isLoading, setIsLoading] = useState(true);
