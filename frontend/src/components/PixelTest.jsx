@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Progress } from './ui/progress';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.1.3';
+const BUILD_VERSION = '1.1.4';
 
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);
