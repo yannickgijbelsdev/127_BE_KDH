@@ -14,6 +14,7 @@ const PrinterTest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [showConfig, setShowConfig] = useState(false);
   
   // Test options
   const [numPages, setNumPages] = useState(1);
@@ -41,6 +42,13 @@ const PrinterTest = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleClick = () => {
+    if (showInstructions) {
+      setShowInstructions(false);
+      setShowConfig(true);
+    }
+  };
 
   const handlePrint = () => {
     if (!includeText && !includeColorBars && !includeLines && !includeAlignment) {
