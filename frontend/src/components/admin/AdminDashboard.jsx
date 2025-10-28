@@ -48,16 +48,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('admin_token');
-    localStorage.removeItem('admin_user');
-    navigate('/localhost');
-  };
-
-  const getInitials = (username) => {
-    return username.substring(0, 2).toUpperCase();
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-[#202124] flex items-center justify-center">
