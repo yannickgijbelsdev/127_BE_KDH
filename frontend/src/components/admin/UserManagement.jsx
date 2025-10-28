@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, UserPlus, Edit, Trash2, Shield, Mail, User as UserIcon } from 'lucide-react';
+import TwoFactorSetup from './TwoFactorSetup';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [show2FAModal, setShow2FAModal] = useState(false);
+  const [selected2FAUser, setSelected2FAUser] = useState(null);
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({
     email: '',
