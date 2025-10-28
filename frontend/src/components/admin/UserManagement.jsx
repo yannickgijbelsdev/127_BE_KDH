@@ -122,14 +122,15 @@ const UserManagement = () => {
 
   return (
     <div className="min-h-screen bg-[#202124]">
-      {/* Header */}
-      <div className="bg-[#303134] border-b border-[#5f6368] px-6 py-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link to="/localhost/dashboard">
               <ArrowLeft className="w-6 h-6 text-[#9aa0a6] hover:text-[#e8eaed] cursor-pointer" />
             </Link>
-            <h1 className="text-2xl font-bold text-[#e8eaed]">User Management</h1>
+            <h1 className="text-3xl font-bold text-[#e8eaed]">User Management</h1>
           </div>
           
           <button
