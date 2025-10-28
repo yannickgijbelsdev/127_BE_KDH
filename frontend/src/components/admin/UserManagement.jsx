@@ -181,11 +181,29 @@ const UserManagement = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    {user.is2FAEnabled ? (
-                      <Shield className="w-5 h-5 text-green-500" />
-                    ) : (
-                      <Shield className="w-5 h-5 text-[#5f6368]" />
-                    )}
+                    <div className="flex items-center gap-2">
+                      {user.is2FAEnabled ? (
+                        <>
+                          <Shield className="w-5 h-5 text-green-500" />
+                          <button
+                            onClick={() => handleDisable2FA(user.id)}
+                            className="text-xs text-red-400 hover:text-red-300"
+                          >
+                            Uitschakelen
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <Shield className="w-5 h-5 text-[#5f6368]" />
+                          <button
+                            onClick={() => handle2FASetup(user)}
+                            className="text-xs text-[#8ab4f8] hover:text-[#aac8f9]"
+                          >
+                            Instellen
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button
