@@ -11,6 +11,7 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import UserManagement from './components/admin/UserManagement';
 import ToolEditor from './components/admin/ToolEditor';
+import Analytics from './components/admin/Analytics';
 import AdminNavBar from './components/admin/AdminNavBar';
 
 function AppContent() {
