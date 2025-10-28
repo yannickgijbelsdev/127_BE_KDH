@@ -25,6 +25,22 @@ function AppContent() {
     setIsAdminLoggedIn(!!token);
   }, [location]);
 
+  // Disable right-click when not logged in
+  useEffect(() => {
+    const handleContextMenu = (e) => {
+      if (!isAdminLoggedIn) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, [isAdminLoggedIn]);
+
   const handleLogin = () => {
     setIsAdminLoggedIn(true);
   };
