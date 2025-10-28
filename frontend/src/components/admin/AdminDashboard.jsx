@@ -128,7 +128,7 @@ const AdminDashboard = () => {
             </div>
           </div>
           
-          <Link to="/admin/users" className="bg-[#303134] rounded-lg p-6 border border-[#5f6368] hover:border-[#8ab4f8] transition-colors cursor-pointer">
+          <Link to="/localhost/users" className="bg-[#303134] rounded-lg p-6 border border-[#5f6368] hover:border-[#8ab4f8] transition-colors cursor-pointer">
             <div className="flex items-center gap-4">
               <Users className="w-12 h-12 text-[#8ab4f8]" />
               <div>
