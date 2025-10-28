@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LogOut, Settings, Users, Code, Power, PowerOff } from 'lucide-react';
+import { Users, Code, Power, PowerOff } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [user, setUser] = useState(null);
