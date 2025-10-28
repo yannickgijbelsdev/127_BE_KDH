@@ -36,10 +36,10 @@ function App() {
           <Route path="/wea" element={<WebcamAudioTest />} />
           <Route path="/password" element={<PasswordGenerator />} />
           
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+          {/* Admin Routes on /localhost */}
+          <Route path="/localhost" element={<AdminLogin onLogin={handleLogin} />} />
           <Route 
-            path="/admin/dashboard" 
+            path="/localhost/dashboard" 
             element={
               <ProtectedRoute>
                 <AdminDashboard />
@@ -47,7 +47,7 @@ function App() {
             } 
           />
           <Route 
-            path="/admin/users" 
+            path="/localhost/users" 
             element={
               <ProtectedRoute>
                 <UserManagement />
@@ -55,7 +55,7 @@ function App() {
             } 
           />
           <Route 
-            path="/admin/tool/:toolId" 
+            path="/localhost/tool/:toolId" 
             element={
               <ProtectedRoute>
                 <ToolEditor />
