@@ -20,7 +20,8 @@ const AdminNavBar = () => {
     localStorage.removeItem('admin_token');
     localStorage.removeItem('admin_user');
     setUser(null);
-    navigate('/localhost');
+    // Force reload to update app state
+    window.location.href = '/localhost';
   };
 
   const handleDashboard = () => {
