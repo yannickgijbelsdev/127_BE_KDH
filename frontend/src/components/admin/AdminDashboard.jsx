@@ -83,7 +83,7 @@ const AdminDashboard = () => {
               </div>
               
               <Link
-                to="/admin/dashboard"
+                to="/localhost/dashboard"
                 className="p-2 bg-[#5f6368] hover:bg-[#7a8086] rounded-lg transition-colors"
                 title="Dashboard"
               >
