@@ -225,10 +225,9 @@ const UserManagement = () => {
             </tbody>
           </table>
         </div>
-      </div>
 
-      {/* Modal */}
-      {showModal && (
+        {/* Modal */}
+        {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4">
           <div className="bg-[#303134] rounded-lg p-6 max-w-md w-full border border-[#5f6368]">
             <h2 className="text-xl font-bold text-[#e8eaed] mb-4">
