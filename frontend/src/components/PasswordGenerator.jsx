@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Copy, RefreshCw, Lock, CheckCircle, AlertTriangle, Lightbulb } from 'lucide-react';
 import { Progress } from './ui/progress';
 import HalloweenDecoration from './HalloweenDecoration';
+import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 const BUILD_VERSION = '1.3.7';
 
