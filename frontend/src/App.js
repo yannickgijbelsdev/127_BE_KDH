@@ -57,6 +57,7 @@ function AppContent() {
       {!isLoginPage && <AdminNavBar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/dpd" element={<PixelTest />} />
         <Route path="/printer" element={<PrinterTest />} />
         <Route path="/sscreen" element={<ScreenTest />} />
