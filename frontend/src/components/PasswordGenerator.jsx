@@ -109,6 +109,14 @@ const PasswordGenerator = () => {
 
     setPassword(generatedPassword);
     setCopied(false);
+    
+    logAction('password', 'Password Generator', 'password_generated', {
+      length: length,
+      includes_uppercase: includeUppercase,
+      includes_lowercase: includeLowercase,
+      includes_numbers: includeNumbers,
+      includes_symbols: includeSymbols
+    });
   };
 
   const calculateStrength = (pwd) => {
