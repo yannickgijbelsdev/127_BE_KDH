@@ -145,10 +145,9 @@ const UserManagement = () => {
             Nieuwe Gebruiker
           </button>
         </div>
-      </div>
 
-      {/* Users Table */}
-      <div className="bg-[#303134] rounded-lg border border-[#5f6368] overflow-hidden">
+        {/* Users Table */}
+        <div className="bg-[#303134] rounded-lg border border-[#5f6368] overflow-hidden">
           <table className="w-full">
             <thead className="bg-[#202124] border-b border-[#5f6368]">
               <tr>
