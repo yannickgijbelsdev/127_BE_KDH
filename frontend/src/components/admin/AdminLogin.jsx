@@ -44,6 +44,9 @@ const AdminLogin = ({ onLogin }) => {
       localStorage.setItem('admin_token', data.access_token);
       localStorage.setItem('admin_user', JSON.stringify(data.user));
       
+      // Dispatch custom event for AdminNavBar
+      window.dispatchEvent(new Event('auth-change'));
+      
       onLogin(data.user);
       navigate('/localhost/dashboard');
     } catch (err) {
