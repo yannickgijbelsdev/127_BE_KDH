@@ -100,6 +100,26 @@ const UserManagement = () => {
     }
   };
 
+  const handle2FASetup = (user) => {
+    setSelected2FAUser(user);
+    setShow2FAModal(true);
+  };
+
+  const handleDisable2FA = async (userId) => {
+    if (!window.confirm('Weet je zeker dat je 2FA wilt uitschakelen?')) return;
+
+    try {
+      const token = localStorage.getItem('admin_token');
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users/${userId}/disable-2fa`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      fetchUsers();
+    } catch (err) {
+      console.error('Failed to disable 2FA:', err);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#202124]">
       {/* Header */}
