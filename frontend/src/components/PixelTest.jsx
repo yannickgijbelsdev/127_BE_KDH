@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Progress } from './ui/progress';
 import { ArrowLeft, Monitor } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
+import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
 const BUILD_VERSION = '1.3.4';
@@ -14,6 +15,11 @@ const PixelTest = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showGPUModal, setShowGPUModal] = useState(false);
   const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
+
+  // Log page visit on mount
+  useEffect(() => {
+    logPageVisit('dpd', 'Dead Pixel Detector');
+  }, []);
 
   const colors = [
     { name: 'Zwart', value: 'black', hex: '#000000' },
