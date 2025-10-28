@@ -173,7 +173,7 @@ const AdminDashboard = () => {
                   </button>
                   
                   <Link
-                    to={`/admin/tool/${tool.id}`}
+                    to={`/localhost/tool/${tool.id}`}
                     className="px-4 py-2 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors"
                   >
                     Edit Code
