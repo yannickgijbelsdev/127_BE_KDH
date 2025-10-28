@@ -144,7 +144,6 @@ const UserManagement = () => {
             <UserPlus className="w-5 h-5" />
             Nieuwe Gebruiker
           </button>
-          </Link>
         </div>
       </div>
 
