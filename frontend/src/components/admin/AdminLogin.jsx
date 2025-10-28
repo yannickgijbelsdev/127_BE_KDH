@@ -128,10 +128,6 @@ const AdminLogin = ({ onLogin }) => {
               {loading ? 'Inloggen...' : 'Login'}
             </button>
           </form>
-
-          <div className="mt-4 text-center text-sm text-[#9aa0a6]">
-            <p>Default: admin@127.be / Admin123!</p>
-          </div>
         </div>
       </div>
     </div>
