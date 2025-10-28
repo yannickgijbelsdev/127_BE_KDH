@@ -216,7 +216,7 @@ const PixelTest = () => {
               <div className="mb-6 flex flex-col items-center">
                 <Monitor className="w-16 h-16 text-[#8ab4f8] mb-4" />
                 <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">GPU Informatie</h2>
-                <p className="text-[#9aa0a6] text-center">Je test op de volgende GPU</p>
+                <p className="text-[#9aa0a6] text-center">Dit toestel gebruikt de volgende GPU</p>
               </div>
               
               <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-6 mb-6">
