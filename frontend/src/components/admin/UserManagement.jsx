@@ -144,12 +144,12 @@ const UserManagement = () => {
             <UserPlus className="w-5 h-5" />
             Nieuwe Gebruiker
           </button>
+          </Link>
         </div>
       </div>
 
       {/* Users Table */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="bg-[#303134] rounded-lg border border-[#5f6368] overflow-hidden">
+      <div className="bg-[#303134] rounded-lg border border-[#5f6368] overflow-hidden">
           <table className="w-full">
             <thead className="bg-[#202124] border-b border-[#5f6368]">
               <tr>
