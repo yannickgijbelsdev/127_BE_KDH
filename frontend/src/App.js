@@ -22,7 +22,7 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    return isAdminLoggedIn ? children : <Navigate to="/admin/login" />;
+    return isAdminLoggedIn ? children : <Navigate to="/localhost" />;
   };
 
   return (
