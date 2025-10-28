@@ -325,6 +325,7 @@ const UserManagement = () => {
           }}
         />
       )}
+      </div>
     </div>
   );
 };
