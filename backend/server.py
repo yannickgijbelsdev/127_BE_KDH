@@ -316,6 +316,62 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@app.on_event("startup")
+async def startup_event():
+    await create_default_admin()
+    # Initialize tools configuration
+    tools_count = await db.tools.count_documents({})
+    if tools_count == 0:
+        tools = [
+            {
+                "id": "dpd",
+                "name": "Dead Pixel Detector",
+                "path": "/dpd",
+                "enabled": True,
+                "file_path": str(ROOT_DIR.parent / "frontend" / "src" / "components" / "PixelTest.jsx"),
+                "code": "",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": "printer",
+                "name": "Printer Tester",
+                "path": "/printer",
+                "enabled": True,
+                "file_path": str(ROOT_DIR.parent / "frontend" / "src" / "components" / "PrinterTest.jsx"),
+                "code": "",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": "sscreen",
+                "name": "Screen Refresh Tester",
+                "path": "/sscreen",
+                "enabled": True,
+                "file_path": str(ROOT_DIR.parent / "frontend" / "src" / "components" / "ScreenTest.jsx"),
+                "code": "",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": "wea",
+                "name": "Webcam & Audio Test",
+                "path": "/wea",
+                "enabled": True,
+                "file_path": str(ROOT_DIR.parent / "frontend" / "src" / "components" / "WebcamAudioTest.jsx"),
+                "code": "",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": "password",
+                "name": "Password Generator",
+                "path": "/password",
+                "enabled": True,
+                "file_path": str(ROOT_DIR.parent / "frontend" / "src" / "components" / "PasswordGenerator.jsx"),
+                "code": "",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }
+        ]
+        await db.tools.insert_many(tools)
+        logger.info("Tools configuration initialized")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
