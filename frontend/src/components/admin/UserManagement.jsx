@@ -103,7 +103,7 @@ const UserManagement = () => {
       <div className="bg-[#303134] border-b border-[#5f6368] px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
-            <Link to="/admin/dashboard">
+            <Link to="/localhost/dashboard">
               <ArrowLeft className="w-6 h-6 text-[#9aa0a6] hover:text-[#e8eaed] cursor-pointer" />
             </Link>
             <h1 className="text-2xl font-bold text-[#e8eaed]">User Management</h1>
