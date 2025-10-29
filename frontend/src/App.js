@@ -66,18 +66,38 @@ function AppContent() {
     setIsAdminLoggedIn(true);
   };
 
+  const handleSetupComplete = () => {
+    setNeedsSetup(false);
+    setIsAdminLoggedIn(true);
+  };
+
   const ProtectedRoute = ({ children }) => {
+    if (checkingSetup) {
+      return <div className="min-h-screen bg-[#202124] flex items-center justify-center">
+        <div className="text-[#e8eaed]">Loading...</div>
+      </div>;
+    }
+    
+    if (needsSetup) {
+      return <AdminSetup onSetupComplete={handleSetupComplete} />;
+    }
+    
     return isAdminLoggedIn ? children : <Navigate to="/localhost" />;
   };
 
   // Don't show admin nav on login page
   const isLoginPage = location.pathname === '/localhost';
 
+  if (checkingSetup) {
+    return <div className="min-h-screen bg-[#202124] flex items-center justify-center">
+      <div className="text-[#e8eaed]">Loading...</div>
+    </div>;
+  }
+
   return (
     <>
       {!isLoginPage && <AdminNavBar />}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/dpd" element={<PixelTest />} />
         <Route path="/printer" element={<PrinterTest />} />
@@ -86,7 +106,10 @@ function AppContent() {
         <Route path="/password" element={<PasswordGenerator />} />
         
         {/* Admin Routes on /localhost */}
-        <Route path="/localhost" element={<AdminLogin onLogin={handleLogin} />} />
+        <Route 
+          path="/localhost" 
+          element={needsSetup ? <AdminSetup onSetupComplete={handleSetupComplete} /> : <AdminLogin onLogin={handleLogin} />} 
+        />
         <Route 
           path="/localhost/dashboard" 
           element={
