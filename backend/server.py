@@ -152,19 +152,14 @@ async def get_current_admin(current_user: User = Depends(get_current_user)):
 
 # Initialize default admin on startup
 async def create_default_admin():
-    existing_admin = await db.users.find_one({"email": "admin@127.be"})
-    if not existing_admin:
-        admin_user = User(
-            email="admin@127.be",
-            username="admin",
-            password_hash=hash_password("Admin123!"),
-            role="admin",
-            is2FAEnabled=False
-        )
-        doc = admin_user.model_dump()
-        doc['created_at'] = doc['created_at'].isoformat()
-        await db.users.insert_one(doc)
-        logger.info("Default admin created: admin@127.be / Admin123!")
+    # Check if ANY admin user exists
+    existing_admin = await db.users.find_one({"role": "admin"})
+    if existing_admin:
+        logger.info("Admin user already exists")
+        return
+    
+    # No hardcoded admin creation - will be done via setup flow
+    logger.info("No admin found - use /api/admin/setup to create first admin")
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
