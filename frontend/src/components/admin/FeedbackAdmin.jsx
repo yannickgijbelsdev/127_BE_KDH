@@ -308,10 +308,19 @@ const FeedbackAdmin = () => {
                       {formatTimestamp(item.timestamp)}
                     </span>
                   </div>
-                  <div className="flex gap-2">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    ))}
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-2">
+                      {[...Array(item.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="p-2 hover:bg-red-500/20 rounded-lg transition-colors group"
+                      title="Verwijder feedback"
+                    >
+                      <Trash2 className="w-5 h-5 text-red-500 group-hover:text-red-400" />
+                    </button>
                   </div>
                 </div>
 
