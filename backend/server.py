@@ -662,6 +662,100 @@ async def get_feedback_stats(current_admin: User = Depends(get_current_admin)):
         "rating_distribution": rating_counts
     }
 
+@api_router.delete("/admin/feedback/{feedback_id}")
+async def delete_feedback(feedback_id: str, current_admin: User = Depends(get_current_admin)):
+    """Delete a feedback entry"""
+    result = await db.feedback.delete_one({"id": feedback_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Feedback not found")
+    
+    return {"message": "Feedback deleted successfully"}
+
+@api_router.get("/admin/feedback/insights/keywords")
+async def get_feedback_keywords(current_admin: User = Depends(get_current_admin)):
+    """Get keyword insights from feedback"""
+    import re
+    from collections import Counter
+    
+    # Get all feedback
+    all_feedback = await db.feedback.find({}, {"_id": 0}).to_list(None)
+    
+    if not all_feedback:
+        return {
+            "positive_keywords": [],
+            "negative_keywords": [],
+            "common_topics": [],
+            "suggestions_keywords": []
+        }
+    
+    # Dutch stop words
+    stop_words = {
+        'de', 'het', 'een', 'en', 'van', 'in', 'op', 'is', 'te', 'dat', 'voor', 'met',
+        'niet', 'zijn', 'was', 'maar', 'er', 'als', 'bij', 'om', 'aan', 'ook', 'uit',
+        'naar', 'door', 'kan', 'nog', 'deze', 'die', 'dan', 'meer', 'of', 'wat', 'ik',
+        'je', 'hij', 'ze', 'we', 'hun', 'mijn', 'me', 'dit', 'zou', 'geen', 'wel', 'zoals',
+        'over', 'al', 'zo', 'wordt', 'heel', 'veel', 'heeft', 'waren', 'zijn', 'kan',
+        'moet', 'hebben', 'had', 'worden', 'waar', 'omdat', 'alleen', 'dus', 'onder',
+        'tegen', 'na', 'nu', 'tot', 'iets', 'zeer', 'alle', 'hier', 'hem', 'haar', 'mij',
+        'ons', 'jullie', 'dan', 'toen', 'daarom', 'echter', 'want', 'maar', 'toch',
+        'altijd', 'nooit', 'vaak', 'soms', 'andere', 'eigen', 'ander', 'nieuwe', 'grote',
+        'kleine', 'goede', 'beste', 'eerste', 'laatste', 'hele', 'zelf', 'elkaar', 'alles',
+        'niets', 'iemand', 'niemand', 'elk', 'elke', 'iedere', 'beide', 'enige', 'enkele',
+        'u', 'jullie', 'zullen', 'kunnen', 'moeten', 'willen', 'mogen', 'laten', 'gaan',
+        'komen', 'zien', 'doen', 'maken', 'geven', 'krijgen', 'worden', 'blijven', 'staan',
+        'zitten', 'liggen', 'houden', 'dragen', 'slaan', 'vallen', 'brengen', 'denken',
+        'weten', 'zeggen', 'vertellen', 'vragen', 'antwoorden', 'kijken', 'luisteren',
+        'voelen', 'horen', 'ruiken', 'proeven', 'proberen', 'beginnen', 'eindigen',
+        'stoppen', 'verder', 'erg', 'gewoon', 'misschien', 'waarom', 'hoe', 'wanneer',
+        'welke', 'wie', 'wat', 'waar'
+    }
+    
+    def extract_keywords(text):
+        if not text:
+            return []
+        # Convert to lowercase and extract words
+        words = re.findall(r'\b\w+\b', text.lower())
+        # Filter out stop words and short words
+        return [w for w in words if len(w) > 3 and w not in stop_words]
+    
+    # Separate by rating
+    positive_feedback = [f for f in all_feedback if f.get('rating', 0) >= 8]
+    negative_feedback = [f for f in all_feedback if f.get('rating', 0) <= 4]
+    
+    # Extract keywords
+    positive_words = []
+    negative_words = []
+    all_words = []
+    suggestions_words = []
+    
+    for f in positive_feedback:
+        positive_words.extend(extract_keywords(f.get('feedback_text', '')))
+    
+    for f in negative_feedback:
+        negative_words.extend(extract_keywords(f.get('feedback_text', '')))
+    
+    for f in all_feedback:
+        all_words.extend(extract_keywords(f.get('feedback_text', '')))
+        if f.get('suggestions'):
+            suggestions_words.extend(extract_keywords(f.get('suggestions', '')))
+    
+    # Count occurrences
+    positive_counter = Counter(positive_words).most_common(15)
+    negative_counter = Counter(negative_words).most_common(15)
+    common_counter = Counter(all_words).most_common(20)
+    suggestions_counter = Counter(suggestions_words).most_common(15)
+    
+    return {
+        "positive_keywords": [{"word": word, "count": count} for word, count in positive_counter],
+        "negative_keywords": [{"word": word, "count": count} for word, count in negative_counter],
+        "common_topics": [{"word": word, "count": count} for word, count in common_counter],
+        "suggestions_keywords": [{"word": word, "count": count} for word, count in suggestions_counter],
+        "total_analyzed": len(all_feedback),
+        "positive_count": len(positive_feedback),
+        "negative_count": len(negative_feedback)
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
