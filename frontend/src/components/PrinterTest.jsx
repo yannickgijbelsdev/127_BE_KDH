@@ -430,7 +430,13 @@ const PrinterTest = () => {
                     <Checkbox 
                       id="text"
                       checked={includeText}
-                      onCheckedChange={setIncludeText}
+                      onCheckedChange={(checked) => {
+                        setIncludeText(checked);
+                        logAction('printer', 'Printer Tester', 'option_toggled', {
+                          option: 'text_test',
+                          enabled: checked
+                        });
+                      }}
                       className="border-[#5f6368]"
                     />
                     <label htmlFor="text" className="text-sm text-[#9aa0a6] cursor-pointer">
@@ -441,7 +447,13 @@ const PrinterTest = () => {
                     <Checkbox 
                       id="colors"
                       checked={includeColorBars}
-                      onCheckedChange={setIncludeColorBars}
+                      onCheckedChange={(checked) => {
+                        setIncludeColorBars(checked);
+                        logAction('printer', 'Printer Tester', 'option_toggled', {
+                          option: 'color_bars',
+                          enabled: checked
+                        });
+                      }}
                       className="border-[#5f6368]"
                     />
                     <label htmlFor="colors" className="text-sm text-[#9aa0a6] cursor-pointer">
@@ -452,7 +464,13 @@ const PrinterTest = () => {
                     <Checkbox 
                       id="lines"
                       checked={includeLines}
-                      onCheckedChange={setIncludeLines}
+                      onCheckedChange={(checked) => {
+                        setIncludeLines(checked);
+                        logAction('printer', 'Printer Tester', 'option_toggled', {
+                          option: 'line_test',
+                          enabled: checked
+                        });
+                      }}
                       className="border-[#5f6368]"
                     />
                     <label htmlFor="lines" className="text-sm text-[#9aa0a6] cursor-pointer">
@@ -463,7 +481,13 @@ const PrinterTest = () => {
                     <Checkbox 
                       id="alignment"
                       checked={includeAlignment}
-                      onCheckedChange={setIncludeAlignment}
+                      onCheckedChange={(checked) => {
+                        setIncludeAlignment(checked);
+                        logAction('printer', 'Printer Tester', 'option_toggled', {
+                          option: 'alignment_grid',
+                          enabled: checked
+                        });
+                      }}
                       className="border-[#5f6368]"
                     />
                     <label htmlFor="alignment" className="text-sm text-[#9aa0a6] cursor-pointer">
