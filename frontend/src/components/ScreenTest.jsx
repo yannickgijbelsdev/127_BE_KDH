@@ -362,7 +362,14 @@ const AnimatedBox = ({ speed, index }) => {
         border: '2px solid rgba(255, 255, 255, 0.3)',
       }}
     />
-  );
+    
+    <FloatingFeedbackButton />
+    <ChangelogModal 
+      isOpen={showChangelog} 
+      onClose={() => setShowChangelog(false)}
+      currentVersion={BUILD_VERSION}
+    />
+  </>;
 };
 
 export default ScreenTest;
