@@ -81,6 +81,14 @@ const ScreenTest = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleSpeedChange = (value) => {
+    setAnimationSpeed(value[0]);
+    logAction('sscreen', 'Screen Refresh Tester', 'speed_changed', {
+      new_speed: value[0],
+      display_info: displayInfo
+    });
+  };
+
   const handleClick = () => {
     if (showInstructions) {
       setShowInstructions(false);
