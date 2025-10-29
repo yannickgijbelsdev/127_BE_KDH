@@ -235,7 +235,9 @@ async def get_current_user_info(current_user: User = Depends(get_current_user)):
 async def check_needs_setup():
     """Check if initial admin setup is needed"""
     admin_count = await db.users.count_documents({"role": "admin"})
-    return {"needs_setup": admin_count == 0}
+    needs_setup = admin_count == 0
+    logger.info(f"Admin count: {admin_count}, needs_setup: {needs_setup}")
+    return {"needs_setup": needs_setup}
 
 @api_router.post("/admin/setup")
 async def setup_admin(user_data: UserCreate):
