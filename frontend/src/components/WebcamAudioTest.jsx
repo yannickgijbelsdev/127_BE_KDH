@@ -40,7 +40,11 @@ const WebcamAudioTest = () => {
 
       if (step >= steps) {
         clearInterval(timer);
-        setTimeout(() => setIsLoading(false), 200);
+        setTimeout(() => {
+          setIsLoading(false);
+          // Log page visit when loading completes
+          logPageVisit('wea', 'Webcam & Audio Test');
+        }, 200);
       }
     }, interval);
 
