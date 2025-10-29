@@ -25,6 +25,11 @@ const PrinterTest = () => {
   const [includeLines, setIncludeLines] = useState(false);
   const [includeAlignment, setIncludeAlignment] = useState(false);
 
+  // Log page visit
+  useEffect(() => {
+    logPageVisit('printer', 'Printer Tester');
+  }, []);
+
   // Loading animation (1 second)
   useEffect(() => {
     const duration = 1000;
