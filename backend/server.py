@@ -471,10 +471,28 @@ async def log_analytics_event(event: AnalyticsEventCreate, request: Request):
     
     return {"message": "Event logged successfully", "id": analytics_event.id}
 
-@api_router.get("/admin/analytics/events", response_model=List[dict])
-async def get_all_analytics(current_admin: User = Depends(get_current_admin)):
-    """Get all analytics events"""
-    events = await db.analytics.find({}, {"_id": 0}).sort("timestamp", -1).limit(1000).to_list(1000)
+@api_router.get("/admin/analytics/events", response_model=dict)
+async def get_all_analytics(
+    page: int = 1,
+    limit: int = 50,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Get all analytics events with pagination"""
+    skip = (page - 1) * limit
+    
+    # Get total count
+    total = await db.analytics.count_documents({})
+    
+    # Get paginated events
+    events = await db.analytics.find({}, {"_id": 0}).sort("timestamp", -1).skip(skip).limit(limit).to_list(limit)
+    
+    return {
+        "events": events,
+        "total": total,
+        "page": page,
+        "limit": limit,
+        "pages": (total + limit - 1) // limit  # Ceiling division
+    }
     return events
 
 @api_router.get("/admin/analytics/tool/{tool_id}", response_model=List[dict])
