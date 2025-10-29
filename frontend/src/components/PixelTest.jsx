@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Progress } from './ui/progress';
 import { ArrowLeft, Monitor } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
-import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
+import { logPageVisit, logAction, logButtonClick, logError } from '../utils/analytics';
 
 // Build version - Update this with each change
 const BUILD_VERSION = '1.5.0';
