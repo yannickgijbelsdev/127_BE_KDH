@@ -196,6 +196,12 @@ const WebcamAudioTest = () => {
     a.download = `audio-${Date.now()}.webm`;
     a.click();
     URL.revokeObjectURL(url);
+    
+    // Log audio download
+    logAction('wea', 'Webcam & Audio Test', 'audio_downloaded', {
+      file_size_kb: Math.round(videoBlob.size / 1024),
+      duration_seconds: recordingTime
+    });
   };
 
   const formatTime = (seconds) => {
