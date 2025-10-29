@@ -537,7 +537,6 @@ async def get_all_analytics(
         "limit": limit,
         "pages": (total + limit - 1) // limit  # Ceiling division
     }
-    return events
 
 @api_router.get("/admin/analytics/tool/{tool_id}", response_model=List[dict])
 async def get_tool_analytics(tool_id: str, current_admin: User = Depends(get_current_admin)):
