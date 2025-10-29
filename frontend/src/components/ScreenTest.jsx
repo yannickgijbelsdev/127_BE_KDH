@@ -349,6 +349,7 @@ const AnimatedBox = ({ speed, index }) => {
   const leftPosition = (index * 12) + 5;
 
   return (
+    <>
     <div
       style={{
         position: 'absolute',
@@ -369,7 +370,7 @@ const AnimatedBox = ({ speed, index }) => {
       onClose={() => setShowChangelog(false)}
       currentVersion={BUILD_VERSION}
     />
-  </>
+    </>
   );
 };
 
