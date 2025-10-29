@@ -319,7 +319,12 @@ const PasswordGenerator = () => {
           />
           <h1 className="text-3xl font-bold text-[#e8eaed] mb-2">Wachtwoord Generator</h1>
           <p className="text-[#9aa0a6]">Maak veilige wachtwoorden en test de sterkte</p>
-          <p className="text-xs text-[#9aa0a6] mt-2">Build {BUILD_VERSION}</p>
+          <button 
+            onClick={() => setShowChangelog(true)}
+            className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] mt-2 cursor-pointer underline"
+          >
+            Build {BUILD_VERSION}
+          </button>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
