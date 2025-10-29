@@ -8,6 +8,7 @@ import ScreenTest from './components/ScreenTest';
 import WebcamAudioTest from './components/WebcamAudioTest';
 import PasswordGenerator from './components/PasswordGenerator';
 import AdminLogin from './components/admin/AdminLogin';
+import AdminSetup from './components/admin/AdminSetup';
 import AdminDashboard from './components/admin/AdminDashboard';
 import UserManagement from './components/admin/UserManagement';
 import ToolEditor from './components/admin/ToolEditor';
@@ -18,7 +19,26 @@ function AppContent() {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(
     !!localStorage.getItem('admin_token')
   );
+  const [needsSetup, setNeedsSetup] = useState(false);
+  const [checkingSetup, setCheckingSetup] = useState(true);
   const location = useLocation();
+
+  // Check if setup is needed
+  useEffect(() => {
+    const checkSetup = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/needs-setup`);
+        const data = await response.json();
+        setNeedsSetup(data.needs_setup);
+      } catch (err) {
+        console.error('Failed to check setup status:', err);
+      } finally {
+        setCheckingSetup(false);
+      }
+    };
+    
+    checkSetup();
+  }, []);
 
   // Check session on location change
   useEffect(() => {
