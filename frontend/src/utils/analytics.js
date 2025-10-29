@@ -11,10 +11,38 @@ const getSessionId = () => {
   return sessionId;
 };
 
+// Get browser info
+const getBrowserInfo = () => {
+  const ua = navigator.userAgent;
+  let browserName = 'Unknown';
+  let browserVersion = 'Unknown';
+  
+  // Detect browser
+  if (ua.indexOf('Firefox') > -1) {
+    browserName = 'Firefox';
+    browserVersion = ua.match(/Firefox\/(\d+\.\d+)/)?.[1] || 'Unknown';
+  } else if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1) {
+    browserName = 'Chrome';
+    browserVersion = ua.match(/Chrome\/(\d+\.\d+)/)?.[1] || 'Unknown';
+  } else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) {
+    browserName = 'Safari';
+    browserVersion = ua.match(/Version\/(\d+\.\d+)/)?.[1] || 'Unknown';
+  } else if (ua.indexOf('Edg') > -1) {
+    browserName = 'Edge';
+    browserVersion = ua.match(/Edg\/(\d+\.\d+)/)?.[1] || 'Unknown';
+  } else if (ua.indexOf('Opera') > -1 || ua.indexOf('OPR') > -1) {
+    browserName = 'Opera';
+    browserVersion = ua.match(/(?:Opera|OPR)\/(\d+\.\d+)/)?.[1] || 'Unknown';
+  }
+  
+  return { browserName, browserVersion };
+};
+
 // Log analytics event
 export const logEvent = async (toolId, toolName, eventType, eventData = {}) => {
   try {
     const sessionId = getSessionId();
+    const { browserName, browserVersion } = getBrowserInfo();
     
     await fetch(`${BACKEND_URL}/api/analytics/event`, {
       method: 'POST',
@@ -30,8 +58,12 @@ export const logEvent = async (toolId, toolName, eventType, eventData = {}) => {
           session_id: sessionId,
           timestamp: new Date().toISOString(),
           user_agent: navigator.userAgent,
+          browser_name: browserName,
+          browser_version: browserVersion,
           screen_resolution: `${window.screen.width}x${window.screen.height}`,
-          viewport_size: `${window.innerWidth}x${window.innerHeight}`
+          viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+          platform: navigator.platform,
+          language: navigator.language
         }
       })
     });
