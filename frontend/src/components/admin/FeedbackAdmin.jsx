@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, MessageSquare, Star, ChevronLeft, ChevronRight, TrendingUp } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Star, ChevronLeft, ChevronRight, TrendingUp, Trash2, TrendingDown, Lightbulb, Hash } from 'lucide-react';
 
 const FeedbackAdmin = () => {
   const [feedback, setFeedback] = useState([]);
