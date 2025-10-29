@@ -252,7 +252,15 @@ const BenchmarkTest = () => {
               />
               <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">GPU Benchmark</h2>
               <p className="text-[#9aa0a6]">Klik om te starten</p>
-              <p className="text-xs text-[#9aa0a6] mt-2">Build {BUILD_VERSION}</p>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowChangelog(true);
+                }}
+                className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] mt-2 cursor-pointer underline"
+              >
+                Build {BUILD_VERSION}
+              </button>
             </div>
             <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 text-left">
               <h3 className="font-semibold text-[#8ab4f8] mb-2">Instructies:</h3>
