@@ -17,6 +17,7 @@ const PixelTest = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showGPUModal, setShowGPUModal] = useState(false);
   const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
+  const [showChangelog, setShowChangelog] = useState(false);
 
   // Log page visit on mount
   useEffect(() => {
