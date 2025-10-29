@@ -128,6 +128,7 @@ const ExitFeedback = () => {
     const { browserName, browserVersion } = getBrowserInfo();
     const os = getOS();
     const gpu = getGPUInfo();
+    const cpu = getCPUInfo();
 
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/feedback`, {
@@ -144,6 +145,8 @@ const ExitFeedback = () => {
           operating_system: os,
           gpu_vendor: gpu.vendor,
           gpu_renderer: gpu.renderer,
+          cpu_cores: cpu.cores,
+          cpu_info: cpu.info,
           user_agent: navigator.userAgent,
           screen_resolution: `${window.screen.width}x${window.screen.height}`
         })
