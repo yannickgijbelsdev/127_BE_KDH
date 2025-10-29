@@ -159,6 +159,11 @@ const WebcamAudioTest = () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      
+      // Log recording stop
+      logAction('wea', 'Webcam & Audio Test', 'recording_stopped', {
+        duration_seconds: recordingTime
+      });
     }
   };
 
