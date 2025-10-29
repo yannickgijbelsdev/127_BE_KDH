@@ -574,6 +574,88 @@ async def get_analytics_stats(current_admin: User = Depends(get_current_admin)):
         "unique_visitors": len(unique_visitors) if unique_visitors else 0
     }
 
+# ==================== FEEDBACK ENDPOINTS ====================
+
+@api_router.post("/feedback")
+async def submit_feedback(feedback: FeedbackCreate, request: Request):
+    """Submit user feedback (publicly accessible)"""
+    # Get IP address from request
+    client_ip = request.client.host
+    forwarded_for = request.headers.get("x-forwarded-for")
+    if forwarded_for:
+        client_ip = forwarded_for.split(",")[0].strip()
+    
+    feedback_entry = Feedback(
+        rating=feedback.rating,
+        feedback_text=feedback.feedback_text,
+        suggestions=feedback.suggestions,
+        browser_name=feedback.browser_name,
+        browser_version=feedback.browser_version,
+        operating_system=feedback.operating_system,
+        gpu_vendor=feedback.gpu_vendor,
+        gpu_renderer=feedback.gpu_renderer,
+        user_agent=feedback.user_agent,
+        screen_resolution=feedback.screen_resolution,
+        ip_address=client_ip
+    )
+    
+    doc = feedback_entry.model_dump()
+    doc['timestamp'] = doc['timestamp'].isoformat()
+    await db.feedback.insert_one(doc)
+    
+    return {"message": "Feedback submitted successfully", "id": feedback_entry.id}
+
+@api_router.get("/admin/feedback", response_model=dict)
+async def get_all_feedback(
+    page: int = 1,
+    limit: int = 50,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Get all feedback with pagination"""
+    skip = (page - 1) * limit
+    
+    # Get total count
+    total = await db.feedback.count_documents({})
+    
+    # Get paginated feedback
+    feedback_list = await db.feedback.find({}, {"_id": 0}).sort("timestamp", -1).skip(skip).limit(limit).to_list(limit)
+    
+    return {
+        "feedback": feedback_list,
+        "total": total,
+        "page": page,
+        "limit": limit,
+        "pages": (total + limit - 1) // limit
+    }
+
+@api_router.get("/admin/feedback/stats")
+async def get_feedback_stats(current_admin: User = Depends(get_current_admin)):
+    """Get feedback statistics"""
+    total_feedback = await db.feedback.count_documents({})
+    
+    # Average rating
+    pipeline = [
+        {"$group": {
+            "_id": None,
+            "avg_rating": {"$avg": "$rating"},
+            "ratings": {"$push": "$rating"}
+        }}
+    ]
+    result = await db.feedback.aggregate(pipeline).to_list(1)
+    avg_rating = result[0]["avg_rating"] if result else 0
+    
+    # Rating distribution
+    rating_counts = {}
+    for i in range(1, 11):
+        count = await db.feedback.count_documents({"rating": i})
+        rating_counts[str(i)] = count
+    
+    return {
+        "total_feedback": total_feedback,
+        "average_rating": round(avg_rating, 2) if avg_rating else 0,
+        "rating_distribution": rating_counts
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
