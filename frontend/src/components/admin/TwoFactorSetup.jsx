@@ -27,10 +27,13 @@ const TwoFactorSetup = ({ userId, userEmail, onClose, onSuccess }) => {
       
       if (response.ok) {
         setSecret(data.secret);
-        // Get QR code image
-        setQrCodeUrl(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users/${userId}/2fa-qrcode`);
+        // Set QR code from base64 data
+        setQrCodeUrl(data.qr_code_data);
+      } else {
+        setError(data.detail || 'Failed to enable 2FA');
       }
     } catch (err) {
+      console.error('2FA enable error:', err);
       setError('Failed to enable 2FA');
     }
   };
