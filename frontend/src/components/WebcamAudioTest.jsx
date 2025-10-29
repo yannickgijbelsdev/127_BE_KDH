@@ -371,6 +371,7 @@ const WebcamAudioTest = () => {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-[#202124] flex flex-col">
       {/* Control Panel */}
       <div className="bg-[#303134] border-b border-[#5f6368] p-6">
