@@ -214,29 +214,6 @@ const FeedbackAdmin = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                  <div>
-                    <p className="text-[#9aa0a6] text-xs">IP Adres</p>
-                    <p className="text-[#e8eaed] font-mono">{item.ip_address || 'N/A'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[#9aa0a6] text-xs">Browser</p>
-                    <p className="text-[#e8eaed]">
-                      {item.browser_name} {item.browser_version}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[#9aa0a6] text-xs">Besturingssysteem</p>
-                    <p className="text-[#e8eaed]">{item.operating_system || 'N/A'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[#9aa0a6] text-xs">GPU</p>
-                    <p className="text-[#e8eaed] text-xs truncate" title={item.gpu_renderer}>
-                      {item.gpu_vendor || 'Unknown'}
-                    </p>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
