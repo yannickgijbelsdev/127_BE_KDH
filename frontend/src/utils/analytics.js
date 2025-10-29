@@ -93,9 +93,18 @@ export const logAction = (toolId, toolName, actionName, actionData = {}) => {
   });
 };
 
+// Log errors
+export const logError = (toolId, toolName, errorType, errorData = {}) => {
+  logEvent(toolId, toolName, 'error', {
+    error_type: errorType,
+    ...errorData
+  });
+};
+
 export default {
   logEvent,
   logPageVisit,
   logButtonClick,
-  logAction
+  logAction,
+  logError
 };
