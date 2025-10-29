@@ -81,6 +81,11 @@ const ExitFeedback = () => {
   };
 
   useEffect(() => {
+    // Don't show on admin routes
+    if (location.pathname.startsWith('/localhost')) {
+      return;
+    }
+
     // Check if user has already seen the modal this session
     if (sessionStorage.getItem('feedback_shown')) {
       setHasShown(true);
@@ -112,7 +117,7 @@ const ExitFeedback = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [hasShown, showModal]);
+  }, [hasShown, showModal, location.pathname]);
 
   const handleSubmit = async () => {
     if (rating === 0) {
