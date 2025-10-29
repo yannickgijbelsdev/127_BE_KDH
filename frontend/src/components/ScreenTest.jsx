@@ -369,7 +369,8 @@ const AnimatedBox = ({ speed, index }) => {
       onClose={() => setShowChangelog(false)}
       currentVersion={BUILD_VERSION}
     />
-  </>;
+  </>
+  );
 };
 
 export default ScreenTest;
