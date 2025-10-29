@@ -184,6 +184,14 @@ function AppContent() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/localhost/feedback" 
+          element={
+            <ProtectedRoute>
+              <FeedbackAdmin />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </>
   );
