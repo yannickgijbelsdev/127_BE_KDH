@@ -2,56 +2,58 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Monitor, Printer, Activity, Video, Lock } from 'lucide-react';
 import HalloweenDecoration from './HalloweenDecoration';
+import FloatingFeedbackButton from './FloatingFeedbackButton';
+import ChangelogModal from './ChangelogModal';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.4.0';
+const BUILD_VERSION = '1.5.0';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [showChangelog, setShowChangelog] = useState(false);
 
-  // Available tools/pages
+  // All available tools
   const allTools = [
     {
       id: 'dpd',
       name: 'Dead Pixel Detector',
-      description: 'Test uw scherm op dode pixels met verschillende kleuren',
-      keywords: ['pixel', 'dead', 'detector', 'scherm', 'test', 'dode'],
-      path: '/dpd',
+      description: 'Test je scherm op dode pixels',
       icon: Monitor,
+      path: '/dpd',
+      keywords: ['pixel', 'scherm', 'test', 'dead', 'monitor', 'display']
     },
     {
       id: 'printer',
       name: 'Printer Tester',
-      description: 'Test uw printer op kwaliteit, kleuren, lijnen en uitlijning',
-      keywords: ['printer', 'test', 'print', 'kwaliteit', 'kleuren', 'lijnen', 'afdrukken'],
-      path: '/printer',
+      description: 'Test je printer met verschillende patronen',
       icon: Printer,
+      path: '/printer',
+      keywords: ['print', 'printer', 'test', 'papier', 'kleur', 'pattern']
     },
     {
       id: 'sscreen',
       name: 'Screen Refresh Tester',
-      description: 'Test de verversingssnelheid en vloeiendheid van uw scherm',
-      keywords: ['screen', 'refresh', 'rate', 'fps', 'verversing', 'scherm', 'snelheid', 'hz'],
-      path: '/sscreen',
+      description: 'Meet de refresh rate van je scherm',
       icon: Activity,
+      path: '/sscreen',
+      keywords: ['refresh', 'rate', 'fps', 'hz', 'scherm', 'speed']
     },
     {
       id: 'wea',
-      name: 'Webcam & Audio Test',
-      description: 'Test uw webcam en microfoon, neem op en download de opname',
-      keywords: ['webcam', 'camera', 'audio', 'microfoon', 'mic', 'opname', 'video', 'geluid'],
-      path: '/wea',
+      name: 'Webcam & Audio Tester',
+      description: 'Test je webcam en microfoon',
       icon: Video,
+      path: '/wea',
+      keywords: ['webcam', 'camera', 'audio', 'microfoon', 'microphone', 'test']
     },
     {
       id: 'password',
       name: 'Password Generator',
-      description: 'Maak sterke wachtwoorden en test de sterkte van uw wachtwoord',
-      keywords: ['password', 'wachtwoord', 'generator', 'sterkte', 'security', 'beveiliging', 'generator'],
-      path: '/password',
+      description: 'Genereer veilige wachtwoorden',
       icon: Lock,
+      path: '/password',
+      keywords: ['password', 'wachtwoord', 'generator', 'veilig', 'security']
     },
   ];
 
@@ -111,51 +113,35 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#202124] flex flex-col items-center justify-center px-6">
+    <>
       <HalloweenDecoration />
-      {/* Logo */}
-      <div className="mb-8 animate-fade-in">
-        <img 
-          src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" 
-          alt="127 Logo" 
-          className="w-32 h-auto mx-auto brightness-110"
-        />
-        <p className="text-xs text-[#9aa0a6] text-center mt-3">Build {BUILD_VERSION}</p>
-      </div>
-
-      {/* Search Container */}
-      <div className="w-full max-w-2xl">
-        {/* Search Bar */}
-        <div 
-          className={`relative transition-all duration-200 ${
-            isFocused || showResults 
-              ? 'shadow-2xl' 
-              : 'shadow-lg hover:shadow-2xl'
-          }`}
-        >
-          <div className="relative group">
-            {/* Animated gradient border on hover */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-green-500 rounded-full opacity-0 group-hover:opacity-75 blur-sm transition-opacity duration-300 animate-gradient-rotate"></div>
-            
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 z-10" />
+      <div className="min-h-screen bg-gradient-to-br from-[#202124] to-[#292a2d] flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="w-full max-w-2xl text-center space-y-8 relative z-10">
+          {/* Logo */}
+          <img 
+            src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" 
+            alt="127 Logo" 
+            className="w-48 h-auto mx-auto mb-4 brightness-110"
+          />
+          
+          {/* Search Bar */}
+          <div className="relative">
+            <div className="flex items-center bg-[#303134] rounded-full border border-[#5f6368] hover:border-[#8ab4f8] transition-colors focus-within:border-[#8ab4f8]">
+              <Search className="w-5 h-5 ml-5 text-[#9aa0a6]" />
               <input
                 type="text"
-                placeholder="Zoek naar tools..."
+                placeholder="Zoek een tool..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                className="relative w-full pl-14 pr-4 py-4 text-base bg-[#303134] border border-[#5f6368] text-[#e8eaed] rounded-full focus:outline-none focus:border-[#8ab4f8] transition-all placeholder-gray-400"
+                className="flex-1 px-4 py-4 bg-transparent text-[#e8eaed] placeholder-[#9aa0a6] focus:outline-none"
               />
             </div>
-          </div>
 
-          {/* Search Results Dropdown */}
-          {showResults && (
-            <div className="absolute w-full mt-2 bg-[#303134] rounded-3xl shadow-2xl border border-[#5f6368] overflow-hidden z-10">
-              {filteredTools.length > 0 ? (
-                <div className="py-2">
+            {/* Search Results Dropdown */}
+            {showResults && (
+              <div className="absolute w-full mt-2 bg-[#303134] rounded-lg border border-[#5f6368] shadow-2xl overflow-hidden animate-fade-in z-20">
+                {filteredTools.length > 0 ? (
+                  <div className="divide-y divide-[#5f6368]">
                   {filteredTools.map((tool) => {
                     const Icon = tool.icon;
                     return (
@@ -183,20 +169,16 @@ const LandingPage = () => {
                       </Link>
                     );
                   })}
-                </div>
-              ) : (
-                <div className="px-6 py-8 text-center">
-                  <p className="text-[#e8eaed]">Geen resultaten voor "{searchQuery}"</p>
-                  <p className="text-sm text-[#9aa0a6] mt-1">
-                    Probeer: pixel, scherm, test
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+                  </div>
+                ) : (
+                  <div className="px-6 py-8 text-center text-[#9aa0a6]">
+                    Geen tools gevonden
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
-        {/* Available Tools - Only show when not searching */}
         {!showResults && (
           <div className="mt-8 text-center animate-fade-in">
             <div className="flex gap-3 justify-center flex-wrap">
@@ -212,8 +194,23 @@ const LandingPage = () => {
             </div>
           </div>
         )}
+
+          <button 
+            onClick={() => setShowChangelog(true)}
+            className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] cursor-pointer underline"
+          >
+            Build {BUILD_VERSION}
+          </button>
+        </div>
       </div>
-    </div>
+      
+      <FloatingFeedbackButton />
+      <ChangelogModal 
+        isOpen={showChangelog} 
+        onClose={() => setShowChangelog(false)}
+        currentVersion={BUILD_VERSION}
+      />
+    </>
   );
 };
 
