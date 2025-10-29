@@ -150,6 +150,10 @@ const PixelTest = () => {
       }
     } catch (error) {
       console.warn('Fullscreen niet beschikbaar:', error.message);
+      logError('dpd', 'Dead Pixel Detector', 'fullscreen_failed', {
+        error_message: error.message,
+        error_name: error.name
+      });
       // Fallback: manually set fullscreen state for testing
       setIsFullscreen(true);
     }
