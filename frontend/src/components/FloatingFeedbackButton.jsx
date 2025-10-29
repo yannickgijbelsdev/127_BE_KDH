@@ -134,6 +134,11 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
     }
   };
 
+  // Hide button on admin routes
+  if (location.pathname.startsWith('/localhost')) {
+    return null;
+  }
+
   // Hide button when in fullscreen (for PixelTest)
   if (hideOnFullscreen && document.fullscreenElement) {
     return null;
