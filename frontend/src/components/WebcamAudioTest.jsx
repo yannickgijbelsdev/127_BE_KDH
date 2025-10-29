@@ -382,6 +382,12 @@ const WebcamAudioTest = () => {
               <div>
                 <h1 className="text-2xl font-bold text-[#e8eaed]">Webcam & Audio Test</h1>
                 <p className="text-sm text-[#9aa0a6]">Test uw camera en microfoon</p>
+                <button 
+                  onClick={() => setShowChangelog(true)}
+                  className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] cursor-pointer underline"
+                >
+                  Build {BUILD_VERSION}
+                </button>
               </div>
             </div>
             <Link to="/">
