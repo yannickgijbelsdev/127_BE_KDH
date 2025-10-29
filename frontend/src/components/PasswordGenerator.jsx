@@ -201,6 +201,14 @@ const PasswordGenerator = () => {
       setCustomPassword(memorable); // Also show in strength checker
       setShowMemorableForm(false);
       setMemorableInputs({ interest: '', year: '', favorite: '' });
+      
+      // Log memorable password generation
+      logAction('password', 'Password Generator', 'memorable_password_generated', {
+        has_interest: !!memorableInputs.interest,
+        has_year: !!memorableInputs.year,
+        has_favorite: !!memorableInputs.favorite,
+        password_length: memorable.length
+      });
     }
   };
 
