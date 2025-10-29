@@ -229,6 +229,47 @@ async def get_current_user_info(current_user: User = Depends(get_current_user)):
         "is2FAEnabled": current_user.is2FAEnabled
     }
 
+# ==================== ADMIN SETUP (First Time) ====================
+
+@api_router.get("/admin/needs-setup")
+async def check_needs_setup():
+    """Check if initial admin setup is needed"""
+    admin_count = await db.users.count_documents({"role": "admin"})
+    return {"needs_setup": admin_count == 0}
+
+@api_router.post("/admin/setup")
+async def setup_admin(user_data: UserCreate):
+    """Create the first admin user (only works if no admin exists)"""
+    # Check if admin already exists
+    existing_admin = await db.users.find_one({"role": "admin"})
+    if existing_admin:
+        raise HTTPException(status_code=400, detail="Admin already exists")
+    
+    # Check if email already in use
+    existing_email = await db.users.find_one({"email": user_data.email})
+    if existing_email:
+        raise HTTPException(status_code=400, detail="Email already in use")
+    
+    # Create admin user
+    admin_user = User(
+        email=user_data.email,
+        username=user_data.username,
+        password_hash=hash_password(user_data.password),
+        role="admin",
+        is2FAEnabled=False
+    )
+    
+    doc = admin_user.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.users.insert_one(doc)
+    
+    return {
+        "message": "Admin user created successfully",
+        "id": admin_user.id,
+        "email": admin_user.email,
+        "username": admin_user.username
+    }
+
 # ==================== ADMIN USER MANAGEMENT ====================
 
 @api_router.get("/admin/users", response_model=List[dict])
