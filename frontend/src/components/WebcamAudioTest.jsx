@@ -140,6 +140,12 @@ const WebcamAudioTest = () => {
     setIsRecording(true);
     setRecordingTime(0);
 
+    // Log recording start
+    logAction('wea', 'Webcam & Audio Test', 'recording_started', {
+      camera: devices.camera,
+      microphone: devices.microphone
+    });
+
     // Start timer
     timerRef.current = setInterval(() => {
       setRecordingTime(prev => prev + 1);
