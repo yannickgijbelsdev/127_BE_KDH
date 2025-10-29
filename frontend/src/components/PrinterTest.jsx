@@ -312,6 +312,13 @@ const PrinterTest = () => {
     printWindow.document.close();
     
     setTimeout(() => {
+      logAction('printer', 'Printer Tester', 'print_started', {
+        num_pages: numPages,
+        include_random_text: includeText,
+        include_color_bars: includeColorBars,
+        include_lines: includeLines,
+        include_alignment: includeAlignment
+      });
       printWindow.print();
     }, 1000);
   };
