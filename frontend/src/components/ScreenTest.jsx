@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
 import HalloweenDecoration from './HalloweenDecoration';
-import { logPageVisit, logAction } from '../utils/analytics';
+import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
 const BUILD_VERSION = '1.3.3';
