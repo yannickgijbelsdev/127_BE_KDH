@@ -7,6 +7,8 @@ import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Checkbox } from './ui/checkbox';
 import HalloweenDecoration from './HalloweenDecoration';
+import FloatingFeedbackButton from './FloatingFeedbackButton';
+import ChangelogModal from './ChangelogModal';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
@@ -17,6 +19,7 @@ const PrinterTest = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
   const [showConfig, setShowConfig] = useState(false);
+  const [showChangelog, setShowChangelog] = useState(false);
   
   // Test options
   const [numPages, setNumPages] = useState(1);
