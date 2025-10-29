@@ -123,6 +123,14 @@ const AdminNavBar = () => {
               {!isCollapsed && <span>Analytics</span>}
             </Link>
 
+            <Link 
+              to="/localhost/feedback"
+              className="flex items-center gap-3 px-4 py-3 text-[#e8eaed] hover:bg-[#5f6368] transition-colors"
+            >
+              <MessageSquare className="w-5 h-5 flex-shrink-0" />
+              {!isCollapsed && <span>Feedback</span>}
+            </Link>
+
             <div className="px-4 py-2 mt-4">
               {!isCollapsed && (
                 <p className="text-xs text-[#9aa0a6] uppercase font-semibold mb-2">Tools</p>
