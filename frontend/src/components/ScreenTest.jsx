@@ -91,6 +91,13 @@ const ScreenTest = () => {
 
   const handleClick = () => {
     if (showInstructions) {
+      logButtonClick('sscreen', 'Screen Refresh Tester', 'start_test');
+      logAction('sscreen', 'Screen Refresh Tester', 'display_info_captured', {
+        display_info: displayInfo,
+        screen_width: window.screen.width,
+        screen_height: window.screen.height,
+        color_depth: window.screen.colorDepth
+      });
       setShowInstructions(false);
       setIsRunning(true);
     }
