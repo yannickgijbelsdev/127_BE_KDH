@@ -355,9 +355,24 @@ async def enable_2fa(user_id: str, current_admin: User = Depends(get_current_adm
         issuer_name="127.be Admin"
     )
     
+    # Generate QR code as base64
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(provisioning_uri)
+    qr.make(fit=True)
+    
+    img = qr.make_image(fill_color="black", back_color="white")
+    
+    # Convert to base64
+    import base64
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    img_byte_arr.seek(0)
+    img_base64 = base64.b64encode(img_byte_arr.getvalue()).decode('utf-8')
+    
     return {
         "secret": secret,
-        "qr_code_url": provisioning_uri,
+        "qr_code_data": f"data:image/png;base64,{img_base64}",
+        "provisioning_uri": provisioning_uri,
         "message": "2FA enabled. Scan QR code with Google Authenticator"
     }
 
