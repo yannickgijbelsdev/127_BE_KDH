@@ -87,19 +87,35 @@ const PixelTest = () => {
       switch(e.key) {
         case 'ArrowRight':
         case ' ':
-          setCurrentColor(colors[(currentIndex + 1) % colors.length].value);
+          const nextColor = colors[(currentIndex + 1) % colors.length];
+          setCurrentColor(nextColor.value);
+          logAction('dpd', 'Dead Pixel Detector', 'keyboard_navigation', {
+            key: e.key === ' ' ? 'space' : 'arrow_right',
+            previous_color: currentColor,
+            new_color: nextColor.value,
+            color_index: (currentIndex + 1) % colors.length
+          });
           break;
         case 'ArrowLeft':
-          setCurrentColor(colors[(currentIndex - 1 + colors.length) % colors.length].value);
+          const prevColor = colors[(currentIndex - 1 + colors.length) % colors.length];
+          setCurrentColor(prevColor.value);
+          logAction('dpd', 'Dead Pixel Detector', 'keyboard_navigation', {
+            key: 'arrow_left',
+            previous_color: currentColor,
+            new_color: prevColor.value,
+            color_index: (currentIndex - 1 + colors.length) % colors.length
+          });
           break;
         case 'Escape':
           if (isFullscreen) {
+            logButtonClick('dpd', 'Dead Pixel Detector', 'exit_fullscreen_keyboard');
             exitFullscreen();
           }
           break;
         case 'f':
         case 'F':
           if (!isFullscreen) {
+            logButtonClick('dpd', 'Dead Pixel Detector', 'enter_fullscreen_keyboard');
             enterFullscreen();
           }
           break;
