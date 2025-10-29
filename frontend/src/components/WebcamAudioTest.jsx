@@ -61,6 +61,7 @@ const WebcamAudioTest = () => {
 
   const requestPermissions = async () => {
     setPermissionError('');
+    logButtonClick('wea', 'Webcam & Audio Test', 'request_permissions');
     await startCamera();
   };
 
