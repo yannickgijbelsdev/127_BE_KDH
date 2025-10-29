@@ -483,7 +483,14 @@ const WebcamAudioTest = () => {
         </div>
       </div>
     </div>
-  );
+    
+    <FloatingFeedbackButton />
+    <ChangelogModal 
+      isOpen={showChangelog} 
+      onClose={() => setShowChangelog(false)}
+      currentVersion={BUILD_VERSION}
+    />
+  </>;
 };
 
 export default WebcamAudioTest;
