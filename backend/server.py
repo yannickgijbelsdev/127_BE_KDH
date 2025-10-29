@@ -114,6 +114,35 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+class Feedback(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    rating: int  # 1-10
+    feedback_text: str
+    suggestions: Optional[str] = None
+    browser_name: Optional[str] = None
+    browser_version: Optional[str] = None
+    operating_system: Optional[str] = None
+    gpu_vendor: Optional[str] = None
+    gpu_renderer: Optional[str] = None
+    ip_address: Optional[str] = None
+    user_agent: Optional[str] = None
+    screen_resolution: Optional[str] = None
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class FeedbackCreate(BaseModel):
+    rating: int
+    feedback_text: str
+    suggestions: Optional[str] = None
+    browser_name: Optional[str] = None
+    browser_version: Optional[str] = None
+    operating_system: Optional[str] = None
+    gpu_vendor: Optional[str] = None
+    gpu_renderer: Optional[str] = None
+    user_agent: Optional[str] = None
+    screen_resolution: Optional[str] = None
+
 # Helper Functions
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
