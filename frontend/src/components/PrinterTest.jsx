@@ -52,6 +52,7 @@ const PrinterTest = () => {
 
   const handleClick = () => {
     if (showInstructions) {
+      logButtonClick('printer', 'Printer Tester', 'start_config');
       setShowInstructions(false);
       setShowConfig(true);
     }
