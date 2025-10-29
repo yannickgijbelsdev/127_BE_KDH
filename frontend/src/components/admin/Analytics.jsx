@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Activity, Users, MousePointer, Eye, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Activity, Users, MousePointer, Eye, TrendingUp, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
   const [events, setEvents] = useState([]);
   const [selectedTool, setSelectedTool] = useState('all');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [limit] = useState(50);
 
   useEffect(() => {
     fetchStats();
@@ -19,7 +23,7 @@ const Analytics = () => {
     } else {
       fetchEvents();
     }
-  }, [selectedTool]);
+  }, [selectedTool, currentPage]);
 
   const fetchStats = async () => {
     try {
@@ -37,11 +41,13 @@ const Analytics = () => {
   const fetchEvents = async () => {
     try {
       const token = localStorage.getItem('admin_token');
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/events`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/analytics/events?page=${currentPage}&limit=${limit}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
-      setEvents(data);
+      setEvents(data.events || []);
+      setTotal(data.total || 0);
+      setTotalPages(data.pages || 1);
     } catch (err) {
       console.error('Failed to fetch events:', err);
     } finally {
@@ -57,6 +63,7 @@ const Analytics = () => {
       });
       const data = await response.json();
       setEvents(data);
+      setTotalPages(1); // Tool events don't have pagination yet
     } catch (err) {
       console.error('Failed to fetch tool events:', err);
     }
