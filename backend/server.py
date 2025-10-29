@@ -126,6 +126,8 @@ class Feedback(BaseModel):
     operating_system: Optional[str] = None
     gpu_vendor: Optional[str] = None
     gpu_renderer: Optional[str] = None
+    cpu_cores: Optional[int] = None
+    cpu_info: Optional[str] = None
     ip_address: Optional[str] = None
     user_agent: Optional[str] = None
     screen_resolution: Optional[str] = None
@@ -140,6 +142,8 @@ class FeedbackCreate(BaseModel):
     operating_system: Optional[str] = None
     gpu_vendor: Optional[str] = None
     gpu_renderer: Optional[str] = None
+    cpu_cores: Optional[int] = None
+    cpu_info: Optional[str] = None
     user_agent: Optional[str] = None
     screen_resolution: Optional[str] = None
 
