@@ -68,6 +68,16 @@ const ExitFeedback = () => {
     return { vendor: 'Unknown', renderer: 'Unknown' };
   };
 
+  // Get CPU info
+  const getCPUInfo = () => {
+    const cores = navigator.hardwareConcurrency || 'Unknown';
+    const platform = navigator.platform || 'Unknown';
+    return {
+      cores: cores,
+      info: `${cores} cores (${platform})`
+    };
+  };
+
   useEffect(() => {
     // Check if user has already seen the modal this session
     if (sessionStorage.getItem('feedback_shown')) {
