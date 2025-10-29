@@ -137,6 +137,7 @@ function AppContent() {
   return (
     <>
       {showAdminNav && <AdminNavBar />}
+      <ExitFeedback />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/dpd" element={<PixelTest />} />
