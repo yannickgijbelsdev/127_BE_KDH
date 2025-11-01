@@ -148,13 +148,97 @@ backend:
         comment: "COMPREHENSIVE BACKEND TESTING COMPLETED - All analytics endpoints working perfectly: ✅ POST /api/analytics/event (public) - Successfully logs events with proper structure ✅ GET /api/admin/analytics/events - Returns all events with correct fields ✅ GET /api/admin/analytics/tool/{tool_id} - Filters events by tool correctly ✅ GET /api/admin/analytics/stats - Provides aggregated statistics ✅ Admin authentication flow working ✅ Error handling for malformed requests ✅ Authorization protection for admin endpoints. Current analytics: 26 total events, 19 unique visitors, events tracked for WebcamAudioTest (12), Dead Pixel Detector (10), Password Generator (3). All required fields present: id, tool_id, tool_name, event_type, event_data, timestamp."
 
 frontend:
-  - task: "WebcamAudioTest Analytics Integration"
+  - task: "ToolStatusWrapper Component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ToolStatusWrapper.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created wrapper component to check tool status before rendering. Shows loading spinner while checking, displays offline message if disabled, or renders the child component if enabled."
+  
+  - task: "LandingPage - Filter Enabled Tools"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/LandingPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Modified LandingPage to fetch enabled tools from backend API (/api/tools) on mount and filter the displayed tools based on enabled status. If backend fails, shows all tools as fallback."
+  
+  - task: "PixelTest - Offline Protection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/PixelTest.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Wrapped PixelTest with ToolStatusWrapper (toolId: 'dpd') to check if tool is enabled before rendering."
+  
+  - task: "PrinterTest - Offline Protection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/PrinterTest.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Wrapped PrinterTest with ToolStatusWrapper (toolId: 'printer') to check if tool is enabled before rendering."
+  
+  - task: "ScreenTest - Offline Protection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ScreenTest.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Wrapped ScreenTest with ToolStatusWrapper (toolId: 'sscreen') to check if tool is enabled before rendering. Note: File was corrupted and restored from git history."
+  
+  - task: "WebcamAudioTest - Offline Protection"
     implemented: true
     working: "NA"
     file: "/app/frontend/src/components/WebcamAudioTest.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Wrapped WebcamAudioTest with ToolStatusWrapper (toolId: 'wea') to check if tool is enabled before rendering."
+  
+  - task: "PasswordGenerator - Offline Protection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/PasswordGenerator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Wrapped PasswordGenerator with ToolStatusWrapper (toolId: 'password') to check if tool is enabled before rendering."
+  
+  - task: "WebcamAudioTest Analytics Integration"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/WebcamAudioTest.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -168,8 +252,8 @@ frontend:
     working: "NA"
     file: "/app/frontend/src/App.js"
     stuck_count: 0
-    priority: "high"
-    needs_retesting: true
+    priority: "medium"
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
@@ -184,7 +268,7 @@ frontend:
     file: "/app/frontend/src/components/WebcamAudioTest.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
