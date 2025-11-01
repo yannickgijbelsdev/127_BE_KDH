@@ -8,6 +8,7 @@ import { Slider } from './ui/slider';
 import AutumnDecoration from './AutumnDecoration';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
 import ChangelogModal from './ChangelogModal';
+import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
