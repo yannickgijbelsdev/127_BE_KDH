@@ -164,7 +164,7 @@ const LandingPage = () => {
             src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
             alt="127 Logo" 
             className="w-48 h-auto mx-auto mb-4 brightness-110"
-          />
+           draggable="false"/>
           
           {/* Search Bar */}
           <div className="relative">

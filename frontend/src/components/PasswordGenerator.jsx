@@ -251,7 +251,7 @@ const PasswordGenerator = () => {
               src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
               alt="127 Logo" 
               className="w-48 h-auto brightness-110"
-            />
+             draggable="false"/>
           </div>
           <div className="space-y-4">
             <div className="text-center">
@@ -318,7 +318,7 @@ const PasswordGenerator = () => {
             src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
             alt="127 Logo" 
             className="w-24 h-auto mx-auto mb-4 brightness-110"
-          />
+           draggable="false"/>
           <h1 className="text-3xl font-bold text-[#e8eaed] mb-2">Wachtwoord Generator</h1>
           <p className="text-[#9aa0a6]">Maak veilige wachtwoorden en test de sterkte</p>
           <button 

@@ -221,7 +221,7 @@ const BenchmarkTest = () => {
               src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
               alt="127 Logo" 
               className="w-48 h-auto brightness-110"
-            />
+             draggable="false"/>
           </div>
           <div className="space-y-4">
             <div className="text-center">
@@ -249,7 +249,7 @@ const BenchmarkTest = () => {
                 src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
                 alt="127 Logo" 
                 className="w-32 h-auto mb-4 brightness-110"
-              />
+               draggable="false"/>
               <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">GPU Benchmark</h2>
               <p className="text-[#9aa0a6]">Klik om te starten</p>
               <button 
