@@ -103,10 +103,9 @@
 #====================================================================================================
 
 user_problem_statement: |
-  Complete pending features for the "127 | Yannick Tools" application:
-  1. Add comprehensive analytics tracking to WebcamAudioTest component
-  2. Fix admin session management - AdminNavBar should only show when logged in
-  3. Ensure all functionality is working correctly
+  Implement the "disable" feature in the admin dashboard so that:
+  - Disabled tools are hidden from the landing page
+  - Accessing a disabled tool directly via URL shows "Sorry, this tool is offline" message
 
 backend:
   - task: "Analytics Event Logging API"
