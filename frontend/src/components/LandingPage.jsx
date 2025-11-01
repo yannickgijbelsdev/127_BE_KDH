@@ -7,7 +7,7 @@ import ChangelogModal from './ChangelogModal';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.5.0';
+const BUILD_VERSION = '1.6.0';
 
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');

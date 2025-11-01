@@ -12,7 +12,7 @@ import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.5.0';
+const BUILD_VERSION = '1.6.0';
 
 const ScreenTest = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -131,7 +131,7 @@ const ScreenTest = () => {
         <div className="w-full max-w-md space-y-8">
           <div className="flex justify-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" 
+              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
               alt="127 Logo" 
               className="w-48 h-auto brightness-110"
             />
@@ -159,7 +159,7 @@ const ScreenTest = () => {
           <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 max-w-md border border-[#5f6368]">
             <div className="mb-6 flex flex-col items-center">
               <img 
-                src="https://customer-assets.emergentagent.com/job_053c424a-d7ee-4a13-a916-f7596c34862b/artifacts/qy7ga8qf_2025_Logo_127.png" 
+                src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
                 alt="127 Logo" 
                 className="w-32 h-auto mb-4 brightness-110"
               />
