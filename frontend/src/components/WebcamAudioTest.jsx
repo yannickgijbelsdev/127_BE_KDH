@@ -502,4 +502,10 @@ const WebcamAudioTest = () => {
   );
 };
 
-export default WebcamAudioTest;
+export default function WrappedWebcamAudioTest() {
+  return (
+    <ToolStatusWrapper toolId="wea">
+      <WebcamAudioTest />
+    </ToolStatusWrapper>
+  );
+}
