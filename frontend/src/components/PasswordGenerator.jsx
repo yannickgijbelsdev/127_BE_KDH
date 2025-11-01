@@ -651,4 +651,10 @@ const PasswordGenerator = () => {
   );
 };
 
-export default PasswordGenerator;
+export default function WrappedPasswordGenerator() {
+  return (
+    <ToolStatusWrapper toolId="password">
+      <PasswordGenerator />
+    </ToolStatusWrapper>
+  );
+}
