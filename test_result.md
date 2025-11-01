@@ -153,6 +153,18 @@ backend:
         agent: "testing"
         comment: "COMPREHENSIVE BACKEND TESTING COMPLETED - All analytics endpoints working perfectly: ✅ POST /api/analytics/event (public) - Successfully logs events with proper structure ✅ GET /api/admin/analytics/events - Returns all events with correct fields ✅ GET /api/admin/analytics/tool/{tool_id} - Filters events by tool correctly ✅ GET /api/admin/analytics/stats - Provides aggregated statistics ✅ Admin authentication flow working ✅ Error handling for malformed requests ✅ Authorization protection for admin endpoints. Current analytics: 26 total events, 19 unique visitors, events tracked for WebcamAudioTest (12), Dead Pixel Detector (10), Password Generator (3). All required fields present: id, tool_id, tool_name, event_type, event_data, timestamp."
 
+  - task: "Admin Tool Toggle API - PUT /api/admin/tools/{tool_id}"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE BACKEND TESTING COMPLETED - Admin tool toggle functionality working perfectly: ✅ PUT /api/admin/tools/{tool_id} with {enabled: false} successfully disables tools ✅ PUT /api/admin/tools/{tool_id} with {enabled: true} successfully enables tools ✅ Disabled tools immediately excluded from GET /api/tools public API ✅ Tool status API reflects real-time enabled/disabled state ✅ Proper authentication required (403 without token) ✅ GET /api/admin/tools returns all tools with full details ✅ Tool state changes persist correctly ✅ Tested complete disable/enable cycle with 'dpd' tool ✅ All 5 tools (dpd, printer, sscreen, wea, password) accessible via admin API"
+
 frontend:
   - task: "ToolStatusWrapper Component"
     implemented: true
