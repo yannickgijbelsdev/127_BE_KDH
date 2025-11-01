@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 const AutumnDecoration = () => {
   const [leaves, setLeaves] = useState([
-    { id: 1, x: 10, y: -10, speed: 2, rotation: 0, color: '#D4A574', size: 20, sway: 15 },
-    { id: 2, x: 30, y: -20, speed: 2.5, rotation: 45, color: '#E8B86D', size: 18, sway: 20 },
-    { id: 3, x: 50, y: -15, speed: 1.8, rotation: 90, color: '#C89F65', size: 22, sway: 18 },
-    { id: 4, x: 70, y: -25, speed: 2.2, rotation: 135, color: '#DDA15E', size: 16, sway: 22 },
-    { id: 5, x: 90, y: -30, speed: 1.9, rotation: 180, color: '#BC8A5F', size: 19, sway: 17 },
-    { id: 6, x: 20, y: -35, speed: 2.3, rotation: 225, color: '#E8C4A0', size: 21, sway: 19 },
-    { id: 7, x: 60, y: -40, speed: 2.1, rotation: 270, color: '#F4D4A8', size: 17, sway: 21 },
-    { id: 8, x: 40, y: -45, speed: 2.4, rotation: 315, color: '#D9B58C', size: 20, sway: 16 },
+    { id: 1, x: 10, y: -10, speed: 1.0, rotation: 0, color: '#D4A574', size: 35, sway: 8 },
+    { id: 2, x: 30, y: -20, speed: 1.2, rotation: 45, color: '#E8B86D', size: 38, sway: 10 },
+    { id: 3, x: 50, y: -15, speed: 0.9, rotation: 90, color: '#C89F65', size: 42, sway: 9 },
+    { id: 4, x: 70, y: -25, speed: 1.1, rotation: 135, color: '#DDA15E', size: 36, sway: 11 },
+    { id: 5, x: 90, y: -30, speed: 1.0, rotation: 180, color: '#BC8A5F', size: 40, sway: 8 },
+    { id: 6, x: 20, y: -35, speed: 1.3, rotation: 225, color: '#E8C4A0', size: 37, sway: 9 },
+    { id: 7, x: 60, y: -40, speed: 1.1, rotation: 270, color: '#F4D4A8', size: 39, sway: 10 },
+    { id: 8, x: 40, y: -45, speed: 1.2, rotation: 315, color: '#D9B58C', size: 41, sway: 8 },
   ]);
 
   useEffect(() => {
