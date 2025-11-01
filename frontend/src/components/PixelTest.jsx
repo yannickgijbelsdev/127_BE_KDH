@@ -14,7 +14,7 @@ const BUILD_VERSION = '1.6.0';
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [currentColor, setCurrentColor] = useState('black');
+  const [currentColor, setCurrentColor] = useState('red');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
   const [showChangelog, setShowChangelog] = useState(false);
