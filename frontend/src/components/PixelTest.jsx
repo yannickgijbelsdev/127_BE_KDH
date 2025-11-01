@@ -350,4 +350,10 @@ const PixelTest = () => {
   );
 };
 
-export default PixelTest;
+export default function WrappedPixelTest() {
+  return (
+    <ToolStatusWrapper toolId="dpd">
+      <PixelTest />
+    </ToolStatusWrapper>
+  );
+}
