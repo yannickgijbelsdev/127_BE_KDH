@@ -321,6 +321,10 @@ const LandingPage = () => {
         onClose={() => setShowChangelog(false)}
         currentVersion={BUILD_VERSION}
       />
+      <ToolSuggestionModal 
+        isOpen={showToolSuggestion}
+        onClose={() => setShowToolSuggestion(false)}
+      />
     </>
   );
 };
