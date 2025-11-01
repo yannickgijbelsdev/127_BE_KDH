@@ -13,6 +13,7 @@ const BUILD_VERSION = '1.7.0';
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChangelog, setShowChangelog] = useState(false);
+  const [showToolSuggestion, setShowToolSuggestion] = useState(false);
   const [enabledToolIds, setEnabledToolIds] = useState([]);
   const [loadingTools, setLoadingTools] = useState(true);
 
