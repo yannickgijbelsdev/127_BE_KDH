@@ -193,6 +193,14 @@ function AppContent() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/localhost/suggestions" 
+          element={
+            <ProtectedRoute>
+              <ToolSuggestionsAdmin />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </>
   );
