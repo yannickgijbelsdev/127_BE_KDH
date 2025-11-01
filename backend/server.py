@@ -796,6 +796,108 @@ async def get_feedback_keywords(current_admin: User = Depends(get_current_admin)
         "negative_count": len(negative_feedback)
     }
 
+# ==================== TOOL SUGGESTION ENDPOINTS ====================
+
+@api_router.post("/tool-suggestions")
+async def submit_tool_suggestion(suggestion: ToolSuggestionCreate, request: Request):
+    """Submit a tool suggestion (publicly accessible)"""
+    # Get IP address from request
+    client_ip = request.client.host
+    forwarded_for = request.headers.get("x-forwarded-for")
+    if forwarded_for:
+        client_ip = forwarded_for.split(",")[0].strip()
+    
+    suggestion_entry = ToolSuggestion(
+        tool_name=suggestion.tool_name,
+        description=suggestion.description,
+        use_case=suggestion.use_case,
+        browser_name=suggestion.browser_name,
+        browser_version=suggestion.browser_version,
+        operating_system=suggestion.operating_system,
+        user_agent=suggestion.user_agent,
+        ip_address=client_ip,
+        status="new"
+    )
+    
+    doc = suggestion_entry.model_dump()
+    doc['timestamp'] = doc['timestamp'].isoformat()
+    await db.tool_suggestions.insert_one(doc)
+    
+    return {"message": "Tool suggestion submitted successfully", "id": suggestion_entry.id}
+
+@api_router.get("/admin/tool-suggestions", response_model=dict)
+async def get_all_tool_suggestions(
+    page: int = 1,
+    limit: int = 50,
+    status: Optional[str] = None,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Get all tool suggestions with pagination"""
+    skip = (page - 1) * limit
+    
+    # Build query filter
+    query = {}
+    if status:
+        query["status"] = status
+    
+    # Get total count
+    total = await db.tool_suggestions.count_documents(query)
+    
+    # Get paginated suggestions
+    suggestions_list = await db.tool_suggestions.find(query, {"_id": 0}).sort("timestamp", -1).skip(skip).limit(limit).to_list(limit)
+    
+    return {
+        "suggestions": suggestions_list,
+        "total": total,
+        "page": page,
+        "limit": limit,
+        "pages": (total + limit - 1) // limit
+    }
+
+@api_router.get("/admin/tool-suggestions/stats")
+async def get_tool_suggestions_stats(current_admin: User = Depends(get_current_admin)):
+    """Get tool suggestions statistics"""
+    total_suggestions = await db.tool_suggestions.count_documents({})
+    new_suggestions = await db.tool_suggestions.count_documents({"status": "new"})
+    reviewed_suggestions = await db.tool_suggestions.count_documents({"status": "reviewed"})
+    implemented_suggestions = await db.tool_suggestions.count_documents({"status": "implemented"})
+    rejected_suggestions = await db.tool_suggestions.count_documents({"status": "rejected"})
+    
+    return {
+        "total_suggestions": total_suggestions,
+        "new": new_suggestions,
+        "reviewed": reviewed_suggestions,
+        "implemented": implemented_suggestions,
+        "rejected": rejected_suggestions
+    }
+
+@api_router.put("/admin/tool-suggestions/{suggestion_id}/status")
+async def update_suggestion_status(
+    suggestion_id: str,
+    status_data: dict,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Update tool suggestion status"""
+    result = await db.tool_suggestions.update_one(
+        {"id": suggestion_id},
+        {"$set": {"status": status_data.get("status")}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Tool suggestion not found")
+    
+    return {"message": "Status updated successfully"}
+
+@api_router.delete("/admin/tool-suggestions/{suggestion_id}")
+async def delete_tool_suggestion(suggestion_id: str, current_admin: User = Depends(get_current_admin)):
+    """Delete a tool suggestion"""
+    result = await db.tool_suggestions.delete_one({"id": suggestion_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Tool suggestion not found")
+    
+    return {"message": "Tool suggestion deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
