@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Monitor, Printer, Activity, Video, Lock } from 'lucide-react';
+import { Search, Monitor, Printer, Activity, Video, Lock, Plus } from 'lucide-react';
 import AutumnDecoration from './AutumnDecoration';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
 import ChangelogModal from './ChangelogModal';
+import ToolSuggestionModal from './ToolSuggestionModal';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 // Build version - Update this with each change
