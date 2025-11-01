@@ -108,6 +108,30 @@ user_problem_statement: |
   - Accessing a disabled tool directly via URL shows "Sorry, this tool is offline" message
 
 backend:
+  - task: "Public Tool Status API - GET /api/tools"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created public endpoint GET /api/tools to return only enabled tools (excluding code and file_path fields). This allows LandingPage to fetch and filter enabled tools."
+  
+  - task: "Public Tool Status Check API - GET /api/tools/{tool_id}/status"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created public endpoint GET /api/tools/{tool_id}/status to check if a specific tool is enabled. Returns {id, enabled, name}. Used by ToolStatusWrapper to check tool status before rendering."
+  
   - task: "Analytics Event Logging API"
     implemented: true
     working: true
