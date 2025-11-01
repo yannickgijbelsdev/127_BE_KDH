@@ -5,6 +5,7 @@ import { Progress } from './ui/progress';
 import AutumnDecoration from './AutumnDecoration';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
 import ChangelogModal from './ChangelogModal';
+import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
 const BUILD_VERSION = '1.5.0';
