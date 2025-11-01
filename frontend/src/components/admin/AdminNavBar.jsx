@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, Settings, Users, Code, Home, ChevronLeft, ChevronRight, BarChart3, MessageSquare } from 'lucide-react';
+import { LogOut, Settings, Users, Code, Home, ChevronLeft, ChevronRight, BarChart3, MessageSquare, Lightbulb } from 'lucide-react';
 
 const AdminNavBar = () => {
   const [user, setUser] = useState(null);
