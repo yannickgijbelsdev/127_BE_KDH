@@ -282,20 +282,15 @@ metadata:
 
 test_plan:
   current_focus:
-    - "WebcamAudioTest Analytics Integration"
-    - "AdminNavBar Visibility Fix"
+    - "Public Tool Status API - GET /api/tools"
+    - "Public Tool Status Check API - GET /api/tools/{tool_id}/status"
+    - "ToolStatusWrapper Component"
+    - "LandingPage - Filter Enabled Tools"
+    - "All Tool Components - Offline Protection"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
-    message: "Starting implementation of analytics tracking for WebcamAudioTest and fixing AdminNavBar visibility. Will add comprehensive event logging for all user interactions in WebcamAudioTest, and fix App.js to only show AdminNavBar when user is logged in."
-  - agent: "main"
-    message: "Implementation complete. Added analytics tracking to WebcamAudioTest for all interactions (page visits, button clicks, permission events, recording events, downloads). Fixed AdminNavBar visibility in App.js. Ready for backend testing first, then will ask user about frontend testing."
-  - agent: "testing"
-    message: "BACKEND TESTING COMPLETE ✅ - All analytics endpoints are working perfectly! Successfully tested: analytics event logging (public endpoint), admin authentication, analytics data retrieval, error handling, and authorization protection. The analytics system is fully functional with 26 events logged across multiple tools. Backend APIs are ready for production use. Note: Had to reset admin credentials for testing - new admin created with email: yannick@radiogroep.be, password: admin."
-  - agent: "main"
-    message: "USER REQUESTED MORE DETAILED ANALYTICS - Expanded all tools with comprehensive event tracking: PixelTest (keyboard navigation with arrow keys/space/F/Escape, fullscreen events, color changes with previous/new color tracking), PrinterTest (all checkbox option toggles tracked individually), PasswordGenerator (strength checks with detailed metrics, memorable password generation, copy actions, Autosoft detection), LandingPage (page visits, tool displays, search queries with debounce, tool navigation from search/buttons), ScreenTest (display info capture, test start), WebcamAudioTest (already had full tracking). All BUILD_VERSIONs updated to 1.5.0. Ready for testing."
-  - agent: "main"
-    message: "ENHANCED ANALYTICS SYSTEM - Added IP address tracking (via request headers with X-Forwarded-For support), browser detection (name + version from user agent), error/fail event tracking (new event_type: 'error' for all tools), pagination in analytics dashboard (50 events per page with Previous/Next controls and page numbers). Backend: Modified /api/analytics/event to capture IP, added pagination to /api/admin/analytics/events with page/limit params. Frontend: Enhanced analytics.js with getBrowserInfo() function, added logError() function, updated Analytics.jsx with pagination UI, added IP Address and Browser columns to table, error event type with red color. All tools now track errors (fullscreen fails, media access errors, etc.)."
+    message: "TOOL DISABLE FEATURE IMPLEMENTED - Created two public API endpoints: GET /api/tools (returns only enabled tools) and GET /api/tools/{tool_id}/status (checks individual tool status). Created ToolStatusWrapper component that checks tool status and displays offline message if disabled. Modified LandingPage to fetch and filter enabled tools from backend. Wrapped all tool components (PixelTest, PrinterTest, ScreenTest, WebcamAudioTest, PasswordGenerator) with ToolStatusWrapper to prevent direct URL access to disabled tools. Ready for backend testing."
