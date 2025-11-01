@@ -16,7 +16,6 @@ const PixelTest = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [currentColor, setCurrentColor] = useState('black');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showGPUModal, setShowGPUModal] = useState(false);
   const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
   const [showChangelog, setShowChangelog] = useState(false);
 
