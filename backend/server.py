@@ -147,6 +147,30 @@ class FeedbackCreate(BaseModel):
     user_agent: Optional[str] = None
     screen_resolution: Optional[str] = None
 
+class ToolSuggestion(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    tool_name: str
+    description: str
+    use_case: Optional[str] = None
+    browser_name: Optional[str] = None
+    browser_version: Optional[str] = None
+    operating_system: Optional[str] = None
+    ip_address: Optional[str] = None
+    user_agent: Optional[str] = None
+    status: str = "new"  # new, reviewed, implemented, rejected
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ToolSuggestionCreate(BaseModel):
+    tool_name: str
+    description: str
+    use_case: Optional[str] = None
+    browser_name: Optional[str] = None
+    browser_version: Optional[str] = None
+    operating_system: Optional[str] = None
+    user_agent: Optional[str] = None
+
 # Helper Functions
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
