@@ -1,25 +1,41 @@
 export const CHANGELOG = {
-  "1.6.0": {
+  "1.7.0": {
     nl: {
-      title: "Tool Beheer & Logo Update",
-      date: "2025-01-31",
+      title: "Dead Pixel Detector Verbeteringen",
+      date: "2025-02-01",
       features: [
-        "Admin kan tools in-/uitschakelen via dashboard",
-        "Uitgeschakelde tools worden verborgen op de landingspagina",
-        "Offline bericht bij directe toegang tot uitgeschakelde tools",
-        "Nieuw 2025 Official Logo overal toegepast",
-        "Real-time status updates voor tool beschikbaarheid"
+        "GPU informatie nu direct zichtbaar in instructies",
+        "Vereenvoudigde kleurenselectie: 6 essentiële kleuren",
+        "Geen tussenmodal meer - test start direct",
+        "Verbeterde gebruikerservaring met snellere workflow"
       ]
     },
     en: {
-      title: "Tool Management & Logo Update",
+      title: "Dead Pixel Detector Improvements",
+      date: "2025-02-01",
+      features: [
+        "GPU information now directly visible in instructions",
+        "Simplified color selection: 6 essential colors",
+        "No intermediate modal - test starts immediately",
+        "Improved user experience with faster workflow"
+      ]
+    }
+  },
+  "1.6.0": {
+    nl: {
+      title: "Logo Update",
       date: "2025-01-31",
       features: [
-        "Admin can enable/disable tools via dashboard",
-        "Disabled tools are hidden from landing page",
-        "Offline message when accessing disabled tools directly",
+        "Nieuw 2025 Official Logo overal toegepast",
+        "Verbeterde visuele consistentie"
+      ]
+    },
+    en: {
+      title: "Logo Update",
+      date: "2025-01-31",
+      features: [
         "New 2025 Official Logo applied everywhere",
-        "Real-time status updates for tool availability"
+        "Improved visual consistency"
       ]
     }
   },
