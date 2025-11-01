@@ -25,15 +25,12 @@ const PixelTest = () => {
   }, []);
 
   const colors = [
-    { name: 'Zwart', value: 'black', hex: '#000000' },
-    { name: 'Wit', value: 'white', hex: '#FFFFFF' },
     { name: 'Rood', value: 'red', hex: '#FF0000' },
     { name: 'Groen', value: 'green', hex: '#00FF00' },
     { name: 'Blauw', value: 'blue', hex: '#0000FF' },
-    { name: 'Cyaan', value: 'cyan', hex: '#00FFFF' },
-    { name: 'Magenta', value: 'magenta', hex: '#FF00FF' },
-    { name: 'Geel', value: 'yellow', hex: '#FFFF00' },
-    { name: 'Grijs', value: 'gray', hex: '#808080' },
+    { name: 'Zwart', value: 'black', hex: '#000000' },
+    { name: 'Wit', value: 'white', hex: '#FFFFFF' },
+    { name: 'Lichtgrijs', value: 'lightgray', hex: '#D3D3D3' },
   ];
 
   // Loading animation (1 second)
