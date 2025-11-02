@@ -164,8 +164,7 @@ const WebcamAudioTest = () => {
     }
     
     if (!canvasRef.current) {
-      console.error('Canvas not ready, retrying...');
-      setTimeout(visualizeAudio, 100);
+      console.error('Canvas not available!');
       return;
     }
     
