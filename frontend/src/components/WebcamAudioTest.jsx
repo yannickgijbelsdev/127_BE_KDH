@@ -218,25 +218,33 @@ const WebcamAudioTest = () => {
   const startRecording = () => {
     if (!stream) return;
 
+    // Clear previous chunks
     chunksRef.current = [];
+    setRecordedChunks([]);
+    
     const mediaRecorder = new MediaRecorder(stream, {
       mimeType: 'video/webm;codecs=vp9',
     });
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
+        console.log('Data chunk received:', event.data.size, 'bytes');
         chunksRef.current.push(event.data);
       }
     };
 
     mediaRecorder.onstop = () => {
-      setRecordedChunks(chunksRef.current);
+      console.log('Recording stopped, total chunks:', chunksRef.current.length);
+      setRecordedChunks([...chunksRef.current]);
     };
 
-    mediaRecorder.start();
+    // Start recording with 100ms timeslice for better control
+    mediaRecorder.start(100);
     mediaRecorderRef.current = mediaRecorder;
     setIsRecording(true);
     setRecordingTime(0);
+
+    console.log('Recording started');
 
     // Log recording start
     logAction('wea', 'Webcam & Audio Test', 'recording_started', {
@@ -251,17 +259,25 @@ const WebcamAudioTest = () => {
   };
 
   const stopRecording = () => {
+    console.log('Stop recording called');
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      console.log('Stopping media recorder...');
       mediaRecorderRef.current.stop();
       setIsRecording(false);
+      
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
       
+      console.log('Recording stopped after', recordingTime, 'seconds');
+      
       // Log recording stop
       logAction('wea', 'Webcam & Audio Test', 'recording_stopped', {
-        duration_seconds: recordingTime
+        duration_seconds: recordingTime,
+        chunks_count: chunksRef.current.length
       });
+    } else {
+      console.log('MediaRecorder not active or already stopped');
     }
   };
 
