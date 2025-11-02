@@ -343,6 +343,19 @@ const WebcamAudioTest = () => {
     };
   }, [stream]);
 
+  // Setup video when stream and videoRef are both ready
+  useEffect(() => {
+    if (stream && videoRef.current && isRunning) {
+      console.log('Setting up video with stream...');
+      videoRef.current.srcObject = stream;
+      videoRef.current.play().then(() => {
+        console.log('Video started playing successfully');
+      }).catch(err => {
+        console.error('Error playing video:', err);
+      });
+    }
+  }, [stream, isRunning]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#202124] flex flex-col items-center justify-center p-8">
