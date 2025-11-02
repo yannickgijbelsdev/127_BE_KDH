@@ -257,7 +257,7 @@ const PixelTest = () => {
               }}
             />
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>
 
         {/* 127 Logo Top Left */}
