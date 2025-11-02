@@ -130,22 +130,23 @@ const LandingPage = () => {
     );
   });
 
-  // Log search activity
+  // Handle search input with debounce
   useEffect(() => {
-    if (searchQuery.trim().length > 0) {
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery.trim().length > 0) {
+        setShowResults(true);
         logAction('home', 'Landing Page', 'search_query', {
           query: searchQuery,
           results_count: filteredTools.length,
           matching_tools: filteredTools.map(t => t.id)
         });
-      }, 1000); // Debounce for 1 second
-      
-      return () => clearTimeout(timer);
-    }
-  }, [searchQuery]);
-
-  const showResults = searchQuery.trim().length > 0;
+      } else {
+        setShowResults(false);
+      }
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, [searchQuery, filteredTools.length]);
   
   const handleToolClick = (toolId, toolName) => {
     logButtonClick('home', 'Landing Page', `tool_clicked_${toolId}`);
@@ -158,126 +159,202 @@ const LandingPage = () => {
 
   return (
     <>
-      <AutumnDecoration />
-      <div className="min-h-screen bg-gradient-to-br from-[#202124] to-[#292a2d] flex flex-col items-center justify-center p-4 relative overflow-hidden">
-        <div className="w-full max-w-2xl text-center space-y-8 relative z-10">
-          {/* Logo */}
-          <img 
-            src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
-            alt="127 Logo" 
-            className="w-48 h-auto mx-auto mb-4 brightness-110"
-           draggable="false"/>
-          
-          {/* Search Bar */}
-          <div className="relative">
-            <div className="flex items-center bg-[#303134] rounded-full border border-[#5f6368] hover:border-[#8ab4f8] transition-colors focus-within:border-[#8ab4f8]">
-              <Search className="w-5 h-5 ml-5 text-[#9aa0a6]" />
-              <input
-                type="text"
-                placeholder="Zoek een tool..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-4 bg-transparent text-[#e8eaed] placeholder-[#9aa0a6] focus:outline-none"
+      <div className="min-h-screen bg-[#1a1a1a] flex">
+        {/* Left Side - Video */}
+        <div className="w-2/5 bg-[#2a2a2a] flex items-center justify-center p-12">
+          <div className="w-full max-w-md">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto rounded-lg shadow-2xl"
+            >
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        {/* Right Side - Tools */}
+        <div className="flex-1 flex flex-col items-center justify-center p-12">
+          <div className="w-full max-w-lg space-y-8">
+            {/* Logo */}
+            <div className="text-center">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+                alt="127 Logo" 
+                className="w-32 h-auto mx-auto mb-8 brightness-110"
+                draggable="false"
               />
             </div>
 
-            {/* Search Results Dropdown */}
-            {showResults && (
-              <div className="absolute w-full mt-2 bg-[#303134] rounded-lg border border-[#5f6368] shadow-2xl overflow-hidden animate-fade-in z-20">
-                {filteredTools.length > 0 ? (
-                  <>
-                    <div className="divide-y divide-[#5f6368]">
-                    {filteredTools.map((tool) => {
-                      const Icon = tool.icon;
-                      return (
-                        <Link 
-                          key={tool.id} 
-                          to={tool.path}
-                          onClick={() => handleToolClick(tool.id, tool.name)}
-                          className="block"
+            {/* Search Bar */}
+            <div className="relative">
+              <div className="flex items-center bg-[#2a2a2a] rounded-full border-2 border-[#3a3a3a] hover:border-[#8ab4f8] transition-colors focus-within:border-[#8ab4f8]">
+                <Search className="w-5 h-5 ml-5 text-[#9aa0a6]" />
+                <input
+                  type="text"
+                  placeholder="Zoek een tool..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => searchQuery && setShowResults(true)}
+                  className="flex-1 px-4 py-4 bg-transparent text-[#e8eaed] placeholder-[#9aa0a6] focus:outline-none"
+                />
+              </div>
+
+              {/* Search Results Dropdown */}
+              {showResults && (
+                <div className="absolute w-full mt-2 bg-[#2a2a2a] rounded-lg border-2 border-[#3a3a3a] shadow-2xl overflow-hidden animate-fade-in z-20">
+                  {filteredTools.length > 0 ? (
+                    <>
+                      <div className="divide-y divide-[#3a3a3a]">
+                      {filteredTools.map((tool) => {
+                        const Icon = tool.icon;
+                        return (
+                          <Link 
+                            key={tool.id} 
+                            to={tool.path}
+                            onClick={() => handleToolClick(tool.id, tool.name)}
+                            className="block"
+                          >
+                            <div className="px-6 py-4 hover:bg-[#3a3a3a] transition-colors cursor-pointer">
+                              <div className="flex items-center gap-4">
+                                <div className="bg-[#3a3a3a] p-2 rounded-full">
+                                  <Icon className="w-5 h-5 text-[#8ab4f8]" />
+                                </div>
+                                <div className="flex-1">
+                                  <div className="text-base font-medium text-[#e8eaed]">
+                                    {tool.name}
+                                  </div>
+                                  <div className="text-sm text-[#9aa0a6] mt-0.5">
+                                    {tool.description}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                      </div>
+                      
+                      {/* Tool suggestion section */}
+                      <div className="border-t border-[#3a3a3a] bg-[#1a1a1a]">
+                        <button
+                          onClick={() => {
+                            setShowToolSuggestion(true);
+                            logButtonClick('home', 'Landing Page', 'suggest_tool_from_search');
+                          }}
+                          className="w-full px-6 py-4 hover:bg-[#3a3a3a] transition-colors text-left"
                         >
-                          <div className="px-6 py-4 hover:bg-[#3c4043] transition-colors cursor-pointer">
-                            <div className="flex items-center gap-4">
-                              <div className="bg-[#3c4043] p-2 rounded-full">
-                                <Icon className="w-5 h-5 text-[#8ab4f8]" />
+                          <div className="flex items-center gap-4">
+                            <div className="bg-[#8ab4f8] p-2 rounded-full">
+                              <Plus className="w-5 h-5 text-[#1a1a1a]" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-base font-medium text-[#8ab4f8]">
+                                Mis je nog een tool?
                               </div>
-                              <div className="flex-1">
-                                <div className="text-base font-medium text-[#e8eaed]">
-                                  {tool.name}
-                                </div>
-                                <div className="text-sm text-[#9aa0a6] mt-0.5">
-                                  {tool.description}
-                                </div>
+                              <div className="text-sm text-[#9aa0a6] mt-0.5">
+                                Laat het ons weten en we kijken wat we kunnen doen!
                               </div>
                             </div>
                           </div>
-                        </Link>
-                      );
-                    })}
-                    </div>
-                    
-                    {/* Tool suggestion section */}
-                    <div className="border-t border-[#5f6368] bg-[#202124]">
-                      <button
-                        onClick={() => {
-                          setShowToolSuggestion(true);
-                          logButtonClick('home', 'Landing Page', 'suggest_tool_from_search');
-                        }}
-                        className="w-full px-6 py-4 hover:bg-[#3c4043] transition-colors text-left"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="bg-[#8ab4f8] p-2 rounded-full">
-                            <Plus className="w-5 h-5 text-[#202124]" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-base font-medium text-[#8ab4f8]">
-                              Mis je nog een tool?
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="px-6 py-8 text-center text-[#9aa0a6]">
+                        Geen tools gevonden
+                      </div>
+                      
+                      {/* Tool suggestion for no results */}
+                      <div className="border-t border-[#3a3a3a] bg-[#1a1a1a]">
+                        <button
+                          onClick={() => {
+                            setShowToolSuggestion(true);
+                            logButtonClick('home', 'Landing Page', 'suggest_tool_no_results');
+                          }}
+                          className="w-full px-6 py-4 hover:bg-[#3a3a3a] transition-colors text-left"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="bg-[#8ab4f8] p-2 rounded-full">
+                              <Plus className="w-5 h-5 text-[#1a1a1a]" />
                             </div>
-                            <div className="text-sm text-[#9aa0a6] mt-0.5">
-                              Laat het ons weten en we kijken wat we kunnen doen!
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="px-6 py-8 text-center text-[#9aa0a6]">
-                      Geen tools gevonden
-                    </div>
-                    
-                    {/* Tool suggestion for no results */}
-                    <div className="border-t border-[#5f6368] bg-[#202124]">
-                      <button
-                        onClick={() => {
-                          setShowToolSuggestion(true);
-                          logButtonClick('home', 'Landing Page', 'suggest_tool_no_results');
-                        }}
-                        className="w-full px-6 py-4 hover:bg-[#3c4043] transition-colors text-left"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="bg-[#8ab4f8] p-2 rounded-full">
-                            <Plus className="w-5 h-5 text-[#202124]" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-base font-medium text-[#8ab4f8]">
-                              Mis je nog een tool?
-                            </div>
-                            <div className="text-sm text-[#9aa0a6] mt-0.5">
-                              Laat het ons weten en we kijken wat we kunnen doen!
+                            <div className="flex-1">
+                              <div className="text-base font-medium text-[#8ab4f8]">
+                                Mis je nog een tool?
+                              </div>
+                              <div className="text-sm text-[#9aa0a6] mt-0.5">
+                                Laat het ons weten en we kijken wat we kunnen doen!
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </button>
-                    </div>
-                  </>
-                )}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Tool Buttons */}
+            {!showResults && (
+              <div className="space-y-4 animate-fade-in">
+                <div className="grid grid-cols-3 gap-3">
+                  {displayedTools.map((tool) => {
+                    const Icon = tool.icon;
+                    return (
+                      <Link key={tool.id} to={tool.path} onClick={() => handleToolClick(tool.id, tool.name)}>
+                        <button className="w-full px-4 py-3 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-[#e8eaed] rounded-lg text-sm font-medium transition-colors border-2 border-[#3a3a3a] hover:border-[#8ab4f8]">
+                          {tool.name}
+                        </button>
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                {/* Tool Voorstellen Button */}
+                <button
+                  onClick={() => {
+                    setShowToolSuggestion(true);
+                    logButtonClick('home', 'Landing Page', 'suggest_tool_button');
+                  }}
+                  className="w-full px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#1a1a1a] rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Tool Voorstellen
+                </button>
               </div>
             )}
-          </div>
 
-        {!showResults && (
+            {/* Build Version */}
+            <div className="text-center">
+              <button
+                onClick={() => setShowChangelog(true)}
+                className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] cursor-pointer underline"
+              >
+                Build {BUILD_VERSION}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <FloatingFeedbackButton />
+      <ChangelogModal 
+        isOpen={showChangelog} 
+        onClose={() => setShowChangelog(false)}
+        currentVersion={BUILD_VERSION}
+      />
+      <ToolSuggestionModal 
+        isOpen={showToolSuggestion}
+        onClose={() => setShowToolSuggestion(false)}
+      />
+    </>
+  );
+};
           <div className="mt-8 text-center animate-fade-in">
             <div className="flex gap-3 justify-center flex-wrap items-center">
               {displayedTools.map((tool) => (
