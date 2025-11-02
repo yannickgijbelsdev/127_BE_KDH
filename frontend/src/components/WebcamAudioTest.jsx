@@ -284,11 +284,11 @@ const WebcamAudioTest = () => {
   const downloadVideo = () => {
     if (recordedChunks.length === 0) return;
     
-    const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+    const blob = new Blob(recordedChunks, { type: 'video/webm' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `video-recording-${Date.now()}.mp4`;
+    a.download = `video-${Date.now()}.webm`;
     a.click();
     URL.revokeObjectURL(url);
     
@@ -296,19 +296,19 @@ const WebcamAudioTest = () => {
     logAction('wea', 'Webcam & Audio Test', 'video_downloaded', {
       file_size_kb: Math.round(blob.size / 1024),
       duration_seconds: recordingTime,
-      format: 'mp4'
+      format: 'webm'
     });
   };
 
   const downloadAudio = () => {
     if (recordedChunks.length === 0) return;
 
-    // Download the recorded audio as MP3
-    const blob = new Blob(recordedChunks, { type: 'audio/mpeg' });
+    // Download the same recording (contains audio) as webm
+    const blob = new Blob(recordedChunks, { type: 'audio/webm' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `audio-recording-${Date.now()}.mp3`;
+    a.download = `audio-${Date.now()}.webm`;
     a.click();
     URL.revokeObjectURL(url);
     
@@ -316,7 +316,7 @@ const WebcamAudioTest = () => {
     logAction('wea', 'Webcam & Audio Test', 'audio_downloaded', {
       file_size_kb: Math.round(blob.size / 1024),
       duration_seconds: recordingTime,
-      format: 'mp3'
+      format: 'webm'
     });
   };
 
