@@ -45,10 +45,10 @@ const WebcamAudioTest = () => {
   useEffect(() => {
     const fetchBackgroundImage = async () => {
       try {
-        // Random page between 1-20 for much more variety
-        const randomPage = Math.floor(Math.random() * 20) + 1;
+        // Random page between 1-10 for variety - tech/working/networking theme
+        const randomPage = Math.floor(Math.random() * 10) + 1;
         const response = await fetch(
-          `https://api.pexels.com/v1/search?query=abstract+technology+minimal&orientation=landscape&per_page=15&page=${randomPage}`,
+          `https://api.pexels.com/v1/search?query=technology+people+working+coding+networking+hacking&orientation=landscape&per_page=15&page=${randomPage}`,
           {
             headers: {
               Authorization: 'SBv6ZOHirhcApz4iLkxYd7c2RDXBWJPKbc8AWDku666r3zU6Tdc2sOih'
