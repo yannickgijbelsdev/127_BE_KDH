@@ -497,7 +497,7 @@ const PasswordGenerator = () => {
                   onChange={(e) => setIncludeUppercase(e.target.checked)}
                   className="w-4 h-4 accent-[#8ab4f8]"
                 />
-                <span className="text-sm text-[#e8eaed]">Hoofdletters (A-Z)</span>
+                <span className="text-sm text-white text-opacity-90">Hoofdletters (A-Z)</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -506,7 +506,7 @@ const PasswordGenerator = () => {
                   onChange={(e) => setIncludeLowercase(e.target.checked)}
                   className="w-4 h-4 accent-[#8ab4f8]"
                 />
-                <span className="text-sm text-[#e8eaed]">Kleine letters (a-z)</span>
+                <span className="text-sm text-white text-opacity-90">Kleine letters (a-z)</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -515,7 +515,7 @@ const PasswordGenerator = () => {
                   onChange={(e) => setIncludeNumbers(e.target.checked)}
                   className="w-4 h-4 accent-[#8ab4f8]"
                 />
-                <span className="text-sm text-[#e8eaed]">Cijfers (0-9)</span>
+                <span className="text-sm text-white text-opacity-90">Cijfers (0-9)</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -524,16 +524,24 @@ const PasswordGenerator = () => {
                   onChange={(e) => setIncludeSymbols(e.target.checked)}
                   className="w-4 h-4 accent-[#8ab4f8]"
                 />
-                <span className="text-sm text-[#e8eaed]">Speciale tekens (!@#$%)</span>
+                <span className="text-sm text-white text-opacity-90">Speciale tekens (!@#$%)</span>
               </label>
             </div>
           </div>
 
           {/* Strength Checker Section */}
-          <div className="bg-[#303134] rounded-lg p-6 border border-[#5f6368]">
-            <div className="flex items-center gap-2 mb-4">
-              <CheckCircle className="w-5 h-5 text-[#8ab4f8]" />
-              <h2 className="text-xl font-semibold text-[#e8eaed]">Sterkte Check</h2>
+          <div 
+            className="rounded-3xl p-8 border"
+            style={{
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderColor: 'rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <div className="flex items-center gap-2 mb-6">
+              <CheckCircle className="w-5 h-5 text-white text-opacity-80" />
+              <h2 className="text-xl font-semibold text-white">Sterkte Check</h2>
             </div>
 
             {/* Custom Password Input */}
