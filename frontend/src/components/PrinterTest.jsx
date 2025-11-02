@@ -762,6 +762,7 @@ const PrinterTest = () => {
   return (
     <>
       <FloatingFeedbackButton />
+      <LanguageToggle />
       <ChangelogModal 
         isOpen={showChangelog} 
         onClose={() => setShowChangelog(false)}
