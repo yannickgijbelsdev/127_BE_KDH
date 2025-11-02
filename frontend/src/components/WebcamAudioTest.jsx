@@ -689,20 +689,31 @@ const WebcamAudioTest = () => {
             )}
 
             <div className="space-y-3">
-              <Button 
+              <button 
                 onClick={requestPermissions}
-                className="w-full bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] font-medium"
+                className="w-full px-6 py-4 rounded-full font-medium transition-all"
+                style={{
+                  background: 'rgba(150, 180, 255, 0.3)',
+                  color: '#cfe1ff'
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
               >
                 Geef Toestemming
-              </Button>
+              </button>
               <Link to="/" onClick={(e) => e.stopPropagation()}>
-                <Button 
-                  variant="outline"
-                  className="w-full border-[#5f6368] text-[#e8eaed] hover:bg-[#3c4043]"
+                <button 
+                  className="w-full px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <ArrowLeft className="w-4 h-4" />
                   Annuleren
-                </Button>
+                </button>
               </Link>
             </div>
 
