@@ -662,9 +662,15 @@ const PasswordGenerator = () => {
 
                 {/* Strength Tips */}
                 {!isAutosoftPassword && (
-                <div className="bg-[#202124] rounded-lg p-4 border border-[#5f6368]">
-                  <h3 className="text-sm font-semibold text-[#e8eaed] mb-2">Tips voor sterker wachtwoord:</h3>
-                  <ul className="text-xs text-[#9aa0a6] space-y-1">
+                <div 
+                  className="rounded-lg p-4"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
+                >
+                  <h3 className="text-sm font-semibold text-white mb-2">Tips voor sterker wachtwoord:</h3>
+                  <ul className="text-xs text-white text-opacity-70 space-y-1">
                     <li>• Minimaal 12 karakters lang</li>
                     <li>• Mix van hoofd/kleine letters, cijfers en symbolen</li>
                     <li>• Vermijd herhalende karakters of patronen</li>
@@ -674,8 +680,14 @@ const PasswordGenerator = () => {
                 )}
 
                 {!isAutosoftPassword && strength.score >= 80 && (
-                  <div className="bg-[#9C27B0] bg-opacity-20 border border-[#9C27B0] rounded-lg p-4">
-                    <p className="text-[#e8eaed] text-center font-semibold">
+                  <div 
+                    className="rounded-lg p-4"
+                    style={{
+                      background: 'rgba(156, 39, 176, 0.2)',
+                      border: '1px solid rgba(156, 39, 176, 0.4)'
+                    }}
+                  >
+                    <p className="text-white text-center font-semibold">
                       Uitstekend wachtwoord!
                     </p>
                   </div>
