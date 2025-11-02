@@ -445,26 +445,32 @@ const PasswordGenerator = () => {
                 />
                 <button
                   onClick={() => copyToClipboard(password)}
-                  className="px-4 py-3 rounded-full transition-colors"
+                  className="px-4 py-3 rounded-full font-medium transition-colors"
                   style={{
-                    background: 'rgba(150, 180, 255, 0.3)',
+                    background: 'rgba(150, 180, 255, 0.25)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(150, 180, 255, 0.15)',
                     color: '#cfe1ff'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
-                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.35)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.25)'}
                   title="Kopieer"
                 >
                   {copied ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={generatePassword}
-                  className="px-4 py-3 rounded-full transition-colors"
+                  className="px-4 py-3 rounded-full font-medium transition-colors"
                   style={{
-                    background: 'rgba(150, 180, 255, 0.3)',
+                    background: 'rgba(150, 180, 255, 0.25)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(150, 180, 255, 0.15)',
                     color: '#cfe1ff'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
-                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.35)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.25)'}
                   title="Genereer nieuw"
                 >
                   <RefreshCw className="w-5 h-5" />
