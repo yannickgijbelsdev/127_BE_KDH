@@ -143,6 +143,7 @@ const WebcamAudioTest = () => {
 
   const setupAudioVisualizer = (mediaStream) => {
     try {
+      console.log('Setting up audio visualizer...');
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const analyser = audioContext.createAnalyser();
       const source = audioContext.createMediaStreamSource(mediaStream);
@@ -153,15 +154,30 @@ const WebcamAudioTest = () => {
       audioContextRef.current = audioContext;
       analyserRef.current = analyser;
       
-      // Start visualization
-      visualizeAudio();
+      console.log('Audio context created, starting visualization...');
+      
+      // Start visualization after a short delay to ensure canvas is ready
+      setTimeout(() => {
+        visualizeAudio();
+      }, 100);
     } catch (error) {
       console.error('Error setting up audio visualizer:', error);
     }
   };
 
   const visualizeAudio = () => {
-    if (!analyserRef.current || !canvasRef.current) return;
+    if (!analyserRef.current) {
+      console.error('Analyser not ready');
+      return;
+    }
+    
+    if (!canvasRef.current) {
+      console.error('Canvas not ready, retrying...');
+      setTimeout(visualizeAudio, 100);
+      return;
+    }
+    
+    console.log('Starting audio visualization');
     
     const canvas = canvasRef.current;
     const canvasContext = canvas.getContext('2d');
