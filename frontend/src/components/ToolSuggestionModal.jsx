@@ -3,6 +3,7 @@ import { X, Lightbulb, Loader2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const ToolSuggestionModal = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
   const [toolName, setToolName] = useState('');
   const [description, setDescription] = useState('');
   const [useCase, setUseCase] = useState('');
