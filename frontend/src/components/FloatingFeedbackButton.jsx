@@ -296,7 +296,16 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
                   <button
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 px-4 py-3 rounded-full font-medium transition-colors disabled:opacity-50"
+                    style={{
+                      background: 'rgba(150, 180, 255, 0.25)',
+                      backdropFilter: 'blur(8px)',
+                      WebkitBackdropFilter: 'blur(8px)',
+                      border: '1px solid rgba(150, 180, 255, 0.15)',
+                      color: '#cfe1ff'
+                    }}
+                    onMouseEnter={(e) => !isSubmitting && (e.target.style.background = 'rgba(150, 180, 255, 0.35)')}
+                    onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.25)'}
                   >
                     {isSubmitting ? 'Verzenden...' : 'Verzenden'}
                   </button>
