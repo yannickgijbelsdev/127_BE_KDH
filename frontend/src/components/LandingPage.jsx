@@ -211,7 +211,9 @@ const LandingPage = () => {
     <>
       <div className="min-h-screen relative overflow-hidden">
         {/* Video Background from Pexels */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden" style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+        }}>
           {backgroundImage ? (
             <video
               autoPlay
@@ -243,6 +245,9 @@ const LandingPage = () => {
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
+
+        {/* Language Toggle */}
+        <LanguageToggle />
 
         {/* 127 Logo Top Left */}
         <div className="absolute top-8 left-8 z-30">
