@@ -607,10 +607,11 @@ const PrinterTest = () => {
                   max="10"
                   value={numPages}
                   onChange={(e) => setNumPages(Math.min(10, Math.max(1, parseInt(e.target.value) || 1)))}
-                  className="bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50"
+                  className="bg-white bg-opacity-5 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50"
                   style={{
                     backdropFilter: 'blur(8px)',
-                    WebkitBackdropFilter: 'blur(8px)'
+                    WebkitBackdropFilter: 'blur(8px)',
+                    color: '#ffffff'
                   }}
                 />
               </div>
