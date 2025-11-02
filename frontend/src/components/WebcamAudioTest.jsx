@@ -86,20 +86,8 @@ const WebcamAudioTest = () => {
       console.log('Video tracks:', mediaStream.getVideoTracks());
       console.log('Audio tracks:', mediaStream.getAudioTracks());
       
+      // Set stream - the useEffect will handle video setup
       setStream(mediaStream);
-      if (videoRef.current) {
-        console.log('Setting video srcObject...');
-        videoRef.current.srcObject = mediaStream;
-        // Force play to ensure video shows
-        try {
-          await videoRef.current.play();
-          console.log('Video is playing');
-        } catch (playError) {
-          console.error('Error playing video:', playError);
-        }
-      } else {
-        console.error('videoRef.current is null!');
-      }
 
       // Setup audio visualizer
       setupAudioVisualizer(mediaStream);
