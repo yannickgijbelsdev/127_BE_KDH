@@ -274,7 +274,7 @@ const PasswordGenerator = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen relative overflow-hidden">
-        {/* Unsplash Background */}
+        {/* Pexels Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {backgroundImage ? (
             <div
@@ -342,7 +342,7 @@ const PasswordGenerator = () => {
     <div 
       className="min-h-screen relative overflow-hidden transition-all duration-700"
     >
-      {/* Unsplash Background */}
+      {/* Pexels Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {backgroundImage ? (
           <div
