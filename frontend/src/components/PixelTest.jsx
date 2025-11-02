@@ -9,7 +9,7 @@ import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logAction, logButtonClick, logError } from '../utils/analytics';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.7.0';
+const BUILD_VERSION = '1.8.0';
 
 const PixelTest = () => {
   const [isLoading, setIsLoading] = useState(true);

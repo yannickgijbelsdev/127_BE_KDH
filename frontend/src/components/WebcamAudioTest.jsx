@@ -10,7 +10,7 @@ import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logButtonClick, logAction, logError } from '../utils/analytics';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.7.0';
+const BUILD_VERSION = '1.8.0';
 
 const WebcamAudioTest = () => {
   const [isLoading, setIsLoading] = useState(true);

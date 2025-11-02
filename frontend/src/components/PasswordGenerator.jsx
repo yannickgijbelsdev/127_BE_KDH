@@ -8,7 +8,7 @@ import ChangelogModal from './ChangelogModal';
 import ToolStatusWrapper from './ToolStatusWrapper';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 
-const BUILD_VERSION = '1.7.0';
+const BUILD_VERSION = '1.8.0';
 
 const PasswordGenerator = () => {
   const [isLoading, setIsLoading] = useState(true);

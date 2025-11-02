@@ -7,7 +7,7 @@ import FloatingFeedbackButton from './FloatingFeedbackButton';
 import ChangelogModal from './ChangelogModal';
 
 // Build version - Update this with each change
-const BUILD_VERSION = '1.7.0';
+const BUILD_VERSION = '1.8.0';
 
 const BenchmarkTest = () => {
   const [isLoading, setIsLoading] = useState(true);
