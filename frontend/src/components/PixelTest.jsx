@@ -428,6 +428,7 @@ const PixelTest = () => {
       
       {/* Floating Feedback Button - Hide in fullscreen */}
       <FloatingFeedbackButton hideOnFullscreen={true} />
+      <LanguageToggle />
       
       {/* Changelog Modal */}
       <ChangelogModal 
