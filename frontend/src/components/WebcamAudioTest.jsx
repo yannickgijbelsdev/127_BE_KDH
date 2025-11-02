@@ -357,14 +357,15 @@ const WebcamAudioTest = () => {
   };
 
   const downloadAudio = () => {
-    if (recordedChunks.length === 0) return;
+    if (recordedAudioChunks.length === 0) {
+      console.log('No audio chunks available');
+      return;
+    }
 
-    // Always use .mp3 extension for audio downloads for better compatibility
-    // Note: The actual codec is determined by the recording MIME type
+    // Use the audio-only recording chunks
     const audioMimeType = recordedMimeType.includes('mp4') ? 'audio/mp4' : 'audio/webm';
     
-    // Download the same recording (contains audio) as MP3
-    const blob = new Blob(recordedChunks, { type: audioMimeType });
+    const blob = new Blob(recordedAudioChunks, { type: audioMimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -372,13 +373,14 @@ const WebcamAudioTest = () => {
     a.click();
     URL.revokeObjectURL(url);
     
-    console.log(`Downloaded audio as mp3, size: ${Math.round(blob.size / 1024)}KB`);
+    console.log(`Downloaded audio-only as mp3, size: ${Math.round(blob.size / 1024)}KB`);
     
     // Log audio download
     logAction('wea', 'Webcam & Audio Test', 'audio_downloaded', {
       file_size_kb: Math.round(blob.size / 1024),
       duration_seconds: recordingTime,
-      format: 'mp3'
+      format: 'mp3',
+      audio_only: true
     });
   };
 
