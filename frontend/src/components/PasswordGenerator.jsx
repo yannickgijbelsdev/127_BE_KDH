@@ -637,7 +637,13 @@ const PasswordGenerator = () => {
                       </div>
                       <button
                         onClick={() => setShowMemorableForm(true)}
-                        className="w-full px-4 py-2 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors text-sm"
+                        className="w-full px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+                        style={{
+                          background: 'rgba(150, 180, 255, 0.3)',
+                          color: '#cfe1ff'
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
+                        onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
                       >
                         Of maak een memorabel wachtwoord
                       </button>
