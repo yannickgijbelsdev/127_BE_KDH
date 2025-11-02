@@ -716,7 +716,7 @@ const PrinterTest = () => {
                   }}
                 >
                   <Printer className="w-4 h-4" />
-                  Genereer en Print
+                  {t('Genereer en Print', 'Generate and Print')}
                 </button>
                 
                 <Link to="/">
@@ -737,7 +737,7 @@ const PrinterTest = () => {
                     }}
                   >
                     <ArrowLeft className="w-4 h-4" />
-                    Bekijk ook andere tools
+                    {t('Bekijk ook andere tools', 'Check out other tools')}
                   </button>
                 </Link>
               </div>
