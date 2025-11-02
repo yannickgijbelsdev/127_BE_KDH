@@ -181,28 +181,31 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
             {submitted ? (
               <div className="text-center py-8">
                 <div className="mb-4">
-                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                    <MessageSquare className="w-8 h-8 text-white" />
+                  <div 
+                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto"
+                    style={{ background: 'rgba(34, 197, 94, 0.3)' }}
+                  >
+                    <MessageSquare className="w-8 h-8 text-green-400" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-[#e8eaed] mb-2">Bedankt!</h3>
-                <p className="text-[#9aa0a6]">Je feedback is verzonden.</p>
+                <h3 className="text-2xl font-bold text-white mb-2">Bedankt!</h3>
+                <p className="text-white text-opacity-70">Je feedback is verzonden.</p>
               </div>
             ) : (
               <>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-[#e8eaed]">Geef Feedback</h2>
+                  <h2 className="text-2xl font-bold text-white">Geef Feedback</h2>
                   <button
                     onClick={() => setShowForm(false)}
-                    className="p-2 hover:bg-[#5f6368] rounded-lg transition-colors"
+                    className="p-2 rounded-lg transition-colors hover:bg-white hover:bg-opacity-10"
                   >
-                    <X className="w-5 h-5 text-[#9aa0a6]" />
+                    <X className="w-5 h-5 text-white text-opacity-70" />
                   </button>
                 </div>
 
                 {/* Rating */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-[#e8eaed] mb-3">
+                  <label className="block text-sm font-medium text-white mb-3">
                     Geef een beoordeling (1-10)
                   </label>
                   <div className="flex gap-2 justify-center">
@@ -219,8 +222,16 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
                               : num <= 7
                               ? 'bg-orange-500 text-white'
                               : 'bg-green-500 text-white'
-                            : 'bg-[#202124] text-[#9aa0a6] border border-[#5f6368]'
+                            : 'text-white text-opacity-60'
                         }`}
+                        style={
+                          !(hoverRating >= num || (hoverRating === 0 && rating >= num))
+                            ? {
+                                background: 'rgba(255, 255, 255, 0.05)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)'
+                              }
+                            : {}
+                        }
                       >
                         {num}
                       </button>
