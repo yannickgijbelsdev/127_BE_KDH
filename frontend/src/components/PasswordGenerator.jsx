@@ -646,7 +646,7 @@ const PasswordGenerator = () => {
                       </div>
                       <button
                         onClick={() => setShowMemorableForm(true)}
-                        className="w-full px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+                        className="w-full px-4 py-2 rounded-full font-medium transition-colors text-sm"
                         style={{
                           background: 'rgba(150, 180, 255, 0.3)',
                           color: '#cfe1ff'
@@ -722,7 +722,7 @@ const PasswordGenerator = () => {
                     value={memorableInputs.interest}
                     onChange={(e) => setMemorableInputs({...memorableInputs, interest: e.target.value})}
                     placeholder="bijv. Voetbal, Muziek, Reizen"
-                    className="w-full text-white px-4 py-2 rounded-lg text-sm placeholder-white placeholder-opacity-40"
+                    className="w-full text-white px-4 py-2 rounded-full text-sm placeholder-white placeholder-opacity-40"
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.1)'
@@ -738,7 +738,7 @@ const PasswordGenerator = () => {
                     onChange={(e) => setMemorableInputs({...memorableInputs, year: e.target.value})}
                     placeholder="bijv. 1990, 2024"
                     maxLength="4"
-                    className="w-full text-white px-4 py-2 rounded-lg text-sm placeholder-white placeholder-opacity-40"
+                    className="w-full text-white px-4 py-2 rounded-full text-sm placeholder-white placeholder-opacity-40"
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.1)'
@@ -753,7 +753,7 @@ const PasswordGenerator = () => {
                     value={memorableInputs.favorite}
                     onChange={(e) => setMemorableInputs({...memorableInputs, favorite: e.target.value})}
                     placeholder="bijv. Kat, Pizza, Strand"
-                    className="w-full text-white px-4 py-2 rounded-lg text-sm placeholder-white placeholder-opacity-40"
+                    className="w-full text-white px-4 py-2 rounded-full text-sm placeholder-white placeholder-opacity-40"
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.1)'
@@ -768,7 +768,7 @@ const PasswordGenerator = () => {
                     setShowMemorableForm(false);
                     setMemorableInputs({ interest: '', year: '', favorite: '' });
                   }}
-                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-colors"
+                  className="flex-1 px-4 py-2 rounded-full font-medium transition-colors"
                   style={{
                     background: 'rgba(255, 255, 255, 0.1)',
                     color: 'white'
@@ -781,7 +781,7 @@ const PasswordGenerator = () => {
                 <button
                   onClick={handleMemorableSubmit}
                   disabled={!memorableInputs.interest || !memorableInputs.year || !memorableInputs.favorite}
-                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 rounded-full font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     background: 'rgba(150, 180, 255, 0.3)',
                     color: '#cfe1ff'
