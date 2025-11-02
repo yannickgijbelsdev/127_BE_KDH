@@ -303,25 +303,33 @@ const WebcamAudioTest = () => {
 
   const stopRecording = () => {
     console.log('Stop recording called');
+    
+    // Stop video recorder
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
-      console.log('Stopping media recorder...');
+      console.log('Stopping video recorder...');
       mediaRecorderRef.current.stop();
-      setIsRecording(false);
-      
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-      
-      console.log('Recording stopped after', recordingTime, 'seconds');
-      
-      // Log recording stop
-      logAction('wea', 'Webcam & Audio Test', 'recording_stopped', {
-        duration_seconds: recordingTime,
-        chunks_count: chunksRef.current.length
-      });
-    } else {
-      console.log('MediaRecorder not active or already stopped');
     }
+    
+    // Stop audio recorder
+    if (audioRecorderRef.current && audioRecorderRef.current.state !== 'inactive') {
+      console.log('Stopping audio recorder...');
+      audioRecorderRef.current.stop();
+    }
+    
+    setIsRecording(false);
+    
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    
+    console.log('Recording stopped after', recordingTime, 'seconds');
+    
+    // Log recording stop
+    logAction('wea', 'Webcam & Audio Test', 'recording_stopped', {
+      duration_seconds: recordingTime,
+      video_chunks_count: chunksRef.current.length,
+      audio_chunks_count: audioChunksRef.current.length
+    });
   };
 
   const downloadVideo = () => {
