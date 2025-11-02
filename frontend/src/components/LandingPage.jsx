@@ -187,14 +187,14 @@ const LandingPage = () => {
   return (
     <>
       <div className="min-h-screen relative overflow-hidden">
-        {/* Image Background with Blur from Unsplash */}
+        {/* Image Background with Less Blur from Unsplash */}
         <div className="absolute inset-0 z-0">
           {backgroundImage ? (
             <div
               className="w-full h-full bg-cover bg-center"
               style={{
                 backgroundImage: `url(${backgroundImage})`,
-                filter: 'blur(10px) brightness(0.6)'
+                filter: 'blur(3px) brightness(0.5)'
               }}
             />
           ) : (
@@ -202,12 +202,12 @@ const LandingPage = () => {
               className="w-full h-full"
               style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                filter: 'blur(10px) brightness(0.6)'
+                filter: 'blur(3px) brightness(0.5)'
               }}
             />
           )}
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         </div>
 
         {/* 127 Logo Top Left */}
@@ -225,11 +225,10 @@ const LandingPage = () => {
           <div 
             className="w-full max-w-2xl p-12 rounded-3xl"
             style={{
-              background: 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)'
             }}
           >
             <div className="space-y-8">
