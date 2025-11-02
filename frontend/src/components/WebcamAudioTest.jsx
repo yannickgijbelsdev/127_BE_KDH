@@ -23,6 +23,7 @@ const WebcamAudioTest = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [showChangelog, setShowChangelog] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+  const [recordedAudioChunks, setRecordedAudioChunks] = useState([]);
   const [recordingTime, setRecordingTime] = useState(0);
   const [permissionError, setPermissionError] = useState('');
   const [audioLevel, setAudioLevel] = useState(0);
