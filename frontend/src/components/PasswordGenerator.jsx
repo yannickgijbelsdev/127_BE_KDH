@@ -622,7 +622,7 @@ const PasswordGenerator = () => {
                           type="text"
                           value={generateSuggestion()}
                           readOnly
-                          className="flex-1 text-white px-3 py-2 rounded-lg font-mono text-xs"
+                          className="flex-1 text-white px-3 py-2 rounded-full font-mono text-xs"
                           style={{
                             background: 'rgba(255, 255, 255, 0.05)',
                             border: '1px solid rgba(255, 255, 255, 0.1)'
@@ -634,7 +634,7 @@ const PasswordGenerator = () => {
                             setCustomPassword(suggestion);
                             copyToClipboard(suggestion);
                           }}
-                          className="px-3 py-2 rounded-lg transition-colors text-sm font-medium text-white"
+                          className="px-3 py-2 rounded-full transition-colors text-sm font-medium text-white"
                           style={{
                             background: 'rgba(255, 165, 0, 0.8)'
                           }}
