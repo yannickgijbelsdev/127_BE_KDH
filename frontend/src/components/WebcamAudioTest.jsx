@@ -295,39 +295,50 @@ const WebcamAudioTest = () => {
   const downloadVideo = () => {
     if (recordedChunks.length === 0) return;
     
-    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+    // Determine file extension based on MIME type
+    const extension = recordedMimeType.includes('mp4') ? 'mp4' : 'webm';
+    
+    const blob = new Blob(recordedChunks, { type: recordedMimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `video-${Date.now()}.webm`;
+    a.download = `video-${Date.now()}.${extension}`;
     a.click();
     URL.revokeObjectURL(url);
+    
+    console.log(`Downloaded video as ${extension}, size: ${Math.round(blob.size / 1024)}KB`);
     
     // Log video download
     logAction('wea', 'Webcam & Audio Test', 'video_downloaded', {
       file_size_kb: Math.round(blob.size / 1024),
       duration_seconds: recordingTime,
-      format: 'webm'
+      format: extension
     });
   };
 
   const downloadAudio = () => {
     if (recordedChunks.length === 0) return;
 
-    // Download the same recording (contains audio) as webm
-    const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+    // Determine file extension based on MIME type
+    const extension = recordedMimeType.includes('mp4') ? 'mp4' : 'webm';
+    const audioMimeType = recordedMimeType.includes('mp4') ? 'audio/mp4' : 'audio/webm';
+    
+    // Download the same recording (contains audio)
+    const blob = new Blob(recordedChunks, { type: audioMimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `audio-${Date.now()}.webm`;
+    a.download = `audio-${Date.now()}.${extension}`;
     a.click();
     URL.revokeObjectURL(url);
+    
+    console.log(`Downloaded audio as ${extension}, size: ${Math.round(blob.size / 1024)}KB`);
     
     // Log audio download
     logAction('wea', 'Webcam & Audio Test', 'audio_downloaded', {
       file_size_kb: Math.round(blob.size / 1024),
       duration_seconds: recordingTime,
-      format: 'webm'
+      format: extension
     });
   };
 
