@@ -372,13 +372,13 @@ const PixelTest = () => {
                 border: '1px solid rgba(255, 255, 255, 0.1)'
               }}
             >
-              <h3 className="font-semibold text-white text-lg mb-2">Instructies:</h3>
+              <h3 className="font-semibold text-white text-lg mb-2">{t('Instructies:', 'Instructions:')}</h3>
               <ul className="text-sm text-white text-opacity-80 space-y-1">
-                <li>• Klik overal op het scherm om fullscreen te gaan</li>
-                <li>• Gebruik pijltjestoetsen (← →) om van kleur te wisselen</li>
-                <li>• De muis verdwijnt automatisch in fullscreen</li>
-                <li>• Druk op ESC om fullscreen te verlaten</li>
-                <li>• Zoek naar pixels die niet mee veranderen</li>
+                <li>• {t('Klik overal op het scherm om fullscreen te gaan', 'Click anywhere on screen to go fullscreen')}</li>
+                <li>• {t('Gebruik pijltjestoetsen (← →) om van kleur te wisselen', 'Use arrow keys (← →) to switch colors')}</li>
+                <li>• {t('De muis verdwijnt automatisch in fullscreen', 'Mouse disappears automatically in fullscreen')}</li>
+                <li>• {t('Druk op ESC om fullscreen te verlaten', 'Press ESC to exit fullscreen')}</li>
+                <li>• {t('Zoek naar pixels die niet mee veranderen', 'Look for pixels that don\'t change')}</li>
               </ul>
             </div>
             <div 
