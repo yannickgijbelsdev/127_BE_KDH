@@ -667,6 +667,13 @@ const WebcamAudioTest = () => {
           </div>
         </div>
       </div>
+      
+      {/* Changelog Modal */}
+      <ChangelogModal 
+        isOpen={showChangelog} 
+        onClose={() => setShowChangelog(false)}
+        currentVersion={BUILD_VERSION}
+      />
     );
   }
 
