@@ -191,7 +191,7 @@ const LandingPage = () => {
   return (
     <>
       <div className="min-h-screen relative overflow-hidden">
-        {/* Image Background from Unsplash */}
+        {/* Image Background from Pexels */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {backgroundImage ? (
             <div
