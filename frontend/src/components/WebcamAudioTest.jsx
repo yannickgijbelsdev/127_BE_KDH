@@ -224,7 +224,9 @@ const WebcamAudioTest = () => {
 
     // Clear previous chunks
     chunksRef.current = [];
+    audioChunksRef.current = [];
     setRecordedChunks([]);
+    setRecordedAudioChunks([]);
     
     // Check for supported MIME types - prefer MP4 if available
     let mimeType = 'video/webm;codecs=vp9';
@@ -237,23 +239,50 @@ const WebcamAudioTest = () => {
     console.log('Using MIME type:', mimeType);
     setRecordedMimeType(mimeType);
     
+    // Create video recorder (video + audio)
     const mediaRecorder = new MediaRecorder(stream, { mimeType });
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
-        console.log('Data chunk received:', event.data.size, 'bytes');
+        console.log('Video chunk received:', event.data.size, 'bytes');
         chunksRef.current.push(event.data);
       }
     };
 
     mediaRecorder.onstop = () => {
-      console.log('Recording stopped, total chunks:', chunksRef.current.length);
+      console.log('Video recording stopped, total chunks:', chunksRef.current.length);
       setRecordedChunks([...chunksRef.current]);
     };
 
-    // Start recording with 100ms timeslice for better control
     mediaRecorder.start(100);
     mediaRecorderRef.current = mediaRecorder;
+
+    // Create audio-only recorder
+    const audioTracks = stream.getAudioTracks();
+    if (audioTracks.length > 0) {
+      const audioStream = new MediaStream(audioTracks);
+      const audioMimeType = mimeType.includes('mp4') ? 'audio/mp4' : 'audio/webm';
+      
+      const audioRecorder = new MediaRecorder(audioStream, { 
+        mimeType: audioMimeType 
+      });
+
+      audioRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          console.log('Audio chunk received:', event.data.size, 'bytes');
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      audioRecorder.onstop = () => {
+        console.log('Audio recording stopped, total chunks:', audioChunksRef.current.length);
+        setRecordedAudioChunks([...audioChunksRef.current]);
+      };
+
+      audioRecorder.start(100);
+      audioRecorderRef.current = audioRecorder;
+    }
+
     setIsRecording(true);
     setRecordingTime(0);
 
