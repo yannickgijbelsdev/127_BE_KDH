@@ -810,21 +810,32 @@ const WebcamAudioTest = () => {
 
             {recordedChunks.length > 0 && !isRecording && (
               <>
-                <Button 
+                <button 
                   onClick={downloadVideo}
-                  className="bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124]"
+                  className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2"
+                  style={{
+                    background: 'rgba(150, 180, 255, 0.3)',
+                    color: '#cfe1ff'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
                 >
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-4 h-4" />
                   Download Video
-                </Button>
-                <Button 
+                </button>
+                <button 
                   onClick={downloadAudio}
-                  variant="outline"
-                  className="border-[#5f6368] text-[#e8eaed] hover:bg-[#3c4043]"
+                  className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
                 >
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-4 h-4" />
                   Download Audio
-                </Button>
+                </button>
               </>
             )}
           </div>
