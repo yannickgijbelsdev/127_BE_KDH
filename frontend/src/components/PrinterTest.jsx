@@ -539,7 +539,7 @@ const PrinterTest = () => {
                   }}
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Bekijk ook andere tools
+                  {t('Bekijk ook andere tools', 'Check out other tools')}
                 </button>
               </Link>
 
