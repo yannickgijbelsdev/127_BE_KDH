@@ -388,21 +388,21 @@ const PixelTest = () => {
                 border: '1px solid rgba(255, 255, 255, 0.1)'
               }}
             >
-              <h3 className="font-semibold text-white text-lg mb-2">GPU Informatie:</h3>
+              <h3 className="font-semibold text-white text-lg mb-2">{t('GPU Informatie:', 'GPU Information:')}</h3>
               <div className="text-sm text-white text-opacity-80 space-y-2">
                 <div>
-                  <span className="text-white text-opacity-60">Vendor:</span>
+                  <span className="text-white text-opacity-60">{t('Vendor:', 'Vendor:')}</span>
                   <span className="ml-2 text-white font-medium break-words">{gpuInfo.vendor}</span>
                 </div>
                 <div>
-                  <span className="text-white text-opacity-60">Renderer:</span>
+                  <span className="text-white text-opacity-60">{t('Renderer:', 'Renderer:')}</span>
                   <span className="ml-2 text-white font-medium break-words">{gpuInfo.renderer}</span>
                 </div>
               </div>
             </div>
             <div className="mt-6">
               <p className="text-sm text-white text-opacity-70">
-                Huidige kleur: <span className="font-bold text-white">{currentColorObj.name}</span>
+                {t('Huidige kleur:', 'Current color:')} <span className="font-bold text-white">{currentColorObj.name}</span>
               </p>
             </div>
             <div className="mt-6">
