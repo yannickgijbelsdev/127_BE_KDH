@@ -683,6 +683,7 @@ const WebcamAudioTest = () => {
 
   if (showPermissionRequest) {
     return (
+      <>
       <div className="min-h-screen bg-[#202124] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
           <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 border border-[#5f6368]">
