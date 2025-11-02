@@ -227,8 +227,7 @@ const LandingPage = () => {
             style={{
               background: 'rgba(0, 0, 0, 0.5)',
               backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.5)'
+              WebkitBackdropFilter: 'blur(20px)'
             }}
           >
             <div className="space-y-8">
