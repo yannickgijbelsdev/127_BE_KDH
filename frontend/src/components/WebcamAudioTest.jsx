@@ -519,6 +519,18 @@ const WebcamAudioTest = () => {
               </div>
               <Progress value={loadingProgress} className="h-3" />
               <p className="text-center text-lg text-white text-opacity-80">{Math.round(loadingProgress)}%</p>
+              <div className="text-center">
+                <button
+                  onClick={() => setShowChangelog(true)}
+                  className="text-xs cursor-pointer hover:opacity-100 transition-opacity"
+                  style={{
+                    color: '#8fa8ff',
+                    opacity: 0.8
+                  }}
+                >
+                  Build {BUILD_VERSION}
+                </button>
+              </div>
             </div>
           </div>
         </div>
