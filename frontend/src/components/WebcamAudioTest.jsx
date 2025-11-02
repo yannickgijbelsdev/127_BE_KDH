@@ -303,6 +303,12 @@ const WebcamAudioTest = () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
     };
   }, [stream]);
 
