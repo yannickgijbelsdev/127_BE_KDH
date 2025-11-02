@@ -150,8 +150,17 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
       {!showForm && (
         <button
           onClick={() => setShowForm(true)}
-          className="fixed right-6 bottom-6 w-14 h-14 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 z-[9998]"
+          className="fixed right-6 bottom-6 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 z-[9998]"
+          style={{
+            background: 'rgba(150, 180, 255, 0.25)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            border: '1px solid rgba(150, 180, 255, 0.15)',
+            color: '#cfe1ff'
+          }}
           title="Geef feedback"
+          onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.35)'}
+          onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.25)'}
         >
           <MessageSquare className="w-6 h-6" />
         </button>
@@ -159,8 +168,16 @@ const FloatingFeedbackButton = ({ hideOnFullscreen = false }) => {
 
       {/* Feedback Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[9999] px-4">
-          <div className="bg-[#303134] rounded-lg p-6 max-w-md w-full border border-[#5f6368] shadow-2xl">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] px-4 backdrop-blur-sm">
+          <div 
+            className="rounded-3xl p-8 max-w-md w-full shadow-2xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
             {submitted ? (
               <div className="text-center py-8">
                 <div className="mb-4">
