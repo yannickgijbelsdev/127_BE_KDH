@@ -180,12 +180,12 @@ const ToolSuggestionModal = ({ isOpen, onClose }) => {
 
               <div>
                 <label className="block text-sm font-medium text-white text-opacity-70 mb-2">
-                  Use Case (optioneel)
+                  {t('Use Case (optioneel)', 'Use Case (optional)')}
                 </label>
                 <textarea
                   value={useCase}
                   onChange={(e) => setUseCase(e.target.value)}
-                  placeholder="Wanneer zou je deze tool gebruiken?"
+                  placeholder={t('Wanneer zou je deze tool gebruiken?', 'When would you use this tool?')}
                   rows={2}
                   className="w-full px-4 py-2 text-white rounded-lg focus:outline-none resize-none placeholder-white placeholder-opacity-30"
                   style={{
