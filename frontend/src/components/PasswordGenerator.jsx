@@ -270,22 +270,64 @@ const PasswordGenerator = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#202124] flex flex-col items-center justify-center p-8">
-        <AutumnDecoration />
-        <div className="w-full max-w-md space-y-8">
-          <div className="flex justify-center">
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Unsplash Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {backgroundImage ? (
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)',
+                width: '105%',
+                height: '105%',
+                marginLeft: '-2.5%',
+                marginTop: '-2.5%'
+              }}
+            />
+          ) : (
+            <div
+              className="w-full h-full"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)'
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
+
+        {/* 127 Logo Top Left */}
+        <div className="absolute top-8 left-8 z-30">
+          <Link to="/">
             <img 
               src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
               alt="127 Logo" 
-              className="w-48 h-auto brightness-110"
-             draggable="false"/>
-          </div>
-          <div className="space-y-4">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">Password Generator</h2>
+              className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
+              draggable="false"
+            />
+          </Link>
+        </div>
+
+        {/* Loading Content */}
+        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+          <div 
+            className="w-full max-w-md p-12 rounded-3xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)'
+            }}
+          >
+            <div className="space-y-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-white mb-2">Password Generator</h2>
+              </div>
+              <Progress value={loadingProgress} className="h-3" />
+              <p className="text-center text-lg text-white text-opacity-80">{Math.round(loadingProgress)}%</p>
             </div>
-            <Progress value={loadingProgress} className="h-3 bg-[#303134]" />
-            <p className="text-center text-sm text-[#9aa0a6]">{Math.round(loadingProgress)}%</p>
           </div>
         </div>
       </div>
