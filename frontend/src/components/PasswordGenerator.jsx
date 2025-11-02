@@ -437,18 +437,34 @@ const PasswordGenerator = () => {
                   type="text"
                   value={password}
                   readOnly
-                  className="flex-1 bg-[#202124] text-[#e8eaed] px-4 py-3 rounded-lg border border-[#5f6368] font-mono text-sm"
+                  className="flex-1 text-white px-4 py-3 rounded-lg font-mono text-sm"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
                 />
                 <button
                   onClick={() => copyToClipboard(password)}
-                  className="px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg transition-colors"
+                  className="px-4 py-3 rounded-lg transition-colors"
+                  style={{
+                    background: 'rgba(150, 180, 255, 0.3)',
+                    color: '#cfe1ff'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
                   title="Kopieer"
                 >
                   {copied ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={generatePassword}
-                  className="px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg transition-colors"
+                  className="px-4 py-3 rounded-lg transition-colors"
+                  style={{
+                    background: 'rgba(150, 180, 255, 0.3)',
+                    color: '#cfe1ff'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
                   title="Genereer nieuw"
                 >
                   <RefreshCw className="w-5 h-5" />
@@ -459,8 +475,8 @@ const PasswordGenerator = () => {
             {/* Length Slider */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <label className="text-sm text-[#9aa0a6]">Lengte</label>
-                <span className="text-sm font-semibold text-[#e8eaed]">{length} karakters</span>
+                <label className="text-sm text-white text-opacity-70">Lengte</label>
+                <span className="text-sm font-semibold text-white">{length} karakters</span>
               </div>
               <input
                 type="range"
