@@ -1,6 +1,28 @@
-export const BUILD_VERSION = '1.8.0';
+export const BUILD_VERSION = '1.8.2';
 
 export const CHANGELOG = {
+  "1.8.2": {
+    nl: {
+      title: "Video Playlist Systeem",
+      date: "2025-02-03",
+      features: [
+        "Automatisch wisselende video's op landing page",
+        "Playlist van 10 natuurlijke, kleurrijke video's",
+        "Soepele overgangen tussen video's",
+        "Meer afwisseling in achtergronden"
+      ]
+    },
+    en: {
+      title: "Video Playlist System",
+      date: "2025-02-03",
+      features: [
+        "Automatically switching videos on landing page",
+        "Playlist of 10 natural, colorful videos",
+        "Smooth transitions between videos",
+        "More variety in backgrounds"
+      ]
+    }
+  },
   "1.8.0": {
     nl: {
       title: "Glassmorphism Redesign & Pexels Integratie",
