@@ -242,6 +242,7 @@ const ScreenTest = () => {
         onClose={() => setShowChangelog(false)}
         currentVersion={BUILD_VERSION}
       />
+      </>
     );
   }
 
