@@ -445,6 +445,13 @@ const ScreenTest = () => {
           <AnimatedBox key={index} speed={speed} index={index} />
         ))}
       </div>
+      
+      <FloatingFeedbackButton />
+      <ChangelogModal 
+        isOpen={showChangelog} 
+        onClose={() => setShowChangelog(false)}
+        currentVersion={BUILD_VERSION}
+      />
     </div>
   );
 };
