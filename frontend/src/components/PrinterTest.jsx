@@ -511,13 +511,13 @@ const PrinterTest = () => {
                   border: '1px solid rgba(255, 255, 255, 0.05)'
                 }}
               >
-                <h3 className="font-semibold text-white text-lg mb-3">Instructies:</h3>
+                <h3 className="font-semibold text-white text-lg mb-3">{t('Instructies:', 'Instructions:')}</h3>
                 <ul className="text-white text-opacity-80 space-y-2">
-                  <li>• Klik om de configuratie te openen</li>
-                  <li>• Kies het aantal pagina's (1-10)</li>
-                  <li>• Selecteer de gewenste testen</li>
-                  <li>• Klik op "Genereer en Print"</li>
-                  <li>• Controleer de afdruk op kwaliteit</li>
+                  <li>• {t('Klik om de configuratie te openen', 'Click to open configuration')}</li>
+                  <li>• {t('Kies het aantal pagina\'s (1-10)', 'Choose number of pages (1-10)')}</li>
+                  <li>• {t('Selecteer de gewenste testen', 'Select desired tests')}</li>
+                  <li>• {t('Klik op "Genereer en Print"', 'Click "Generate and Print"')}</li>
+                  <li>• {t('Controleer de afdruk op kwaliteit', 'Check print quality')}</li>
                 </ul>
               </div>
 
