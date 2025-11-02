@@ -786,23 +786,33 @@ const WebcamAudioTest = () => {
           {/* Recording Controls */}
           <div className="flex items-center gap-3">
             {!isRecording ? (
-              <Button 
+              <button 
                 onClick={startRecording}
-                className="bg-red-600 hover:bg-red-700 text-white"
+                className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 text-white"
+                style={{
+                  background: 'rgba(220, 38, 38, 0.8)'
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgba(220, 38, 38, 0.9)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(220, 38, 38, 0.8)'}
               >
-                <Circle className="w-4 h-4 mr-2 fill-current" />
+                <Circle className="w-4 h-4 fill-current" />
                 Start Opname
-              </Button>
+              </button>
             ) : (
               <>
-                <Button 
+                <button 
                   onClick={stopRecording}
-                  className="bg-gray-600 hover:bg-gray-700 text-white"
+                  className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 text-white"
+                  style={{
+                    background: 'rgba(75, 85, 99, 0.8)'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(75, 85, 99, 0.9)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(75, 85, 99, 0.8)'}
                 >
-                  <Square className="w-4 h-4 mr-2" />
+                  <Square className="w-4 h-4" />
                   Stop Opname
-                </Button>
-                <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-mono">
+                </button>
+                <div className="px-4 py-2 rounded-lg font-mono text-white" style={{ background: 'rgba(220, 38, 38, 0.8)' }}>
                   {formatTime(recordingTime)}
                 </div>
               </>
