@@ -501,7 +501,7 @@ const PrinterTest = () => {
             <div className="space-y-6">
               <div className="text-center">
                 <h2 className="text-3xl font-bold text-white mb-2">Printer Tester</h2>
-                <p className="text-white text-opacity-70">Klik om te starten</p>
+                <p className="text-white text-opacity-70">{t('Klik om te starten', 'Click to start')}</p>
               </div>
               
               <div 
