@@ -150,10 +150,8 @@ const WebcamAudioTest = () => {
       
       console.log('Audio context created, starting visualization...');
       
-      // Start visualization after a short delay to ensure canvas is ready
-      setTimeout(() => {
-        visualizeAudio();
-      }, 100);
+      // Start visualization immediately since canvas is now ready
+      visualizeAudio();
     } catch (error) {
       console.error('Error setting up audio visualizer:', error);
     }
