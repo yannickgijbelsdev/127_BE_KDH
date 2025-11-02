@@ -488,7 +488,7 @@ const WebcamAudioTest = () => {
               }}
             />
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
 
         {/* 127 Logo Top Left */}
@@ -554,7 +554,7 @@ const WebcamAudioTest = () => {
               }}
             />
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
 
         {/* 127 Logo Top Left */}
