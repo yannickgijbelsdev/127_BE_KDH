@@ -125,13 +125,13 @@ const ChangelogModal = ({ isOpen, onClose, currentVersion }) => {
                     <div className="space-y-2">
                       {changelog.features.map((feature, idx) => (
                         <div key={idx} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 bg-[#8ab4f8] rounded-full mt-2 flex-shrink-0" />
-                          <p className="text-[#e8eaed]">{feature}</p>
+                          <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: '#8fa8ff' }} />
+                          <p className="text-white text-opacity-90">{feature}</p>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="text-[#9aa0a6] italic text-sm">
+                    <div className="text-white text-opacity-50 italic text-sm">
                       {language === 'nl' 
                         ? 'Deze versie bevat voornamelijk backend wijzigingen.'
                         : 'This version mainly contains backend changes.'}
