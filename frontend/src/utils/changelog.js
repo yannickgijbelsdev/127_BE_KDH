@@ -7,7 +7,7 @@ export const CHANGELOG = {
       date: "2025-02-03",
       features: [
         "Automatisch wisselende video's op landing page",
-        "Playlist van 10 natuurlijke, kleurrijke video's",
+        "Playlist van 10 coding/programming video's",
         "Soepele overgangen tussen video's",
         "Meer afwisseling in achtergronden"
       ]
@@ -17,7 +17,7 @@ export const CHANGELOG = {
       date: "2025-02-03",
       features: [
         "Automatically switching videos on landing page",
-        "Playlist of 10 natural, colorful videos",
+        "Playlist of 10 coding/programming videos",
         "Smooth transitions between videos",
         "More variety in backgrounds"
       ]
