@@ -76,20 +76,29 @@ const WebcamAudioTest = () => {
 
   const startCamera = async () => {
     try {
+      console.log('Requesting camera and microphone access...');
       const mediaStream = await navigator.mediaDevices.getUserMedia({ 
         video: { width: 1920, height: 1080 }, 
         audio: true 
       });
       
+      console.log('Media stream obtained:', mediaStream);
+      console.log('Video tracks:', mediaStream.getVideoTracks());
+      console.log('Audio tracks:', mediaStream.getAudioTracks());
+      
       setStream(mediaStream);
       if (videoRef.current) {
+        console.log('Setting video srcObject...');
         videoRef.current.srcObject = mediaStream;
         // Force play to ensure video shows
         try {
           await videoRef.current.play();
+          console.log('Video is playing');
         } catch (playError) {
           console.error('Error playing video:', playError);
         }
+      } else {
+        console.error('videoRef.current is null!');
       }
 
       // Setup audio visualizer
