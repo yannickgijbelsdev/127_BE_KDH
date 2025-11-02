@@ -87,27 +87,35 @@ const ChangelogModal = ({ isOpen, onClose, currentVersion }) => {
               return (
                 <div
                   key={version}
-                  className={`bg-[#202124] rounded-lg p-6 border ${
-                    isCurrent ? 'border-[#8ab4f8]' : 'border-[#5f6368]'
-                  }`}
+                  className="rounded-2xl p-6"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: isCurrent ? '1px solid rgba(150, 180, 255, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-[#e8eaed]">
+                        <h3 className="text-xl font-bold text-white">
                           Version {version}
                         </h3>
                         {isCurrent && (
-                          <span className="px-2 py-1 bg-[#8ab4f8] text-[#202124] text-xs font-semibold rounded">
+                          <span 
+                            className="px-2 py-1 text-xs font-semibold rounded"
+                            style={{
+                              background: 'rgba(150, 180, 255, 0.3)',
+                              color: '#cfe1ff'
+                            }}
+                          >
                             HUIDIGE
                           </span>
                         )}
                       </div>
-                      <p className="text-lg text-[#8ab4f8] font-semibold">
+                      <p className="text-lg font-semibold" style={{ color: '#8fa8ff' }}>
                         {changelog.title}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-[#9aa0a6]">
+                    <div className="flex items-center gap-2 text-sm text-white text-opacity-60">
                       <Calendar className="w-4 h-4" />
                       <span>{changelog.date}</span>
                     </div>
