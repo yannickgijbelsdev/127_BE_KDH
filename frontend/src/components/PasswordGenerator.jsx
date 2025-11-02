@@ -800,7 +800,7 @@ const PasswordGenerator = () => {
         <div className="mt-8 text-center">
           <Link to="/">
             <button 
-              className="px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 mx-auto"
+              className="px-6 py-3 rounded-full font-medium transition-colors flex items-center justify-center gap-2 mx-auto"
               style={{
                 background: 'rgba(150, 180, 255, 0.3)',
                 color: '#cfe1ff'

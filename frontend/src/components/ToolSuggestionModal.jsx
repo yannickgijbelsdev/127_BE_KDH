@@ -198,7 +198,7 @@ const ToolSuggestionModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={isSubmitting || !toolName.trim() || !description.trim()}
-                className="w-full px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 rounded-full font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style={{
                   background: 'rgba(150, 180, 255, 0.3)',
                   color: '#cfe1ff'
