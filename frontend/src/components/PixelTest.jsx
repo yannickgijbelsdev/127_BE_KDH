@@ -319,28 +319,46 @@ const PixelTest = () => {
         {/* Instructions when not in fullscreen */}
         {!isFullscreen && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
-          <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 max-w-md border border-[#5f6368]">
+          <div 
+            className="rounded-3xl shadow-2xl p-8 max-w-md"
+            style={{
+              background: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
+          >
             <div className="mb-6 flex flex-col items-center">
               <img 
                 src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
                 alt="127 Logo" 
                 className="w-32 h-auto mb-4 brightness-110"
                draggable="false"/>
-              <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">Dead Pixel Detector</h2>
-              <p className="text-[#9aa0a6]">Klik om te starten</p>
+              <h2 className="text-2xl font-bold text-white mb-2">Dead Pixel Detector</h2>
+              <p className="text-white text-opacity-70">Klik om te starten</p>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowChangelog(true);
                 }}
-                className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] mt-2 cursor-pointer underline"
+                className="text-xs cursor-pointer hover:opacity-100 transition-opacity mt-2"
+                style={{
+                  color: '#8fa8ff',
+                  opacity: 0.8
+                }}
               >
                 Build {BUILD_VERSION}
               </button>
             </div>
-            <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 text-left">
-              <h3 className="font-semibold text-[#8ab4f8] mb-2">Instructies:</h3>
-              <ul className="text-sm text-[#9aa0a6] space-y-1">
+            <div 
+              className="rounded-2xl p-4 text-left"
+              style={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <h3 className="font-semibold text-white text-lg mb-2">Instructies:</h3>
+              <ul className="text-sm text-white text-opacity-80 space-y-1">
                 <li>• Klik overal op het scherm om fullscreen te gaan</li>
                 <li>• Gebruik pijltjestoetsen (← →) om van kleur te wisselen</li>
                 <li>• De muis verdwijnt automatisch in fullscreen</li>
