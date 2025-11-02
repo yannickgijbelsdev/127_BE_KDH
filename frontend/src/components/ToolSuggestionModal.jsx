@@ -140,13 +140,13 @@ const ToolSuggestionModal = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-white text-opacity-70 mb-2">
-                  Tool Naam *
+                  {t('Tool Naam *', 'Tool Name *')}
                 </label>
                 <input
                   type="text"
                   value={toolName}
                   onChange={(e) => setToolName(e.target.value)}
-                  placeholder="Bijv. WiFi Speed Tester"
+                  placeholder={t('Bijv. WiFi Speed Tester', 'E.g. WiFi Speed Tester')}
                   required
                   className="w-full px-4 py-2 text-white rounded-lg focus:outline-none placeholder-white placeholder-opacity-30"
                   style={{
