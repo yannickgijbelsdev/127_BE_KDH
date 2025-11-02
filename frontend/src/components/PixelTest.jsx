@@ -18,6 +18,33 @@ const PixelTest = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [gpuInfo, setGpuInfo] = useState({ vendor: 'Unknown', renderer: 'Unknown' });
   const [showChangelog, setShowChangelog] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState('');
+
+  // Fetch random background image from Unsplash
+  useEffect(() => {
+    const fetchBackgroundImage = async () => {
+      try {
+        const response = await fetch(
+          'https://api.unsplash.com/photos/random?query=abstract,technology,minimal&orientation=landscape',
+          {
+            headers: {
+              Authorization: 'Client-ID rS3f7X0URqQ1BDPKC3tZ3kSEo_P7S9KR_gm6_S8h-T0'
+            }
+          }
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          setBackgroundImage(data.urls.regular);
+        }
+      } catch (error) {
+        console.error('Error fetching Unsplash image:', error);
+        setBackgroundImage('');
+      }
+    };
+
+    fetchBackgroundImage();
+  }, []);
 
   // Log page visit on mount
   useEffect(() => {
