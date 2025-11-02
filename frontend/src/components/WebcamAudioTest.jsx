@@ -25,11 +25,16 @@ const WebcamAudioTest = () => {
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [recordingTime, setRecordingTime] = useState(0);
   const [permissionError, setPermissionError] = useState('');
+  const [audioLevel, setAudioLevel] = useState(0);
   
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
   const timerRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const canvasRef = useRef(null);
 
   // Loading animation (1 second)
   useEffect(() => {
