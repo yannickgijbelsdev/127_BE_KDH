@@ -17,27 +17,42 @@ const ChangelogModal = ({ isOpen, onClose, currentVersion }) => {
   });
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[9999] px-4">
-      <div className="bg-[#303134] rounded-lg max-w-3xl w-full max-h-[90vh] overflow-hidden border border-[#5f6368] shadow-2xl">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] px-4 backdrop-blur-sm">
+      <div 
+        className="rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+        style={{
+          background: 'rgba(0, 0, 0, 0.7)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
+        }}
+      >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#5f6368]">
+        <div className="flex items-center justify-between p-6" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
           <div className="flex items-center gap-3">
-            <Package className="w-8 h-8 text-[#8ab4f8]" />
+            <Package className="w-8 h-8 text-white text-opacity-90" />
             <div>
-              <h2 className="text-2xl font-bold text-[#e8eaed]">Changelog</h2>
-              <p className="text-sm text-[#9aa0a6]">Huidige versie: {currentVersion}</p>
+              <h2 className="text-2xl font-bold text-white">Changelog</h2>
+              <p className="text-sm text-white text-opacity-70">Huidige versie: {currentVersion}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             {/* Language Toggle */}
-            <div className="flex bg-[#202124] rounded-lg p-1 border border-[#5f6368]">
+            <div 
+              className="flex rounded-lg p-1"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}
+            >
               <button
                 onClick={() => setLanguage('nl')}
                 className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                   language === 'nl'
-                    ? 'bg-[#8ab4f8] text-[#202124]'
-                    : 'text-[#9aa0a6] hover:text-[#e8eaed]'
+                    ? 'text-white'
+                    : 'text-white text-opacity-60 hover:text-opacity-90'
                 }`}
+                style={language === 'nl' ? { background: 'rgba(150, 180, 255, 0.3)' } : {}}
               >
                 NL
               </button>
@@ -45,18 +60,19 @@ const ChangelogModal = ({ isOpen, onClose, currentVersion }) => {
                 onClick={() => setLanguage('en')}
                 className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                   language === 'en'
-                    ? 'bg-[#8ab4f8] text-[#202124]'
-                    : 'text-[#9aa0a6] hover:text-[#e8eaed]'
+                    ? 'text-white'
+                    : 'text-white text-opacity-60 hover:text-opacity-90'
                 }`}
+                style={language === 'en' ? { background: 'rgba(150, 180, 255, 0.3)' } : {}}
               >
                 EN
               </button>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-[#5f6368] rounded-lg transition-colors"
+              className="p-2 rounded-lg transition-colors hover:bg-white hover:bg-opacity-10"
             >
-              <X className="w-5 h-5 text-[#9aa0a6]" />
+              <X className="w-5 h-5 text-white text-opacity-70" />
             </button>
           </div>
         </div>
