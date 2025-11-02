@@ -457,22 +457,64 @@ const WebcamAudioTest = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#202124] flex flex-col items-center justify-center p-8">
-        <AutumnDecoration />
-        <div className="w-full max-w-md space-y-8">
-          <div className="flex justify-center">
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Unsplash Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {backgroundImage ? (
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)',
+                width: '105%',
+                height: '105%',
+                marginLeft: '-2.5%',
+                marginTop: '-2.5%'
+              }}
+            />
+          ) : (
+            <div
+              className="w-full h-full"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)'
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
+
+        {/* 127 Logo Top Left */}
+        <div className="absolute top-8 left-8 z-30">
+          <Link to="/">
             <img 
               src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
               alt="127 Logo" 
-              className="w-48 h-auto brightness-110"
-             draggable="false"/>
-          </div>
-          <div className="space-y-4">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">Webcam & Audio Test</h2>
+              className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
+              draggable="false"
+            />
+          </Link>
+        </div>
+
+        {/* Loading Content */}
+        <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+          <div 
+            className="w-full max-w-md p-12 rounded-3xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)'
+            }}
+          >
+            <div className="space-y-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-white mb-2">Webcam & Audio Test</h2>
+              </div>
+              <Progress value={loadingProgress} className="h-3" />
+              <p className="text-center text-lg text-white text-opacity-80">{Math.round(loadingProgress)}%</p>
             </div>
-            <Progress value={loadingProgress} className="h-3 bg-[#303134]" />
-            <p className="text-center text-sm text-[#9aa0a6]">{Math.round(loadingProgress)}%</p>
           </div>
         </div>
       </div>
@@ -481,48 +523,121 @@ const WebcamAudioTest = () => {
 
   if (showInstructions) {
     return (
-      <div 
-        onClick={handleClick}
-        className="min-h-screen bg-[#202124] flex items-center justify-center px-6"
-        style={{ cursor: 'pointer' }}
-      >
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
-          <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 max-w-md border border-[#5f6368]">
-            <div className="mb-6 flex flex-col items-center">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
-                alt="127 Logo" 
-                className="w-32 h-auto mb-4 brightness-110"
-               draggable="false"/>
-              <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">Webcam & Audio Test</h2>
-              <p className="text-[#9aa0a6]">Klik om te starten</p>
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowChangelog(true);
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Unsplash Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {backgroundImage ? (
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)',
+                width: '105%',
+                height: '105%',
+                marginLeft: '-2.5%',
+                marginTop: '-2.5%'
+              }}
+            />
+          ) : (
+            <div
+              className="w-full h-full"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                filter: 'blur(1.5px) brightness(0.5)',
+                transform: 'scale(1.05)'
+              }}
+            />
+          )}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
+
+        {/* 127 Logo Top Left */}
+        <div className="absolute top-8 left-8 z-30">
+          <Link to="/">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              alt="127 Logo" 
+              className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
+              draggable="false"
+            />
+          </Link>
+        </div>
+
+        {/* Instructions Content */}
+        <div 
+          onClick={handleClick}
+          className="relative z-10 min-h-screen flex items-center justify-center p-4"
+          style={{ cursor: 'pointer' }}
+        >
+          <div 
+            className="w-full max-w-lg p-12 rounded-3xl"
+            style={{
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)'
+            }}
+          >
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-white mb-2">Webcam & Audio Test</h2>
+                <p className="text-white text-opacity-70">Klik om te starten</p>
+              </div>
+              
+              <div 
+                className="p-6 rounded-2xl text-left"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.05)'
                 }}
-                className="text-xs text-[#8ab4f8] hover:text-[#aac8f9] mt-2 cursor-pointer underline"
               >
-                Build {BUILD_VERSION}
-              </button>
-            </div>
-            <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 text-left">
-              <h3 className="font-semibold text-[#8ab4f8] mb-2">Instructies:</h3>
-              <ul className="text-sm text-[#9aa0a6] space-y-1">
-                <li>• Klik om camera en microfoon te activeren</li>
-                <li>• Geef toestemming voor camera en microfoon</li>
-                <li>• Test uw beeld en geluid</li>
-                <li>• Neem op en download de opname</li>
-                <li>• Download video en audio apart of samen</li>
-              </ul>
-            </div>
-            <div className="mt-6">
+                <h3 className="font-semibold text-white text-lg mb-3">Instructies:</h3>
+                <ul className="text-white text-opacity-80 space-y-2">
+                  <li>• Klik om camera en microfoon te activeren</li>
+                  <li>• Geef toestemming voor camera en microfoon</li>
+                  <li>• Test uw beeld en geluid</li>
+                  <li>• Neem op en download de opname</li>
+                  <li>• Download video en audio apart of samen</li>
+                </ul>
+              </div>
+
               <Link to="/" onClick={(e) => e.stopPropagation()}>
-                <button className="w-full px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                <button 
+                  className="w-full px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2"
+                  style={{
+                    background: 'rgba(150, 180, 255, 0.25)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(150, 180, 255, 0.15)',
+                    color: '#cfe1ff'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(150, 180, 255, 0.35)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(150, 180, 255, 0.25)';
+                  }}
+                >
                   <ArrowLeft className="w-4 h-4" />
                   Bekijk ook andere tools
                 </button>
               </Link>
+
+              <div className="text-center">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowChangelog(true);
+                  }}
+                  className="text-xs cursor-pointer hover:opacity-100 transition-opacity"
+                  style={{
+                    color: '#8fa8ff',
+                    opacity: 0.8
+                  }}
+                >
+                  Build {BUILD_VERSION}
+                </button>
+              </div>
             </div>
           </div>
         </div>
