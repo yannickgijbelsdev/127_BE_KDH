@@ -747,13 +747,17 @@ const PasswordGenerator = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm text-[#9aa0a6] mb-1">Favoriete ding</label>
+                  <label className="block text-sm text-white text-opacity-70 mb-1">Favoriete ding</label>
                   <input
                     type="text"
                     value={memorableInputs.favorite}
                     onChange={(e) => setMemorableInputs({...memorableInputs, favorite: e.target.value})}
                     placeholder="bijv. Kat, Pizza, Strand"
-                    className="w-full bg-[#202124] text-[#e8eaed] px-4 py-2 rounded-lg border border-[#5f6368] text-sm"
+                    className="w-full text-white px-4 py-2 rounded-lg text-sm placeholder-white placeholder-opacity-40"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}
                   />
                 </div>
               </div>
