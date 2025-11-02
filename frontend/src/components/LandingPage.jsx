@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Monitor, Printer, Activity, Video, Lock, Plus } from 'lucide-react';
-import AutumnDecoration from './AutumnDecoration';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
 import ChangelogModal from './ChangelogModal';
 import ToolSuggestionModal from './ToolSuggestionModal';
@@ -14,6 +13,7 @@ const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChangelog, setShowChangelog] = useState(false);
   const [showToolSuggestion, setShowToolSuggestion] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const [enabledToolIds, setEnabledToolIds] = useState([]);
   const [loadingTools, setLoadingTools] = useState(true);
 
