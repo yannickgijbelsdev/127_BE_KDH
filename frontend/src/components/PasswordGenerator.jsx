@@ -727,14 +727,26 @@ const PasswordGenerator = () => {
                     setShowMemorableForm(false);
                     setMemorableInputs({ interest: '', year: '', favorite: '' });
                   }}
-                  className="flex-1 px-4 py-2 bg-[#5f6368] hover:bg-[#7a8086] text-[#e8eaed] rounded-lg font-medium transition-colors"
+                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-colors"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
                 >
                   Annuleren
                 </button>
                 <button
                   onClick={handleMemorableSubmit}
                   disabled={!memorableInputs.interest || !memorableInputs.year || !memorableInputs.favorite}
-                  className="flex-1 px-4 py-2 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    background: 'rgba(150, 180, 255, 0.3)',
+                    color: '#cfe1ff'
+                  }}
+                  onMouseEnter={(e) => !e.target.disabled && (e.target.style.background = 'rgba(150, 180, 255, 0.4)')}
+                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
                 >
                   Genereer
                 </button>
