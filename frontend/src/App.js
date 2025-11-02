@@ -138,7 +138,7 @@ function AppContent() {
   }
 
   return (
-    <>
+    <div className="App">
       {showAdminNav && <AdminNavBar />}
       <ExitFeedback />
       <Routes>
