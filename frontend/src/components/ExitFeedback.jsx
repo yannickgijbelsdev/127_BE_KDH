@@ -257,7 +257,7 @@ const ExitFeedback = () => {
 
             {/* Feedback */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-[#e8eaed] mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 Wat kan er beter?
               </label>
               <textarea
@@ -265,13 +265,19 @@ const ExitFeedback = () => {
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="Vertel ons wat je ervaring was..."
                 rows="3"
-                className="w-full bg-[#202124] text-[#e8eaed] px-4 py-3 rounded-lg border border-[#5f6368] focus:border-[#8ab4f8] focus:outline-none resize-none"
+                className="w-full text-white px-4 py-3 rounded-lg focus:outline-none resize-none placeholder-white placeholder-opacity-40"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
+                onFocus={(e) => e.target.style.border = '1px solid rgba(150, 180, 255, 0.4)'}
+                onBlur={(e) => e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)'}
               />
             </div>
 
             {/* Suggestions */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-[#e8eaed] mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 Suggesties (optioneel)
               </label>
               <textarea
@@ -279,7 +285,13 @@ const ExitFeedback = () => {
                 onChange={(e) => setSuggestions(e.target.value)}
                 placeholder="Heb je ideeën voor verbetering?"
                 rows="2"
-                className="w-full bg-[#202124] text-[#e8eaed] px-4 py-3 rounded-lg border border-[#5f6368] focus:border-[#8ab4f8] focus:outline-none resize-none"
+                className="w-full text-white px-4 py-3 rounded-lg focus:outline-none resize-none placeholder-white placeholder-opacity-40"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
+                onFocus={(e) => e.target.style.border = '1px solid rgba(150, 180, 255, 0.4)'}
+                onBlur={(e) => e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)'}
               />
             </div>
 
@@ -287,14 +299,26 @@ const ExitFeedback = () => {
             <div className="flex gap-3">
               <button
                 onClick={handleClose}
-                className="flex-1 px-4 py-3 bg-[#5f6368] hover:bg-[#7a8086] text-[#e8eaed] rounded-lg font-medium transition-colors"
+                className="flex-1 px-4 py-3 rounded-lg font-medium transition-colors"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: 'white'
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
               >
                 Overslaan
               </button>
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex-1 px-4 py-3 bg-[#8ab4f8] hover:bg-[#aac8f9] text-[#202124] rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                style={{
+                  background: 'rgba(150, 180, 255, 0.3)',
+                  color: '#cfe1ff'
+                }}
+                onMouseEnter={(e) => !isSubmitting && (e.target.style.background = 'rgba(150, 180, 255, 0.4)')}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
               >
                 {isSubmitting ? (
                   'Verzenden...'
