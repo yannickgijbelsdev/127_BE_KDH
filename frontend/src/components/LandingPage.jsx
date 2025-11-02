@@ -204,7 +204,7 @@ const LandingPage = () => {
               playsInline
               className="w-full h-full object-cover"
               style={{
-                filter: 'blur(1.5px) brightness(0.7)',
+                filter: 'blur(1.5px) brightness(0.95)',
                 transform: 'scale(1.05)',
                 width: '105%',
                 height: '105%',
@@ -219,13 +219,13 @@ const LandingPage = () => {
               className="w-full h-full"
               style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                filter: 'blur(1.5px) brightness(0.7)',
+                filter: 'blur(1.5px) brightness(0.95)',
                 transform: 'scale(1.05)'
               }}
             />
           )}
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
 
         {/* 127 Logo Top Left */}
