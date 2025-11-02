@@ -483,6 +483,11 @@ const WebcamAudioTest = () => {
     );
   }
 
+  // Only show main interface when running
+  if (!isRunning) {
+    return null;
+  }
+
   return (
     <>
     <div className="min-h-screen bg-[#202124] flex flex-col">
