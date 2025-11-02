@@ -584,7 +584,7 @@ const PrinterTest = () => {
 
   if (showConfig) {
     return (
-      <>
+      <div>
         <div className="min-h-screen bg-[#202124] py-8 px-4">
         {/* 127 Logo Top Left */}
         <div className="absolute top-8 left-8 z-30">
