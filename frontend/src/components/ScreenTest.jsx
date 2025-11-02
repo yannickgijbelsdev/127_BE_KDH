@@ -503,7 +503,6 @@ const AnimatedBox = ({ speed, index }) => {
   const leftPosition = (index * 12) + 5;
 
   return (
-    <>
     <div
       style={{
         position: 'absolute',
@@ -517,14 +516,6 @@ const AnimatedBox = ({ speed, index }) => {
         border: '2px solid rgba(255, 255, 255, 0.3)',
       }}
     />
-    
-    <FloatingFeedbackButton />
-    <ChangelogModal 
-      isOpen={showChangelog} 
-      onClose={() => setShowChangelog(false)}
-      currentVersion={BUILD_VERSION}
-    />
-    </>
   );
 };
 
