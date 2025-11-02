@@ -350,7 +350,7 @@ const PixelTest = () => {
                 className="w-32 h-auto mb-4 brightness-110"
                draggable="false"/>
               <h2 className="text-2xl font-bold text-white mb-2">Dead Pixel Detector</h2>
-              <p className="text-white text-opacity-70">Klik om te starten</p>
+              <p className="text-white text-opacity-70">{t('Klik om te starten', 'Click to start')}</p>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
