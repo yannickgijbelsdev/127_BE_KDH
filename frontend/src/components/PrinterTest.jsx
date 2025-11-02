@@ -99,7 +99,7 @@ const PrinterTest = () => {
 
   const handlePrint = () => {
     if (!includeText && !includeColorBars && !includeLines && !includeAlignment) {
-      alert('Selecteer minimaal één testoptie');
+      alert(t('Selecteer minimaal één testoptie', 'Select at least one test option'));
       return;
     }
 
