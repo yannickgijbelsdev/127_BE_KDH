@@ -20,25 +20,28 @@ const PixelTest = () => {
   const [showChangelog, setShowChangelog] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  // Fetch random background image from Unsplash
+  // Fetch random background image from Pexels
   useEffect(() => {
     const fetchBackgroundImage = async () => {
       try {
         const response = await fetch(
-          'https://api.unsplash.com/photos/random?query=abstract,technology,minimal&orientation=landscape',
+          'https://api.pexels.com/v1/search?query=abstract+technology+minimal&orientation=landscape&per_page=15',
           {
             headers: {
-              Authorization: 'Client-ID rS3f7X0URqQ1BDPKC3tZ3kSEo_P7S9KR_gm6_S8h-T0'
+              Authorization: 'SBv6ZOHirhcApz4iLkxYd7c2RDXBWJPKbc8AWDku666r3zU6Tdc2sOih'
             }
           }
         );
         
         if (response.ok) {
           const data = await response.json();
-          setBackgroundImage(data.urls.regular);
+          if (data.photos && data.photos.length > 0) {
+            const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)];
+            setBackgroundImage(randomPhoto.src.large);
+          }
         }
       } catch (error) {
-        console.error('Error fetching Unsplash image:', error);
+        console.error('Error fetching Pexels image:', error);
         setBackgroundImage('');
       }
     };
