@@ -18,12 +18,14 @@ const LandingPage = () => {
   const [loadingTools, setLoadingTools] = useState(true);
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  // Fetch random background image from Pexels
+  // Fetch random background video from Pexels for landing page
   useEffect(() => {
-    const fetchBackgroundImage = async () => {
+    const fetchBackgroundVideo = async () => {
       try {
+        // Random page between 1-10 for more variety
+        const randomPage = Math.floor(Math.random() * 10) + 1;
         const response = await fetch(
-          'https://api.pexels.com/v1/search?query=abstract+technology+minimal&orientation=landscape&per_page=15',
+          `https://api.pexels.com/videos/search?query=abstract+technology+minimal&orientation=landscape&per_page=15&page=${randomPage}`,
           {
             headers: {
               Authorization: 'SBv6ZOHirhcApz4iLkxYd7c2RDXBWJPKbc8AWDku666r3zU6Tdc2sOih'
@@ -33,21 +35,22 @@ const LandingPage = () => {
         
         if (response.ok) {
           const data = await response.json();
-          if (data.photos && data.photos.length > 0) {
-            // Select a random photo from the results
-            const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)];
-            setBackgroundImage(randomPhoto.src.large);
-            console.log('Pexels image loaded:', randomPhoto.src.large);
+          if (data.videos && data.videos.length > 0) {
+            // Select a random video from the results
+            const randomVideo = data.videos[Math.floor(Math.random() * data.videos.length)];
+            // Use HD quality video file
+            const videoFile = randomVideo.video_files.find(file => file.quality === 'hd') || randomVideo.video_files[0];
+            setBackgroundImage(videoFile.link);
+            console.log('Pexels video loaded:', videoFile.link);
           }
         }
       } catch (error) {
-        console.error('Error fetching Pexels image:', error);
-        // Fallback to a default gradient
+        console.error('Error fetching Pexels video:', error);
         setBackgroundImage('');
       }
     };
 
-    fetchBackgroundImage();
+    fetchBackgroundVideo();
   }, []);
 
   // Icon mapping for tools
