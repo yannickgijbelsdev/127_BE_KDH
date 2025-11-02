@@ -12,6 +12,7 @@ import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 const BUILD_VERSION = '1.8.2';
 
 const LandingPage = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [showChangelog, setShowChangelog] = useState(false);
   const [showToolSuggestion, setShowToolSuggestion] = useState(false);
