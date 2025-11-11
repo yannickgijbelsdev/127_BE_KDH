@@ -203,6 +203,14 @@ function AppContent() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/autosoft" 
+          element={
+            <ProtectedRoute>
+              <AutosoftDashboard />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </div>
   );
