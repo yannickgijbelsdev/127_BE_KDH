@@ -553,6 +553,13 @@ class BackendTester:
         else:
             print("⚠️  Skipping admin analytics tests due to authentication failure")
         
+        # Test Autosoft endpoints (admin required)
+        if auth_success:
+            self.test_autosoft_endpoints()
+            self.test_autosoft_authentication()
+        else:
+            print("⚠️  Skipping Autosoft tests due to authentication failure")
+        
         # Test error handling
         self.test_error_handling()
         
