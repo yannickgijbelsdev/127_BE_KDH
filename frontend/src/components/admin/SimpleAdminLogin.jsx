@@ -3,57 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import { Lock, Mail } from 'lucide-react';
 
 const SimpleAdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDirectLogin = () => {
+    // Direct login zonder form
+    const token = btoa(JSON.stringify({
+      email: 'yannick@radiogroep.be',
+      role: 'admin',
+      timestamp: Date.now()
+    }));
     
-    alert('Login functie aangeroepen!');
+    localStorage.setItem('admin_token', token);
+    localStorage.setItem('adminUser', JSON.stringify({
+      id: 'admin',
+      email: 'yannick@radiogroep.be',
+      username: 'Yannick',
+      role: 'admin'
+    }));
     
-    setError('');
-    setLoading(true);
-
-    // Trim spaces
-    const cleanEmail = email.trim().toLowerCase();
-    
-    alert(`Email: ${cleanEmail}`);
-    
-    // For now: just check email, accept any password for testing
-    if (cleanEmail === 'yannick@radiogroep.be') {
-      alert('Email correct! Token wordt gezet...');
-      
-      // Create a simple token
-      const token = btoa(JSON.stringify({
-        email: cleanEmail,
-        role: 'admin',
-        timestamp: Date.now()
-      }));
-      
-      // Use correct localStorage key that App.js expects!
-      localStorage.setItem('admin_token', token);
-      localStorage.setItem('adminUser', JSON.stringify({
-        id: 'admin',
-        email: cleanEmail,
-        username: 'Yannick',
-        role: 'admin'
-      }));
-      
-      alert('Token gezet! Redirecting naar admin dashboard');
-      
-      // Redirect to admin dashboard, not directly to autosoft
-      setTimeout(() => {
-        window.location.href = '/localhost/dashboard';
-      }, 100);
-    } else {
-      alert(`Email NIET correct: ${cleanEmail}`);
-      setError(`Email moet yannick@radiogroep.be zijn (je hebt ingevuld: ${cleanEmail})`);
-      setLoading(false);
-    }
+    // Force reload
+    window.location.href = '/localhost/dashboard';
   };
 
   return (
