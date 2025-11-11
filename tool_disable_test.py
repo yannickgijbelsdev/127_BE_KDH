@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 import time
 
 # Configuration
-BACKEND_URL = "https://glass-utils.preview.emergentagent.com/api"
+BACKEND_URL = "https://pixel-diagnostics.preview.emergentagent.com/api"
 
 # Admin credentials as specified in the review request
 ADMIN_CREDENTIALS = {

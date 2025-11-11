@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 import time
 
 # Configuration
-BACKEND_URL = "https://glass-utils.preview.emergentagent.com/api"
+BACKEND_URL = "https://pixel-diagnostics.preview.emergentagent.com/api"
 
 # Try multiple possible admin credentials (found actual admin email in database)
 ADMIN_CREDENTIALS = [
