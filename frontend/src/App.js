@@ -153,6 +153,9 @@ function AppContent() {
         <Route path="/password" element={<PasswordGenerator />} />
         
         {/* Admin Routes on /localhost */}
+        <Route path="/admin/2fa-setup" element={<TwoFASetup />} />
+        <Route path="/admin/2fa-login" element={<TwoFALogin />} />
+        
         <Route 
           path="/localhost" 
           element={needsSetup ? <AdminSetup onSetupComplete={handleSetupComplete} /> : <AdminLogin onLogin={handleLogin} />} 
