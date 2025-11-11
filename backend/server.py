@@ -201,6 +201,20 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     except jwt.JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
     
+    # Handle new 2FA-only admin token
+    if user_id == "admin":
+        email = payload.get("email", ADMIN_EMAIL)
+        return User(
+            id="admin",
+            email=email,
+            username="Admin",
+            password_hash="",  # Not used in 2FA-only mode
+            role="admin",
+            is2FAEnabled=True,
+            twofa_secret=""
+        )
+    
+    # Handle old user system
     user = await db.users.find_one({"id": user_id}, {"_id": 0})
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
