@@ -19,6 +19,7 @@ import ToolSuggestionsAdmin from './components/admin/ToolSuggestionsAdmin';
 import AutosoftDashboard from './components/admin/AutosoftDashboard';
 import TwoFASetup from './components/admin/TwoFASetup';
 import TwoFALogin from './components/admin/TwoFALogin';
+import SimpleAdminLogin from './components/admin/SimpleAdminLogin';
 import AdminNavBar from './components/admin/AdminNavBar';
 import ExitFeedback from './components/ExitFeedback';
 
