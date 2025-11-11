@@ -925,6 +925,109 @@ async def delete_tool_suggestion(suggestion_id: str, current_admin: User = Depen
     
     return {"message": "Tool suggestion deleted successfully"}
 
+# ==================== AUTOSOFT ROUTES ====================
+@api_router.post("/autosoft/scan")
+async def scan_device(
+    scan_request: DeviceScanRequest,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Scan a device barcode - first scan registers, second scan returns device for checklist"""
+    barcode = scan_request.barcode.strip()
+    
+    # Check if device exists
+    existing_device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
+    
+    if existing_device:
+        # Second scan - return device info for checklist
+        return {
+            "action": "open_checklist",
+            "device": existing_device
+        }
+    else:
+        # First scan - register device
+        new_device = ReplacementDevice(
+            barcode=barcode,
+            status="technical_check",
+            scans=[datetime.now(timezone.utc).isoformat()]
+        )
+        
+        doc = new_device.model_dump()
+        await db.replacement_devices.insert_one(doc)
+        
+        return {
+            "action": "registered",
+            "device": new_device.model_dump()
+        }
+
+@api_router.get("/autosoft/devices")
+async def get_all_devices(
+    status: Optional[str] = None,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Get all replacement devices"""
+    query = {}
+    if status:
+        query["status"] = status
+    
+    devices = await db.replacement_devices.find(query, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    return {"devices": devices}
+
+@api_router.get("/autosoft/device/{barcode}")
+async def get_device(
+    barcode: str,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Get specific device by barcode"""
+    device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
+    
+    if not device:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    return device
+
+@api_router.put("/autosoft/device/{barcode}/checklist")
+async def update_device_checklist(
+    barcode: str,
+    checklist_data: ChecklistUpdateRequest,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Update device checklist and mark as checked"""
+    # Add second scan timestamp
+    result = await db.replacement_devices.update_one(
+        {"barcode": barcode},
+        {
+            "$set": {
+                "status": "checked",
+                "checklist": checklist_data.checklist.model_dump(),
+                "checked_by": current_admin.username,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            },
+            "$push": {
+                "scans": datetime.now(timezone.utc).isoformat()
+            }
+        }
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    # Get updated device
+    updated_device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
+    return updated_device
+
+@api_router.delete("/autosoft/device/{barcode}")
+async def delete_device(
+    barcode: str,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Delete a device"""
+    result = await db.replacement_devices.delete_one({"barcode": barcode})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    return {"message": "Device deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
