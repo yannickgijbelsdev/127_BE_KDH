@@ -114,12 +114,72 @@ user_problem_statement: |
   - Review Pexels content queries
 
 backend:
-  - task: "Public Tool Status API - GET /api/tools"
+  - task: "Admin Login API - POST /api/admin/login"
     implemented: true
     working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Admin login working with credentials yannick@radiogroep.be / admin. Returns JWT token and user data. Confirmed with curl test returning 200 OK."
+
+  - task: "Autosoft Device Scan API - POST /api/autosoft/scan"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint for scanning device barcodes. First scan registers device as 'On technical service', second scan opens checklist. Requires JWT authentication."
+
+  - task: "Autosoft Get Devices API - GET /api/autosoft/devices"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint to fetch all devices. Returns list of devices with barcode, status, checklist, etc. Requires JWT authentication."
+
+  - task: "Autosoft Update Checklist API - PUT /api/autosoft/device/{barcode}/checklist"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint to update device checklist with damage status, Windows version, charger, image restoration, data wipe, and notes. Requires JWT authentication."
+
+  - task: "Autosoft Delete Device API - DELETE /api/autosoft/device/{barcode}"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Endpoint to delete a device from the system. Requires JWT authentication."
+
+  - task: "Public Tool Status API - GET /api/tools"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
     needs_retesting: false
     status_history:
       - working: "NA"
