@@ -26,6 +26,10 @@ SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'your-secret-key-change-in-product
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
 
+# 2FA Configuration
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@127.be')
+TOTP_SECRET = os.environ.get('TOTP_SECRET', '')
+
 security = HTTPBearer()
 
 # MongoDB connection
