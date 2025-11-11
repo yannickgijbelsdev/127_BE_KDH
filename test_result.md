@@ -103,9 +103,15 @@
 #====================================================================================================
 
 user_problem_statement: |
-  Implement the "disable" feature in the admin dashboard so that:
-  - Disabled tools are hidden from the landing page
-  - Accessing a disabled tool directly via URL shows "Sorry, this tool is offline" message
+  Fixed admin login 401 error and Autosoft dashboard authentication issue.
+  - Admin login was working but user was using wrong email (admin@127.be instead of yannick@radiogroep.be)
+  - Fixed AutosoftDashboard.jsx token key from 'adminToken' to 'admin_token' (4 occurrences)
+  - Autosoft Replacement Device Management System is now accessible and working
+  
+  Remaining tasks:
+  - Error Boundary Implementation
+  - Complete language switcher integration for remaining admin screens
+  - Review Pexels content queries
 
 backend:
   - task: "Public Tool Status API - GET /api/tools"
