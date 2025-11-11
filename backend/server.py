@@ -280,6 +280,104 @@ async def get_status_checks():
 
 # ==================== ADMIN AUTH ROUTES ====================
 
+# New 2FA-only login models
+class TwoFALoginRequest(BaseModel):
+    email: str
+    totp_code: str
+
+@api_router.post("/admin/2fa-login", response_model=Token)
+async def admin_2fa_login(credentials: TwoFALoginRequest):
+    """Login with email + TOTP code only (no password)"""
+    # Check if email matches admin email
+    if credentials.email.lower() != ADMIN_EMAIL.lower():
+        raise HTTPException(status_code=401, detail="Invalid email")
+    
+    # Check if TOTP secret is configured
+    if not TOTP_SECRET:
+        raise HTTPException(status_code=500, detail="2FA not configured. Please run setup first.")
+    
+    # Verify TOTP code
+    totp = pyotp.TOTP(TOTP_SECRET)
+    if not totp.verify(credentials.totp_code, valid_window=1):
+        raise HTTPException(status_code=401, detail="Invalid 2FA code")
+    
+    # Create token
+    access_token = create_access_token({"sub": "admin", "email": ADMIN_EMAIL})
+    
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": {
+            "id": "admin",
+            "email": ADMIN_EMAIL,
+            "username": "Admin",
+            "role": "admin"
+        }
+    }
+
+@api_router.get("/admin/2fa-setup-status")
+async def check_2fa_setup_status():
+    """Check if 2FA is already configured"""
+    return {
+        "is_configured": bool(TOTP_SECRET),
+        "admin_email": ADMIN_EMAIL
+    }
+
+@api_router.post("/admin/2fa-setup")
+async def setup_2fa():
+    """Generate TOTP secret and QR code for initial setup"""
+    # Generate new secret if not exists
+    secret = TOTP_SECRET if TOTP_SECRET else pyotp.random_base32()
+    
+    # Generate QR code URI
+    totp = pyotp.TOTP(secret)
+    provisioning_uri = totp.provisioning_uri(
+        name=ADMIN_EMAIL,
+        issuer_name="127 | Yannick Tools Admin"
+    )
+    
+    # Generate QR code image
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(provisioning_uri)
+    qr.make(fit=True)
+    
+    img = qr.make_image(fill_color="black", back_color="white")
+    
+    # Convert to bytes
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    img_byte_arr.seek(0)
+    
+    return {
+        "secret": secret,
+        "qr_code_uri": provisioning_uri,
+        "message": "Scan QR code with authenticator app, then save secret to .env file as TOTP_SECRET"
+    }
+
+@api_router.get("/admin/2fa-qr-code")
+async def get_2fa_qr_code():
+    """Get QR code image for 2FA setup"""
+    if not TOTP_SECRET:
+        raise HTTPException(status_code=400, detail="TOTP secret not configured")
+    
+    totp = pyotp.TOTP(TOTP_SECRET)
+    provisioning_uri = totp.provisioning_uri(
+        name=ADMIN_EMAIL,
+        issuer_name="127 | Yannick Tools Admin"
+    )
+    
+    # Generate QR code
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(provisioning_uri)
+    qr.make(fit=True)
+    
+    img = qr.make_image(fill_color="black", back_color="white")
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    img_byte_arr.seek(0)
+    
+    return StreamingResponse(img_byte_arr, media_type="image/png")
+
 @api_router.post("/admin/login", response_model=Token)
 async def admin_login(credentials: UserLogin):
     user = await db.users.find_one({"email": credentials.email}, {"_id": 0})
