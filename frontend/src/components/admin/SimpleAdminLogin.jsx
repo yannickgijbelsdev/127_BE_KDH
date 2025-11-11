@@ -41,59 +41,20 @@ const SimpleAdminLogin = () => {
 
         {/* Login Form */}
         <div className="bg-[#303134] rounded-lg p-8">
-          <form onSubmit={handleLogin} className="space-y-6">
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="yannick@radiogroep.be"
-                  required
-                  className="w-full pl-10 pr-4 py-3 bg-[#202124] border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-                />
-              </div>
-            </div>
-
-            {/* Password */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Wachtwoord
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                  className="w-full pl-10 pr-4 py-3 bg-[#202124] border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
-                />
-              </div>
-            </div>
-
-            {/* Error */}
-            {error && (
-              <div className="bg-red-900 bg-opacity-20 border border-red-700 rounded-lg p-3 text-red-400 text-sm">
-                {error}
-              </div>
-            )}
-
-            {/* Submit */}
+          <div className="text-center">
+            <h2 className="text-xl text-white mb-6">Welkom terug, Yannick!</h2>
+            
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-lg font-medium text-white transition-colors"
+              onClick={handleDirectLogin}
+              className="w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium text-white transition-colors text-lg"
             >
-              {loading ? 'Inloggen...' : 'Inloggen'}
+              Inloggen als Admin
             </button>
-          </form>
+            
+            <p className="text-gray-500 text-sm mt-4">
+              Klik om toegang te krijgen tot het admin dashboard
+            </p>
+          </div>
         </div>
       </div>
     </div>
