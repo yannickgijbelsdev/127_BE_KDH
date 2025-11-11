@@ -207,6 +207,33 @@ async def get_current_admin(current_user: User = Depends(get_current_user)):
         raise HTTPException(status_code=403, detail="Not authorized")
     return current_user
 
+# ==================== AUTOSOFT MODELS ====================
+class ReplacementDeviceChecklist(BaseModel):
+    no_damage: bool = False
+    windows_version: Optional[str] = None  # "win10_22h2", "win11_23h2", "win11_24h2", "win11_25h2"
+    charger_included: bool = False
+    image_restored: bool = False
+    customer_data_wiped: bool = False
+    notes: str = ""
+
+class ReplacementDevice(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    barcode: str
+    status: str = "technical_check"  # "technical_check", "checked"
+    scans: List[str] = Field(default_factory=list)  # ISO datetime strings
+    checklist: Optional[ReplacementDeviceChecklist] = None
+    checked_by: Optional[str] = None
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class DeviceScanRequest(BaseModel):
+    barcode: str
+
+class ChecklistUpdateRequest(BaseModel):
+    checklist: ReplacementDeviceChecklist
+
 # Initialize default admin on startup
 async def create_default_admin():
     # Check if ANY admin user exists
