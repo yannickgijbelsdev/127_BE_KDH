@@ -15,15 +15,21 @@ const SimpleAdminLogin = () => {
     setLoading(true);
 
     // Trim spaces and check
-    const cleanEmail = email.trim();
+    const cleanEmail = email.trim().toLowerCase();
     const cleanPassword = password.trim();
     
-    console.log('Login attempt:', { cleanEmail, cleanPassword });
-    console.log('Expected:', { email: 'yannick@radiogroep.be', password: 'KYLovie13monx' });
-    console.log('Match:', cleanEmail === 'yannick@radiogroep.be', cleanPassword === 'KYLovie13monx');
+    const expectedEmail = 'yannick@radiogroep.be';
+    const expectedPassword = 'KYLovie13monx';
+    
+    console.log('Entered:', { cleanEmail, cleanPassword });
+    console.log('Expected:', { expectedEmail, expectedPassword });
+    console.log('Email match:', cleanEmail === expectedEmail);
+    console.log('Password match:', cleanPassword === expectedPassword);
+    console.log('Password chars:', Array.from(cleanPassword).map((c, i) => `${i}:${c}`));
+    console.log('Expected chars:', Array.from(expectedPassword).map((c, i) => `${i}:${c}`));
 
     // Simple hardcoded check
-    if (cleanEmail === 'yannick@radiogroep.be' && cleanPassword === 'KYLovie13monx') {
+    if (cleanEmail === expectedEmail && cleanPassword === expectedPassword) {
       // Create a simple token
       const token = btoa(JSON.stringify({
         email: cleanEmail,
@@ -44,7 +50,7 @@ const SimpleAdminLogin = () => {
         window.location.href = '/autosoft';
       }, 100);
     } else {
-      setError(`Ongeldige email of wachtwoord (Email: ${cleanEmail}, Pass length: ${cleanPassword.length})`);
+      setError(`Login failed. Check console for details.`);
       setLoading(false);
     }
   };
