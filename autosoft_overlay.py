@@ -247,8 +247,11 @@ class AutosoftOverlay:
                 data = response.json()
                 
                 # Update UI with fetched data
-                self.device_type_label.config(text=data.get('device_type', 'Onbekend'))
-                self.barcode_label.config(text=data.get('barcode', 'N/A'))
+                device_type = data.get('device_type', 'Onbekend')
+                barcode = data.get('barcode', 'N/A')
+                
+                self.device_type_label.config(text=f"{self.device_type_label.label_text} {device_type}")
+                self.barcode_label.config(text=f"{self.barcode_label.label_text} {barcode}")
                 
                 # Last check date
                 if data.get('last_check_date'):
