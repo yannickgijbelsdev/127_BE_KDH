@@ -163,9 +163,10 @@ const AutosoftDashboard = () => {
   const handleChecklistSubmit = async () => {
     if (!selectedDevice) return;
 
-    // First update device type if changed
-    if (deviceType && deviceType !== selectedDevice.device_type) {
-      await handleUpdateDeviceType();
+    // First update device info if changed
+    if ((deviceType && deviceType !== selectedDevice.device_type) || 
+        (serialNumber && serialNumber !== selectedDevice.serial_number)) {
+      await handleUpdateDeviceInfo();
     }
 
     try {
