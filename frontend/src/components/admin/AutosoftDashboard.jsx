@@ -382,42 +382,42 @@ const AutosoftDashboard = () => {
               <tbody>
                 <tr>
                   <td>Zonder schade teruggekomen</td>
-                  <td style="text-align: center;" class="${checklist.no_damage ? 'status-ok' : 'status-nok'}">
-                    ${checklist.no_damage ? '✓ JA' : '✗ NEE'}
+                  <td style="text-align: center;" class="${checklistToPrint.no_damage ? 'status-ok' : 'status-nok'}">
+                    ${checklistToPrint.no_damage ? '✓ JA' : '✗ NEE'}
                   </td>
                 </tr>
                 <tr>
                   <td>Windows versie</td>
-                  <td style="text-align: center;" class="${checklist.windows_version ? 'status-ok' : 'status-nok'}">
-                    ${checklist.windows_version || '✗ Niet ingevuld'}
+                  <td style="text-align: center;" class="${checklistToPrint.windows_version ? 'status-ok' : 'status-nok'}">
+                    ${checklistToPrint.windows_version || '✗ Niet ingevuld'}
                   </td>
                 </tr>
                 <tr>
                   <td>Lader erbij</td>
-                  <td style="text-align: center;" class="${checklist.charger_included ? 'status-ok' : 'status-nok'}">
-                    ${checklist.charger_included ? '✓ JA' : '✗ NEE'}
+                  <td style="text-align: center;" class="${checklistToPrint.charger_included ? 'status-ok' : 'status-nok'}">
+                    ${checklistToPrint.charger_included ? '✓ JA' : '✗ NEE'}
                   </td>
                 </tr>
                 <tr>
                   <td>Image terug gezet</td>
-                  <td style="text-align: center;" class="${checklist.image_restored ? 'status-ok' : 'status-nok'}">
-                    ${checklist.image_restored ? '✓ JA' : '✗ NEE'}
+                  <td style="text-align: center;" class="${checklistToPrint.image_restored ? 'status-ok' : 'status-nok'}">
+                    ${checklistToPrint.image_restored ? '✓ JA' : '✗ NEE'}
                   </td>
                 </tr>
                 <tr>
                   <td>Klant data gewist</td>
-                  <td style="text-align: center;" class="${checklist.customer_data_wiped ? 'status-ok' : 'status-nok'}">
-                    ${checklist.customer_data_wiped ? '✓ JA' : '✗ NEE'}
+                  <td style="text-align: center;" class="${checklistToPrint.customer_data_wiped ? 'status-ok' : 'status-nok'}">
+                    ${checklistToPrint.customer_data_wiped ? '✓ JA' : '✗ NEE'}
                   </td>
                 </tr>
               </tbody>
             </table>
 
             <!-- Notes Section -->
-            ${checklist.notes ? `
+            ${checklistToPrint.notes ? `
               <div class="notes-section">
                 <h3>Notities:</h3>
-                <p>${checklist.notes}</p>
+                <p>${checklistToPrint.notes}</p>
               </div>
             ` : ''}
 
