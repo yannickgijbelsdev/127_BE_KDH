@@ -395,6 +395,7 @@ const AutosoftDashboard = () => {
             <!-- Document Title -->
             <div class="document-title">Checklist # ${selectedDevice.barcode}</div>
             ${selectedDevice.device_type ? `<p style="color: #000; font-size: 12pt; margin-top: 10px; font-weight: bold;">Type: ${selectedDevice.device_type}</p>` : ''}
+            ${selectedDevice.serial_number ? `<p style="color: #666; font-size: 10pt; margin-top: 5px;">Serienummer: ${selectedDevice.serial_number}</p>` : ''}
 
             <!-- Document Info -->
             <div class="document-info">
