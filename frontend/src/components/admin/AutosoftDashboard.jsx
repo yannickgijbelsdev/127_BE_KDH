@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Printer, CheckCircle, Clock, Trash2 } from 'lucide-react';
+import { Search, Printer, CheckCircle, Clock, Trash2, History, Plus, Laptop } from 'lucide-react';
 
 const AutosoftDashboard = () => {
   const [barcode, setBarcode] = useState('');
@@ -9,6 +9,9 @@ const AutosoftDashboard = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [showChecklist, setShowChecklist] = useState(false);
+  const [showDeviceOptions, setShowDeviceOptions] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [deviceType, setDeviceType] = useState('');
   
   // Checklist state
   const [checklist, setChecklist] = useState({
