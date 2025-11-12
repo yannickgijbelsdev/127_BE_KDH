@@ -234,7 +234,8 @@ async def get_current_admin(current_user: User = Depends(get_current_user)):
 # ==================== AUTOSOFT MODELS ====================
 class ReplacementDeviceChecklist(BaseModel):
     no_damage: bool = False
-    windows_version: Optional[str] = None  # "10 22H2", "11 23H2", "11 24H2", "11 25H2"
+    device_platform: Optional[str] = None  # "Windows", "macOS", "Android", "iOS"
+    os_version: Optional[str] = None  # Version based on platform
     charger_included: bool = False
     image_restored: bool = False
     customer_data_wiped: bool = False
@@ -247,7 +248,8 @@ class ReplacementDevice(BaseModel):
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     barcode: str
-    device_type: Optional[str] = None  # e.g., "Dell Latitude 5420", "HP EliteBook 840 G8"
+    serial_number: Optional[str] = None  # Device serial number
+    device_type: Optional[str] = None  # e.g., "Dell Latitude 5420", "HP EliteBook 840 G8", "iPhone 14 Pro"
     status: str = "technical_check"  # "technical_check", "checked"
     scans: List[str] = Field(default_factory=list)  # ISO datetime strings
     checklists: List[ReplacementDeviceChecklist] = Field(default_factory=list)  # Array of all checklists
