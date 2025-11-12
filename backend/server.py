@@ -234,21 +234,23 @@ async def get_current_admin(current_user: User = Depends(get_current_user)):
 # ==================== AUTOSOFT MODELS ====================
 class ReplacementDeviceChecklist(BaseModel):
     no_damage: bool = False
-    windows_version: Optional[str] = None  # "win10_22h2", "win11_23h2", "win11_24h2", "win11_25h2"
+    windows_version: Optional[str] = None  # "10 22H2", "11 23H2", "11 24H2", "11 25H2"
     charger_included: bool = False
     image_restored: bool = False
     customer_data_wiped: bool = False
     notes: str = ""
+    checked_by: Optional[str] = None
+    checked_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 class ReplacementDevice(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     barcode: str
+    device_type: Optional[str] = None  # e.g., "Dell Latitude 5420", "HP EliteBook 840 G8"
     status: str = "technical_check"  # "technical_check", "checked"
     scans: List[str] = Field(default_factory=list)  # ISO datetime strings
-    checklist: Optional[ReplacementDeviceChecklist] = None
-    checked_by: Optional[str] = None
+    checklists: List[ReplacementDeviceChecklist] = Field(default_factory=list)  # Array of all checklists
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
