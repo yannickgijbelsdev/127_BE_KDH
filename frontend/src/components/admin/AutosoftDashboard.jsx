@@ -571,29 +571,37 @@ const AutosoftDashboard = () => {
     }, 250);
   };
 
-  const handleDelete = async (barcode) => {
-    if (!confirm('Weet je zeker dat je dit toestel wilt verwijderen?')) return;
+  const handleDelete = (barcode) => {
+    setConfirmDialog({
+      title: 'Toestel verwijderen',
+      message: `Weet je zeker dat je toestel ${barcode} wilt verwijderen? Deze actie kan niet ongedaan gemaakt worden.`,
+      onConfirm: async () => {
+        setConfirmDialog(null);
+        try {
+          const token = localStorage.getItem('admin_token');
+          const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/api/autosoft/device/${barcode}`,
+            {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            }
+          );
 
-    try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/autosoft/device/${barcode}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`
+          if (response.ok) {
+            showNotification('success', 'Toestel succesvol verwijderd');
+            fetchDevices();
           }
+        } catch (error) {
+          console.error('Error deleting device:', error);
+          showNotification('error', 'Fout bij verwijderen');
         }
-      );
-
-      if (response.ok) {
-        showNotification('success', 'Toestel succesvol verwijderd');
-        fetchDevices();
+      },
+      onCancel: () => {
+        setConfirmDialog(null);
       }
-    } catch (error) {
-      console.error('Error deleting device:', error);
-      showNotification('error', 'Fout bij verwijderen');
-    }
+    });
   };
 
   const formatDate = (isoString) => {
