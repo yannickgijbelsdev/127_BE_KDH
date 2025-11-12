@@ -100,8 +100,58 @@ const AutosoftDashboard = () => {
     }
   };
 
+  const handleNewCheck = () => {
+    setShowDeviceOptions(false);
+    setShowChecklist(true);
+    setChecklist({
+      no_damage: false,
+      windows_version: '',
+      charger_included: false,
+      image_restored: false,
+      customer_data_wiped: false,
+      notes: ''
+    });
+  };
+
+  const handleViewHistory = () => {
+    setShowDeviceOptions(false);
+    setShowHistory(true);
+  };
+
+  const handleUpdateDeviceType = async () => {
+    if (!selectedDevice || !deviceType.trim()) return;
+
+    try {
+      const token = localStorage.getItem('admin_token');
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/autosoft/device/${selectedDevice.barcode}/type`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ device_type: deviceType })
+        }
+      );
+
+      if (response.ok) {
+        const updatedDevice = await response.json();
+        setSelectedDevice(updatedDevice);
+        fetchDevices();
+      }
+    } catch (error) {
+      console.error('Error updating device type:', error);
+    }
+  };
+
   const handleChecklistSubmit = async () => {
     if (!selectedDevice) return;
+
+    // First update device type if changed
+    if (deviceType && deviceType !== selectedDevice.device_type) {
+      await handleUpdateDeviceType();
+    }
 
     try {
       const token = localStorage.getItem('admin_token');
@@ -121,6 +171,7 @@ const AutosoftDashboard = () => {
         alert('Checklist opgeslagen!');
         setShowChecklist(false);
         setSelectedDevice(null);
+        setDeviceType('');
         setChecklist({
           no_damage: false,
           windows_version: '',
