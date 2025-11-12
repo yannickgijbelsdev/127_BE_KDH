@@ -974,14 +974,20 @@ const AutosoftDashboard = () => {
                   />
                 </div>
 
-                {/* Serial Number */}
+                {/* Serial Number / IMEI */}
                 <div className="p-3 bg-[#202124] rounded-lg">
-                  <label className="block text-white mb-2">Serienummer:</label>
+                  <label className="block text-white mb-2">
+                    {getSerialLabel(checklist.device_platform)}:
+                  </label>
                   <input
                     type="text"
                     value={serialNumber}
                     onChange={(e) => setSerialNumber(e.target.value)}
-                    placeholder="Serienummer van het toestel..."
+                    placeholder={
+                      checklist.device_platform === 'iOS' || checklist.device_platform === 'Android' 
+                        ? 'IMEI nummer van het toestel...' 
+                        : 'Serienummer van het toestel...'
+                    }
                     className="w-full px-4 py-2 bg-[#303134] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
