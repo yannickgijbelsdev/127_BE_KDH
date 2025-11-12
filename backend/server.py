@@ -809,19 +809,21 @@ async def get_analytics_stats(current_admin: User = Depends(get_current_admin)):
     # Total events
     total_events = await db.analytics.count_documents({})
     
-    # Events by tool
+    # Events by tool (limited to top 100)
     pipeline = [
         {"$group": {"_id": "$tool_id", "count": {"$sum": 1}, "tool_name": {"$first": "$tool_name"}}},
-        {"$sort": {"count": -1}}
+        {"$sort": {"count": -1}},
+        {"$limit": 100}
     ]
-    events_by_tool = await db.analytics.aggregate(pipeline).to_list(None)
+    events_by_tool = await db.analytics.aggregate(pipeline).to_list(100)
     
-    # Events by type
+    # Events by type (limited to top 50)
     pipeline_type = [
         {"$group": {"_id": "$event_type", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
+        {"$sort": {"count": -1}},
+        {"$limit": 50}
     ]
-    events_by_type = await db.analytics.aggregate(pipeline_type).to_list(None)
+    events_by_type = await db.analytics.aggregate(pipeline_type).to_list(50)
     
     # Unique visitors (approximation based on unique sessions)
     unique_visitors = await db.analytics.distinct("event_data.session_id")
