@@ -7,6 +7,7 @@ const AutosoftDashboard = () => {
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [platformFilter, setPlatformFilter] = useState('all');
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [showChecklist, setShowChecklist] = useState(false);
   const [showDeviceOptions, setShowDeviceOptions] = useState(false);
