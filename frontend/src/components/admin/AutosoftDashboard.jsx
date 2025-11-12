@@ -295,13 +295,17 @@ const AutosoftDashboard = () => {
               font-size: 10pt;
             }
             table thead {
-              background-color: #2596be;
-              color: white;
+              background-color: #2596be !important;
+              color: white !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
             }
             table th {
               padding: 10px;
               text-align: left;
               font-weight: bold;
+              background-color: #2596be !important;
+              color: white !important;
             }
             table td {
               padding: 10px;
