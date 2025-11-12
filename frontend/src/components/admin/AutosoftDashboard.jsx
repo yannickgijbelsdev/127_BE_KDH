@@ -455,7 +455,7 @@ const AutosoftDashboard = () => {
                 <p style="margin: 5px 0;"><strong>Type:</strong> ${selectedDevice.device_type}</p>
               ` : ''}
               ${selectedDevice.serial_number ? `
-                <p style="margin: 5px 0;"><strong>Serienummer:</strong> ${selectedDevice.serial_number}</p>
+                <p style="margin: 5px 0;"><strong>${checklistToPrint.device_platform === 'iOS' || checklistToPrint.device_platform === 'Android' ? 'IMEI nummer' : 'Serienummer'}:</strong> ${selectedDevice.serial_number}</p>
               ` : ''}
               ${checklistToPrint.device_platform && checklistToPrint.os_version ? `
                 <p style="margin: 5px 0;"><strong>Platform:</strong> ${checklistToPrint.device_platform} - ${checklistToPrint.os_version}</p>
