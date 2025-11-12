@@ -613,25 +613,29 @@ const AutosoftDashboard = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <div className="flex gap-2">
-                        {device.status === 'checked' && (
-                          <button
-                            onClick={() => {
-                              setSelectedDevice(device);
-                              setChecklist(device.checklist || {
-                                no_damage: false,
-                                windows_version: '',
-                                charger_included: false,
-                                image_restored: false,
-                                customer_data_wiped: false,
-                                notes: ''
-                              });
-                              handlePrint();
-                            }}
-                            className="p-2 bg-blue-600 hover:bg-blue-700 rounded transition-colors"
-                            title="Print checklist"
-                          >
-                            <Printer className="w-4 h-4" />
-                          </button>
+                        {device.checklists && device.checklists.length > 0 && (
+                          <>
+                            <button
+                              onClick={() => {
+                                setSelectedDevice(device);
+                                setShowHistory(true);
+                              }}
+                              className="p-2 bg-gray-600 hover:bg-gray-700 rounded transition-colors"
+                              title="Bekijk historie"
+                            >
+                              <History className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setSelectedDevice(device);
+                                handlePrint();
+                              }}
+                              className="p-2 bg-blue-600 hover:bg-blue-700 rounded transition-colors"
+                              title="Print laatste check"
+                            >
+                              <Printer className="w-4 h-4" />
+                            </button>
+                          </>
                         )}
                         <button
                           onClick={() => handleDelete(device.barcode)}
