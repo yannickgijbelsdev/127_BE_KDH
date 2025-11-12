@@ -933,8 +933,8 @@ async def get_feedback_keywords(current_admin: User = Depends(get_current_admin)
     import re
     from collections import Counter
     
-    # Get all feedback
-    all_feedback = await db.feedback.find({}, {"_id": 0}).to_list(None)
+    # Get all feedback (limited to 1000 most recent for performance)
+    all_feedback = await db.feedback.find({}, {"_id": 0}).sort("timestamp", -1).limit(1000).to_list(1000)
     
     if not all_feedback:
         return {
