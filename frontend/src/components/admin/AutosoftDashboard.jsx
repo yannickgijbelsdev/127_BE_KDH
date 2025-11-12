@@ -350,6 +350,12 @@ const AutosoftDashboard = () => {
                 type="text"
                 value={barcode}
                 onChange={(e) => setBarcode(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && barcode.trim()) {
+                    e.preventDefault();
+                    handleScan(e);
+                  }
+                }}
                 placeholder="Scan barcode..."
                 className="w-full pl-10 pr-4 py-3 bg-[#202124] border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
                 autoFocus
