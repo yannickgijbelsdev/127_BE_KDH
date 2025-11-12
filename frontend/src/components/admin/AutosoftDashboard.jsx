@@ -4,6 +4,7 @@ import { Search, Printer, CheckCircle, Clock, Trash2, History, Plus, Laptop, Mon
 const AutosoftDashboard = () => {
   const [barcode, setBarcode] = useState('');
   const [notification, setNotification] = useState(null); // { type: 'success'|'error'|'info', message: '' }
+  const [confirmDialog, setConfirmDialog] = useState(null); // { title, message, onConfirm, onCancel }
   const [devices, setDevices] = useState([]);
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [loading, setLoading] = useState(false);
