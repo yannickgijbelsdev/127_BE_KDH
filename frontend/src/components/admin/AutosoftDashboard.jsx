@@ -523,6 +523,26 @@ const AutosoftDashboard = () => {
               </tbody>
             </table>
 
+            <!-- Accessories Section -->
+            ${(checklistToPrint.device_platform === 'Windows' || checklistToPrint.device_platform === 'macOS') && 
+              (checklistToPrint.has_bag || checklistToPrint.other_accessories) ? `
+              <div style="margin: 20px 0;">
+                <h3 style="color: #000; font-size: 11pt; font-weight: bold; margin-bottom: 10px;">Accessoires:</h3>
+                ${checklistToPrint.has_bag ? '<p style="margin: 5px 0;">✓ Tas</p>' : ''}
+                ${checklistToPrint.other_accessories ? `<p style="margin: 5px 0;">• ${checklistToPrint.other_accessories}</p>` : ''}
+              </div>
+            ` : ''}
+            
+            ${(checklistToPrint.device_platform === 'iOS' || checklistToPrint.device_platform === 'Android') && 
+              (checklistToPrint.has_case || checklistToPrint.has_screen_protector || checklistToPrint.has_camera_protector) ? `
+              <div style="margin: 20px 0;">
+                <h3 style="color: #000; font-size: 11pt; font-weight: bold; margin-bottom: 10px;">Accessoires:</h3>
+                ${checklistToPrint.has_case ? '<p style="margin: 5px 0;">✓ Hoesje</p>' : ''}
+                ${checklistToPrint.has_screen_protector ? '<p style="margin: 5px 0;">✓ Screenprotector</p>' : ''}
+                ${checklistToPrint.has_camera_protector ? '<p style="margin: 5px 0;">✓ Camera beschermer</p>' : ''}
+              </div>
+            ` : ''}
+
             <!-- Notes Section -->
             ${checklistToPrint.notes ? `
               <div class="notes-section">
