@@ -34,8 +34,10 @@ const AdminLogin = ({ onLogin }) => {
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
 
+      // Parse response once
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
         if (data.detail === '2FA code required') {
           setNeeds2FA(true);
           setError('Voer je 2FA code in');
@@ -45,8 +47,6 @@ const AdminLogin = ({ onLogin }) => {
         setLoading(false);
         return;
       }
-
-      const data = await response.json();
 
       // Store token and user data
       try {
