@@ -1112,6 +1112,73 @@ const AutosoftDashboard = () => {
                   <span className="text-white">Alle klant data gewist</span>
                 </label>
 
+                {/* Laptop Accessories (Windows/macOS) */}
+                {(checklist.device_platform === 'Windows' || checklist.device_platform === 'macOS') && (
+                  <>
+                    <div className="p-3 bg-[#303134] rounded-lg border border-gray-600">
+                      <p className="text-white font-medium mb-3">Accessoires (Laptop)</p>
+                      
+                      <label className="flex items-center space-x-3 mb-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={checklist.has_bag}
+                          onChange={(e) => setChecklist({ ...checklist, has_bag: e.target.checked })}
+                          className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                        />
+                        <span className="text-white">Tas</span>
+                      </label>
+
+                      <div>
+                        <label className="block text-white mb-2 text-sm">Andere accessoires:</label>
+                        <input
+                          type="text"
+                          value={checklist.other_accessories}
+                          onChange={(e) => setChecklist({ ...checklist, other_accessories: e.target.value })}
+                          placeholder="Bijv. muis, toetsenbord, USB-C hub..."
+                          className="w-full px-3 py-2 bg-[#202124] border border-gray-600 rounded text-white text-sm focus:outline-none focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Mobile Accessories (iOS/Android) */}
+                {(checklist.device_platform === 'iOS' || checklist.device_platform === 'Android') && (
+                  <div className="p-3 bg-[#303134] rounded-lg border border-gray-600">
+                    <p className="text-white font-medium mb-3">Accessoires (Mobiel)</p>
+                    
+                    <label className="flex items-center space-x-3 mb-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={checklist.has_case}
+                        onChange={(e) => setChecklist({ ...checklist, has_case: e.target.checked })}
+                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-white">Hoesje</span>
+                    </label>
+
+                    <label className="flex items-center space-x-3 mb-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={checklist.has_screen_protector}
+                        onChange={(e) => setChecklist({ ...checklist, has_screen_protector: e.target.checked })}
+                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-white">Screenprotector</span>
+                    </label>
+
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={checklist.has_camera_protector}
+                        onChange={(e) => setChecklist({ ...checklist, has_camera_protector: e.target.checked })}
+                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-white">Camera beschermer</span>
+                    </label>
+                  </div>
+                )}
+
                 {/* Notes */}
                 <div className="p-3 bg-[#202124] rounded-lg">
                   <label className="block text-white mb-2">Notities:</label>
