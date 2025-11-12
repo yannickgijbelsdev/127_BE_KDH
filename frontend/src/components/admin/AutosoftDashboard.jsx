@@ -382,15 +382,18 @@ const AutosoftDashboard = () => {
             }
             .notes-section {
               margin: 20px 0;
-              padding: 15px;
-              background-color: #fffbf0;
-              border: 1px solid #ffd700;
-              border-radius: 3px;
+              padding: 0;
             }
             .notes-section h3 {
-              color: #cc8800;
+              color: #000;
               font-size: 11pt;
-              margin-bottom: 10px;
+              font-weight: bold;
+              margin-bottom: 8px;
+            }
+            .notes-section p {
+              color: #333;
+              font-size: 10pt;
+              line-height: 1.5;
             }
             .footer {
               margin-top: 40px;
