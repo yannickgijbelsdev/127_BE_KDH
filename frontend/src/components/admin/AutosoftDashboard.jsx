@@ -274,10 +274,12 @@ const AutosoftDashboard = () => {
               font-size: 10pt;
             }
             .document-title {
-              color: #2596be;
+              color: #2596be !important;
               font-size: 20pt;
               font-weight: bold;
               margin: 20px 0 10px 0;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
             }
             .document-info {
               display: flex;
