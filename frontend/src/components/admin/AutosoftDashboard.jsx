@@ -65,13 +65,26 @@ const AutosoftDashboard = () => {
   }, []);
 
   useEffect(() => {
-    // Filter devices based on status
-    if (statusFilter === 'all') {
-      setFilteredDevices(devices);
-    } else {
-      setFilteredDevices(devices.filter(d => d.status === statusFilter));
+    // Filter devices based on status and platform
+    let filtered = devices;
+    
+    // Apply status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(d => d.status === statusFilter);
     }
-  }, [devices, statusFilter]);
+    
+    // Apply platform filter
+    if (platformFilter !== 'all') {
+      filtered = filtered.filter(d => {
+        const latestCheck = d.checklists && d.checklists.length > 0 
+          ? d.checklists[d.checklists.length - 1] 
+          : null;
+        return latestCheck?.device_platform === platformFilter;
+      });
+    }
+    
+    setFilteredDevices(filtered);
+  }, [devices, statusFilter, platformFilter]);
 
   const fetchDevices = async () => {
     try {
