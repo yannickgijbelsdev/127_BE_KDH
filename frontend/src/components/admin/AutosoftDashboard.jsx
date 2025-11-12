@@ -147,145 +147,224 @@ const AutosoftDashboard = () => {
           <title>Autosoft Checklist - ${selectedDevice.barcode}</title>
           <style>
             @media print {
-              @page { margin: 20mm; }
+              @page { 
+                margin: 15mm; 
+                size: A4;
+              }
+            }
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
             }
             body {
               font-family: Arial, sans-serif;
-              padding: 20px;
-              max-width: 800px;
+              font-size: 11pt;
+              line-height: 1.4;
+              color: #000;
+            }
+            .container {
+              max-width: 210mm;
               margin: 0 auto;
+              padding: 15mm;
             }
             .header {
               display: flex;
-              align-items: center;
               justify-content: space-between;
-              margin-bottom: 30px;
-              padding-bottom: 20px;
-              border-bottom: 3px solid #1e90ff;
+              align-items: flex-start;
+              margin-bottom: 25px;
+              padding-bottom: 15px;
+              border-bottom: 2px solid #000;
             }
-            .header img {
-              max-width: 200px;
+            .header-left img {
+              max-width: 180px;
               height: auto;
             }
-            .header-text {
+            .header-right {
               text-align: right;
+              font-size: 9pt;
+              line-height: 1.6;
             }
-            h1 {
-              color: #1e90ff;
-              margin: 0;
-              font-size: 24px;
+            .header-right strong {
+              font-size: 10pt;
             }
-            .subtitle {
-              color: #666;
-              font-size: 14px;
-              margin-top: 5px;
-            }
-            .info-section {
+            .customer-info {
               margin: 20px 0;
-              background: #f0f8ff;
-              padding: 15px;
-              border-radius: 5px;
-              border-left: 4px solid #1e90ff;
+              padding: 10px 0;
             }
-            .info-section p {
-              margin: 8px 0;
+            .customer-info p {
+              margin: 3px 0;
+              font-size: 10pt;
             }
-            h2 {
+            .document-title {
               color: #1e90ff;
-              font-size: 18px;
-              margin-top: 30px;
-              margin-bottom: 15px;
+              font-size: 20pt;
+              font-weight: bold;
+              margin: 20px 0 10px 0;
             }
-            .checklist-item {
-              padding: 12px;
-              margin: 8px 0;
-              background: #f5f5f5;
-              border-left: 4px solid #ccc;
+            .document-info {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 20px;
+              font-size: 10pt;
+            }
+            .document-info-left, .document-info-right {
+              flex: 1;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 20px 0;
+              font-size: 10pt;
+            }
+            table thead {
+              background-color: #1e90ff;
+              color: white;
+            }
+            table th {
+              padding: 10px;
+              text-align: left;
+              font-weight: bold;
+            }
+            table td {
+              padding: 10px;
+              border-bottom: 1px solid #ddd;
+            }
+            table tbody tr:nth-child(even) {
+              background-color: #f9f9f9;
+            }
+            .status-ok {
+              color: #4CAF50;
+              font-weight: bold;
+            }
+            .status-nok {
+              color: #f44336;
+              font-weight: bold;
+            }
+            .notes-section {
+              margin: 20px 0;
+              padding: 15px;
+              background-color: #fffbf0;
+              border: 1px solid #ffd700;
               border-radius: 3px;
             }
-            .checked {
-              border-left-color: #4CAF50;
-              background: #f1f8f4;
-            }
-            .not-checked {
-              border-left-color: #f44336;
-              background: #fef5f5;
-            }
-            .notes {
-              margin-top: 20px;
-              padding: 15px;
-              background: #fff9e6;
-              border: 2px solid #ffd700;
-              border-radius: 5px;
-            }
-            .notes h3 {
+            .notes-section h3 {
               color: #cc8800;
-              margin-top: 0;
+              font-size: 11pt;
+              margin-bottom: 10px;
             }
             .footer {
               margin-top: 40px;
-              padding-top: 20px;
-              border-top: 2px solid #1e90ff;
-              font-size: 11px;
-              color: #666;
+              padding-top: 15px;
+              border-top: 2px solid #000;
               text-align: center;
+              font-size: 8pt;
+              line-height: 1.8;
+            }
+            .footer-divider {
+              margin: 5px 0;
             }
             @media print {
-              .footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
+              .container {
+                padding: 0;
               }
             }
           </style>
         </head>
         <body>
-          <div class="header">
-            <img src="https://customer-assets.emergentagent.com/job_pixel-diagnostics/artifacts/2r9adp9r_Autosoft%20IT%20Solutions%20BV.png" alt="Autosoft Logo" />
-            <div class="header-text">
-              <h1>Vervangtoestel Checklist</h1>
-              <div class="subtitle">Technische Controle Rapport</div>
+          <div class="container">
+            <!-- Header -->
+            <div class="header">
+              <div class="header-left">
+                <img src="https://customer-assets.emergentagent.com/job_pixel-diagnostics/artifacts/2r9adp9r_Autosoft%20IT%20Solutions%20BV.png" alt="Autosoft Logo" />
+              </div>
+              <div class="header-right">
+                <strong>Autosoft IT Solutions BV</strong><br>
+                Binnensingel 38, 3920 Lommel<br>
+                BTW: BE0476690068<br>
+                BELFIUS: BE47 7775 9649 2280<br>
+                BNP: BE25 0017 2567 7082
+              </div>
             </div>
-          </div>
-          
-          <div class="info-section">
-            <p><strong>Barcode:</strong> ${selectedDevice.barcode}</p>
-            <p><strong>Status:</strong> ${selectedDevice.status === 'checked' ? 'Gecontroleerd' : 'Op technische dienst'}</p>
-            <p><strong>Datum:</strong> ${new Date(selectedDevice.updated_at).toLocaleString('nl-NL')}</p>
-          </div>
 
-          <h2>Controle Checklist</h2>
-          
-          <div class="checklist-item ${checklist.no_damage ? 'checked' : 'not-checked'}">
-            <strong>Zonder schade teruggekomen:</strong> ${checklist.no_damage ? '✓ Ja' : '✗ Nee'}
-          </div>
-
-          <div class="checklist-item ${checklist.windows_version ? 'checked' : 'not-checked'}">
-            <strong>Windows versie:</strong> ${checklist.windows_version || 'Niet ingevuld'}
-          </div>
-
-          <div class="checklist-item ${checklist.charger_included ? 'checked' : 'not-checked'}">
-            <strong>Lader erbij:</strong> ${checklist.charger_included ? '✓ Ja' : '✗ Nee'}
-          </div>
-
-          <div class="checklist-item ${checklist.image_restored ? 'checked' : 'not-checked'}">
-            <strong>Image terug gezet:</strong> ${checklist.image_restored ? '✓ Ja' : '✗ Nee'}
-          </div>
-
-          <div class="checklist-item ${checklist.customer_data_wiped ? 'checked' : 'not-checked'}">
-            <strong>Klant data gewist:</strong> ${checklist.customer_data_wiped ? '✓ Ja' : '✗ Nee'}
-          </div>
-
-          ${checklist.notes ? `
-            <div class="notes">
-              <h3>Notities:</h3>
-              <p>${checklist.notes}</p>
+            <!-- Customer Info -->
+            <div class="customer-info">
+              <p><strong>Gijbels Yannick</strong></p>
+              <p>gijbels.yannick@ascit.be</p>
             </div>
-          ` : ''}
 
-          <div class="footer">
-            <p style="display:none;">Autosoft Computerwinkel - Vervangtoestellen Systeem</p>
-            <p>Geprint op: ${new Date().toLocaleString('nl-NL')}</p>
+            <!-- Document Title -->
+            <div class="document-title">Checklist # ${selectedDevice.barcode}</div>
+
+            <!-- Document Info -->
+            <div class="document-info">
+              <div class="document-info-left">
+                <p><strong>Datum:</strong><br>${new Date(selectedDevice.updated_at).toLocaleDateString('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+              </div>
+              <div class="document-info-right" style="text-align: right;">
+                <p><strong>Status:</strong><br>${selectedDevice.status === 'checked' ? 'Gecontroleerd' : 'Op technische dienst'}</p>
+              </div>
+            </div>
+
+            <!-- Checklist Table -->
+            <table>
+              <thead>
+                <tr>
+                  <th>CONTROLE PUNT</th>
+                  <th style="width: 150px; text-align: center;">STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Zonder schade teruggekomen</td>
+                  <td style="text-align: center;" class="${checklist.no_damage ? 'status-ok' : 'status-nok'}">
+                    ${checklist.no_damage ? '✓ JA' : '✗ NEE'}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Windows versie</td>
+                  <td style="text-align: center;" class="${checklist.windows_version ? 'status-ok' : 'status-nok'}">
+                    ${checklist.windows_version || '✗ Niet ingevuld'}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lader erbij</td>
+                  <td style="text-align: center;" class="${checklist.charger_included ? 'status-ok' : 'status-nok'}">
+                    ${checklist.charger_included ? '✓ JA' : '✗ NEE'}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Image terug gezet</td>
+                  <td style="text-align: center;" class="${checklist.image_restored ? 'status-ok' : 'status-nok'}">
+                    ${checklist.image_restored ? '✓ JA' : '✗ NEE'}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Klant data gewist</td>
+                  <td style="text-align: center;" class="${checklist.customer_data_wiped ? 'status-ok' : 'status-nok'}">
+                    ${checklist.customer_data_wiped ? '✓ JA' : '✗ NEE'}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Notes Section -->
+            ${checklist.notes ? `
+              <div class="notes-section">
+                <h3>Notities:</h3>
+                <p>${checklist.notes}</p>
+              </div>
+            ` : ''}
+
+            <!-- Footer -->
+            <div class="footer">
+              <div class="footer-divider">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+              <p><strong>B2C:</strong> 011 554513 | winkel@autosoft.be | www.autosoft.be</p>
+              <p><strong>B2B:</strong> 011 711030 | sales@ascit.pro | www.ascit.pro</p>
+              <div style="margin-top: 10px; font-size: 7pt;">
+                <p>Pagina: 1 / 1</p>
+              </div>
+            </div>
           </div>
         </body>
       </html>
