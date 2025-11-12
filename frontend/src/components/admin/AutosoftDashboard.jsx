@@ -192,6 +192,23 @@ const AutosoftDashboard = () => {
   const handlePrint = () => {
     if (!selectedDevice) return;
     
+    // Determine which checklist to print
+    let checklistToPrint = checklist;
+    let checkDate = new Date();
+    let checkedBy = '';
+    
+    if (selectedDevice.currentCheckIndex !== undefined && selectedDevice.checklists) {
+      // Printing from history
+      checklistToPrint = selectedDevice.checklists[selectedDevice.currentCheckIndex];
+      checkDate = new Date(checklistToPrint.checked_at);
+      checkedBy = checklistToPrint.checked_by || '';
+    } else if (selectedDevice.checklists && selectedDevice.checklists.length > 0) {
+      // Print most recent checklist
+      checklistToPrint = selectedDevice.checklists[selectedDevice.checklists.length - 1];
+      checkDate = new Date(checklistToPrint.checked_at);
+      checkedBy = checklistToPrint.checked_by || '';
+    }
+    
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
