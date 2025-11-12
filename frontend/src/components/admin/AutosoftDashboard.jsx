@@ -352,7 +352,6 @@ const AutosoftDashboard = () => {
 
             <!-- Footer -->
             <div class="footer">
-              <div class="footer-divider">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
               <p><strong>B2C:</strong> 011 554513 | winkel@autosoft.be | www.autosoft.be</p>
               <p><strong>B2B:</strong> 011 711030 | sales@ascit.pro | www.ascit.pro</p>
               <div style="margin-top: 10px; font-size: 7pt;">
