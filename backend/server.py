@@ -260,6 +260,9 @@ class DeviceScanRequest(BaseModel):
 class ChecklistUpdateRequest(BaseModel):
     checklist: ReplacementDeviceChecklist
 
+class DeviceTypeUpdateRequest(BaseModel):
+    device_type: str
+
 # Initialize default admin on startup
 async def create_default_admin():
     # Check if ANY admin user exists
