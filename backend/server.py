@@ -1208,6 +1208,34 @@ async def update_device_type(
     updated_device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
     return updated_device
 
+@api_router.get("/autosoft/device-info/{identifier}")
+async def get_device_info(identifier: str):
+    """Public endpoint to get device info by serial number or barcode (for overlay app)"""
+    # Try to find by serial_number first, then by barcode
+    device = await db.replacement_devices.find_one(
+        {"$or": [{"serial_number": identifier}, {"barcode": identifier}]},
+        {"_id": 0}
+    )
+    
+    if not device:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    # Get latest checklist
+    latest_check = None
+    if device.get("checklists") and len(device["checklists"]) > 0:
+        latest_check = device["checklists"][-1]
+    
+    return {
+        "barcode": device.get("barcode"),
+        "device_type": device.get("device_type"),
+        "serial_number": device.get("serial_number"),
+        "status": device.get("status"),
+        "last_check_date": latest_check.get("checked_at") if latest_check else None,
+        "platform": latest_check.get("device_platform") if latest_check else None,
+        "os_version": latest_check.get("os_version") if latest_check else None,
+        "checks_count": len(device.get("checklists", []))
+    }
+
 @api_router.delete("/autosoft/device/{barcode}")
 async def delete_device(
     barcode: str,
