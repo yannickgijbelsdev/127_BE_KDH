@@ -1147,6 +1147,29 @@ async def update_device_checklist(
     updated_device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
     return updated_device
 
+@api_router.put("/autosoft/device/{barcode}/type")
+async def update_device_type(
+    barcode: str,
+    type_data: DeviceTypeUpdateRequest,
+    current_admin: User = Depends(get_current_admin)
+):
+    """Update device type"""
+    result = await db.replacement_devices.update_one(
+        {"barcode": barcode},
+        {
+            "$set": {
+                "device_type": type_data.device_type,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }
+        }
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Device not found")
+    
+    updated_device = await db.replacement_devices.find_one({"barcode": barcode}, {"_id": 0})
+    return updated_device
+
 @api_router.delete("/autosoft/device/{barcode}")
 async def delete_device(
     barcode: str,
