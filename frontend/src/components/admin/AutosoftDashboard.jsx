@@ -841,16 +841,27 @@ const AutosoftDashboard = () => {
                 <div className="p-3 bg-[#202124] rounded-lg">
                   <label className="flex items-center gap-2 text-white mb-2">
                     <Laptop className="w-4 h-4" />
-                    Laptop Type:
+                    Toestel Type:
                   </label>
                   <input
                     type="text"
                     value={deviceType}
                     onChange={(e) => setDeviceType(e.target.value)}
-                    placeholder="Bijv. Dell Latitude 5420, HP EliteBook 840 G8..."
+                    placeholder="Bijv. Dell Latitude 5420, iPhone 14 Pro, Samsung Galaxy S23..."
                     className="w-full px-4 py-2 bg-[#303134] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
                   />
-                  <p className="text-gray-400 text-xs mt-1">Vul handmatig in of laat leeg</p>
+                </div>
+
+                {/* Serial Number */}
+                <div className="p-3 bg-[#202124] rounded-lg">
+                  <label className="block text-white mb-2">Serienummer:</label>
+                  <input
+                    type="text"
+                    value={serialNumber}
+                    onChange={(e) => setSerialNumber(e.target.value)}
+                    placeholder="Serienummer van het toestel..."
+                    className="w-full px-4 py-2 bg-[#303134] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
+                  />
                 </div>
 
                 {/* No Damage */}
@@ -864,21 +875,45 @@ const AutosoftDashboard = () => {
                   <span className="text-white">Zonder schade teruggekomen</span>
                 </label>
 
-                {/* Windows Version */}
+                {/* Platform Selection */}
                 <div className="p-3 bg-[#202124] rounded-lg">
-                  <label className="block text-white mb-2">Windows versie:</label>
+                  <label className="block text-white mb-2">Platform:</label>
                   <select
-                    value={checklist.windows_version}
-                    onChange={(e) => setChecklist({ ...checklist, windows_version: e.target.value })}
+                    value={checklist.device_platform}
+                    onChange={(e) => {
+                      setChecklist({ ...checklist, device_platform: e.target.value, os_version: '' });
+                    }}
                     className="w-full px-4 py-2 bg-[#303134] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
                   >
-                    <option value="">Selecteer versie...</option>
-                    <option value="Windows 10 22H2">Windows 10 22H2</option>
-                    <option value="Windows 11 23H2">Windows 11 23H2</option>
-                    <option value="Windows 11 24H2">Windows 11 24H2</option>
-                    <option value="Windows 11 25H2">Windows 11 25H2</option>
+                    <option value="">Selecteer platform...</option>
+                    <option value="Windows">Windows</option>
+                    <option value="macOS">macOS (Apple)</option>
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
                   </select>
                 </div>
+
+                {/* OS Version (conditional based on platform) */}
+                {checklist.device_platform && (
+                  <div className="p-3 bg-[#202124] rounded-lg">
+                    <label className="block text-white mb-2">
+                      {checklist.device_platform === 'Windows' ? 'Windows Versie:' :
+                       checklist.device_platform === 'macOS' ? 'macOS Versie:' :
+                       checklist.device_platform === 'Android' ? 'Android Versie:' :
+                       'iOS Versie:'}
+                    </label>
+                    <select
+                      value={checklist.os_version}
+                      onChange={(e) => setChecklist({ ...checklist, os_version: e.target.value })}
+                      className="w-full px-4 py-2 bg-[#303134] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
+                    >
+                      <option value="">Selecteer versie...</option>
+                      {osVersionOptions[checklist.device_platform]?.map(version => (
+                        <option key={version} value={version}>{version}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
                 {/* Charger Included */}
                 <label className="flex items-center space-x-3 p-3 bg-[#202124] rounded-lg cursor-pointer hover:bg-[#252629]">
