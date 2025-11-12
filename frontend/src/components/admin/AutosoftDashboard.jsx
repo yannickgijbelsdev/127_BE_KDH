@@ -337,10 +337,12 @@ const AutosoftDashboard = () => {
             .footer {
               margin-top: 40px;
               padding-top: 15px;
-              border-top: 2px solid #2596be;
+              border-top: 2px solid #2596be !important;
               text-align: center;
               font-size: 8pt;
               line-height: 1.8;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
             }
             .footer-divider {
               margin: 5px 0;
