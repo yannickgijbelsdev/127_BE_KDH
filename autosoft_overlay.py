@@ -14,16 +14,20 @@ import threading
 import time
 from datetime import datetime
 import sys
-import base64
 from io import BytesIO
+try:
+    from PIL import Image, ImageTk
+except ImportError:
+    print("PIL/Pillow niet geïnstalleerd. Installeer met: pip install Pillow")
+    sys.exit(1)
 
 # Configuration
 BACKEND_URL = "https://pixel-diagnostics.preview.emergentagent.com/api"
 UPDATE_INTERVAL = 300  # 5 minutes in seconds
 OVERLAY_WIDTH = 350
-OVERLAY_HEIGHT = 280
+OVERLAY_HEIGHT = 300
 
-# Autosoft logo base64 (simplified version - will be replaced with actual logo)
+# Autosoft logo URL
 AUTOSOFT_LOGO_URL = "https://customer-assets.emergentagent.com/job_pixel-diagnostics/artifacts/2r9adp9r_Autosoft%20IT%20Solutions%20BV.png"
 
 
