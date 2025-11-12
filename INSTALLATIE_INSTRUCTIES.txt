@@ -121,7 +121,7 @@ SNELLE TEST VAN BACKEND
 ═══════════════════════════════════════════════════════════════════════
 
 Test of de backend bereikbaar is via browser:
-https://pixel-diagnostics.preview.emergentagent.com/api/autosoft/device-info/TEST123
+https://autosoft-device.preview.emergentagent.com/api/autosoft/device-info/TEST123
 
 Je zou een JSON response moeten zien (404 is OK als TEST123 niet bestaat)
 

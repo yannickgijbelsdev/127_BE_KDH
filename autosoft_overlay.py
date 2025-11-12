@@ -22,7 +22,7 @@ except ImportError:
     sys.exit(1)
 
 # Configuration
-BACKEND_URL = "https://pixel-diagnostics.preview.emergentagent.com/api"
+BACKEND_URL = "https://autosoft-device.preview.emergentagent.com/api"
 UPDATE_INTERVAL = 300  # 5 minutes in seconds
 OVERLAY_WIDTH = 350
 OVERLAY_HEIGHT = 300

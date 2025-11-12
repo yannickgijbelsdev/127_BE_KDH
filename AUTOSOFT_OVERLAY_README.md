@@ -65,7 +65,7 @@ Edit `autosoft_overlay.py` om instellingen aan te passen:
 
 ```python
 # Backend URL
-BACKEND_URL = "https://pixel-diagnostics.preview.emergentagent.com/api"
+BACKEND_URL = "https://autosoft-device.preview.emergentagent.com/api"
 
 # Update interval (in seconden)
 UPDATE_INTERVAL = 300  # 5 minuten
