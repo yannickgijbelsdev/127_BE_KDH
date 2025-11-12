@@ -17,7 +17,11 @@ const AdminLogin = ({ onLogin }) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/login`, {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      console.log('Backend URL:', backendUrl);
+      console.log('Attempting login to:', `${backendUrl}/api/admin/login`);
+      
+      const response = await fetch(`${backendUrl}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -26,6 +30,9 @@ const AdminLogin = ({ onLogin }) => {
           totp_code: totpCode || null
         })
       });
+      
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       if (!response.ok) {
         const data = await response.json();
