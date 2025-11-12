@@ -1116,19 +1116,23 @@ async def update_device_checklist(
     checklist_data: ChecklistUpdateRequest,
     current_admin: User = Depends(get_current_admin)
 ):
-    """Update device checklist and mark as checked"""
-    # Add second scan timestamp
+    """Add new checklist to device history"""
+    # Prepare new checklist with metadata
+    new_checklist = checklist_data.checklist.model_dump()
+    new_checklist["checked_by"] = current_admin.username
+    new_checklist["checked_at"] = datetime.now(timezone.utc).isoformat()
+    
+    # Add checklist to array and update status
     result = await db.replacement_devices.update_one(
         {"barcode": barcode},
         {
             "$set": {
                 "status": "checked",
-                "checklist": checklist_data.checklist.model_dump(),
-                "checked_by": current_admin.username,
                 "updated_at": datetime.now(timezone.utc).isoformat()
             },
             "$push": {
-                "scans": datetime.now(timezone.utc).isoformat()
+                "scans": datetime.now(timezone.utc).isoformat(),
+                "checklists": new_checklist
             }
         }
     )
