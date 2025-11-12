@@ -1,0 +1,35 @@
+╔════════════════════════════════════════════════════════╗
+║  [AUTOSOFT LOGO]                                    × ║ <- Blauw (#2596be)
+╠════════════════════════════════════════════════════════╣
+║                                                        ║
+║  Device Type:   Dell Latitude 5420                    ║
+║                                                        ║
+║  Barcode:       LAP-WIN-001                           ║
+║                                                        ║
+║  Windows:       Windows 11 24H2                       ║
+║                                                        ║
+║  PC Naam:       LAPTOP-ABC123                         ║
+║                                                        ║
+║  IP Adres:      192.168.1.105                         ║
+║                                                        ║
+║  Laatste Check: 12-11-2025 02:45                      ║
+║                                                        ║
+╠════════════════════════════════════════════════════════╣
+║            Laatste update: 02:50                       ║ <- Status bar
+╚════════════════════════════════════════════════════════╝
+
+FEATURES:
+• Het echte Autosoft logo wordt getoond (niet plain text)
+• Logo wordt automatisch gedownload van de server
+• Geresized naar max 50px hoog (behoudt aspect ratio)
+• Fallback naar "AUTOSOFT" text als logo niet laadt
+• Draggable - klik en sleep de blauwe balk
+• Always on top - blijft zichtbaar boven andere windows
+• 95% opacity - semi-transparant
+• Auto-refresh elke 5 minuten
+
+LOGO DETAILS:
+• Bron: https://customer-assets.emergentagent.com/.../Autosoft%20IT%20Solutions%20BV.png
+• Cached in memory (niet opnieuw downloaden bij elke refresh)
+• High quality resize met PIL/Pillow (LANCZOS resampling)
+• Displayed met tkinter ImageTk.PhotoImage
