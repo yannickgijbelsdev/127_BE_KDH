@@ -197,7 +197,7 @@ const AutosoftDashboard = () => {
               font-size: 10pt;
             }
             .document-title {
-              color: #1e90ff;
+              color: #2596be;
               font-size: 20pt;
               font-weight: bold;
               margin: 20px 0 10px 0;
@@ -218,7 +218,7 @@ const AutosoftDashboard = () => {
               font-size: 10pt;
             }
             table thead {
-              background-color: #1e90ff;
+              background-color: #2596be;
               color: white;
             }
             table th {
