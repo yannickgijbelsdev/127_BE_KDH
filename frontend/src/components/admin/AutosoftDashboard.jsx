@@ -558,10 +558,13 @@ const AutosoftDashboard = () => {
                   Barcode
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Type
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Gecontroleerd door
+                  Checks
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                   Laatste update
@@ -574,7 +577,7 @@ const AutosoftDashboard = () => {
             <tbody className="divide-y divide-gray-700">
               {filteredDevices.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="px-6 py-8 text-center text-gray-400">
+                  <td colSpan="6" className="px-6 py-8 text-center text-gray-400">
                     Geen toestellen gevonden
                   </td>
                 </tr>
@@ -583,6 +586,9 @@ const AutosoftDashboard = () => {
                   <tr key={device.id} className="hover:bg-[#3c4043]">
                     <td className="px-6 py-4 whitespace-nowrap font-mono text-sm">
                       {device.barcode}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-300">
+                      {device.device_type || <span className="text-gray-500 italic">Niet ingevuld</span>}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {device.status === 'checked' ? (
