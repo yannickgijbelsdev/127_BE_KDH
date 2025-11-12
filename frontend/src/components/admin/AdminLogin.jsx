@@ -75,7 +75,12 @@ const AdminLogin = ({ onLogin }) => {
       navigate('/localhost/dashboard');
     } catch (err) {
       console.error('Login error:', err);
-      setError('Netwerkfout. Controleer je verbinding en probeer opnieuw.');
+      console.error('Error details:', {
+        message: err.message,
+        name: err.name,
+        stack: err.stack
+      });
+      setError(`Netwerkfout: ${err.message}. Controleer je verbinding en probeer opnieuw.`);
       setLoading(false);
     }
   };
