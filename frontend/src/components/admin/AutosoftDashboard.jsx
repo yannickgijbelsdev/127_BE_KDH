@@ -129,20 +129,24 @@ const AutosoftDashboard = () => {
     setShowHistory(true);
   };
 
-  const handleUpdateDeviceType = async () => {
-    if (!selectedDevice || !deviceType.trim()) return;
+  const handleUpdateDeviceInfo = async () => {
+    if (!selectedDevice) return;
+    if (!deviceType.trim() && !serialNumber.trim()) return;
 
     try {
       const token = localStorage.getItem('admin_token');
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/autosoft/device/${selectedDevice.barcode}/type`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/autosoft/device/${selectedDevice.barcode}/info`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ device_type: deviceType })
+          body: JSON.stringify({ 
+            device_type: deviceType || null,
+            serial_number: serialNumber || null
+          })
         }
       );
 
@@ -152,7 +156,7 @@ const AutosoftDashboard = () => {
         fetchDevices();
       }
     } catch (error) {
-      console.error('Error updating device type:', error);
+      console.error('Error updating device info:', error);
     }
   };
 
