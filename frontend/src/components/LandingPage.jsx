@@ -19,59 +19,6 @@ const LandingPage = () => {
   const [showResults, setShowResults] = useState(false);
   const [enabledToolIds, setEnabledToolIds] = useState([]);
   const [loadingTools, setLoadingTools] = useState(true);
-  const [videoPlaylist, setVideoPlaylist] = useState([]);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  // Fetch video playlist from Pexels for landing page - fetch multiple videos
-  useEffect(() => {
-    const fetchVideoPlaylist = async () => {
-      try {
-        // Fetch multiple pages to get more variety
-        const pages = [1, 2, 3];
-        const allVideos = [];
-        const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-        for (const page of pages) {
-          const response = await fetch(
-            `${backendUrl}/api/pexels/videos?query=technology+data+server+network+circuit+board+digital&orientation=landscape&per_page=10&page=${page}`
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            if (data.videos && data.videos.length > 0) {
-              allVideos.push(...data.videos);
-            }
-          }
-        }
-
-        if (allVideos.length > 0) {
-          // Shuffle videos for random order and select 10 for playlist
-          const shuffled = allVideos.sort(() => Math.random() - 0.5);
-          const selectedVideos = shuffled.slice(0, 10).map(video => {
-            const videoFile = video.video_files.find(file => file.quality === 'hd') || video.video_files[0];
-            return videoFile.link;
-          });
-          
-          setVideoPlaylist(selectedVideos);
-          console.log(`Pexels video playlist loaded: ${selectedVideos.length} coding videos`);
-        }
-      } catch (error) {
-        console.error('Error fetching Pexels video playlist:', error);
-      }
-    };
-
-    fetchVideoPlaylist();
-  }, []); // Empty dependency array - only run once on mount
-
-  // Handle video end - switch to next video
-  const handleVideoEnd = () => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoPlaylist.length);
-      setIsTransitioning(false);
-    }, 300); // Short transition delay
-  };
 
   // Icon mapping for tools
   const iconMap = {
@@ -214,42 +161,10 @@ const LandingPage = () => {
   return (
     <>
       <div className="min-h-screen relative overflow-hidden">
-        {/* Video Background from Pexels - Playlist with transitions */}
-        <div className="absolute inset-0 z-0 overflow-hidden" style={{
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-        }}>
-          {videoPlaylist.length > 0 && videoPlaylist[currentVideoIndex] ? (
-            <video
-              key={currentVideoIndex}
-              autoPlay
-              muted
-              playsInline
-              onEnded={handleVideoEnd}
-              className="w-full h-full object-cover transition-opacity duration-300"
-              style={{
-                filter: 'blur(1.5px) brightness(0.95)',
-                transform: 'scale(1.05)',
-                width: '105%',
-                height: '105%',
-                marginLeft: '-2.5%',
-                marginTop: '-2.5%',
-                opacity: isTransitioning ? 0.3 : 1
-              }}
-            >
-              <source src={videoPlaylist[currentVideoIndex]} type="video/mp4" />
-            </video>
-          ) : (
-            <div
-              className="w-full h-full"
-              style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                filter: 'blur(1.5px) brightness(0.95)',
-                transform: 'scale(1.05)'
-              }}
-            />
-          )}
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+        {/* Subtle animated multi-color gradient background */}
+        <div className="absolute inset-0 z-0 animated-gradient-bg">
+          {/* Soft dark overlay for readability */}
+          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         </div>
 
         {/* Language Toggle */}

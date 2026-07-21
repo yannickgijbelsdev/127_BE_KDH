@@ -31,13 +31,16 @@ function AppContent() {
   // Check if setup is needed
   useEffect(() => {
     const checkSetup = async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 5000);
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/needs-setup`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/needs-setup`, { signal: controller.signal });
         const data = await response.json();
         setNeedsSetup(data.needs_setup);
       } catch (err) {
         console.error('Failed to check setup status:', err);
       } finally {
+        clearTimeout(timeout);
         setCheckingSetup(false);
       }
     };
@@ -131,12 +134,6 @@ function AppContent() {
   // Don't show admin nav on login page or when not logged in
   const isLoginPage = location.pathname === '/localhost';
   const showAdminNav = isAdminLoggedIn && !isLoginPage;
-
-  if (checkingSetup) {
-    return <div className="min-h-screen bg-[#202124] flex items-center justify-center">
-      <div className="text-[#e8eaed]">Loading...</div>
-    </div>;
-  }
 
   return (
     <div className="App">

@@ -51,3 +51,25 @@
   background-size: 200% 200%;
   animation: gradient-rotate 3s ease infinite;
 }
+
+/* Subtle multi-color animated background gradient */
+@keyframes subtle-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(
+    120deg,
+    #1e3a5f,
+    #26516b,
+    #2f6d6d,
+    #3a4a72,
+    #4a3f6b,
+    #2c5364,
+    #1e3a5f
+  );
+  background-size: 320% 320%;
+  animation: subtle-gradient-shift 22s ease infinite;
+}

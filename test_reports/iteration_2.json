@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only regression test after App.js loading-gate fix + LandingPage gradient background change. Verified: (1) cold navigation to '/' renders the search input (placeholder 'Zoek een tool...') within 5s without any 'Loading...' block and without manual refresh; (2) all 5 public routes (/dpd, /printer, /sscreen, /wea, /password) render their tool UI immediately (no perpetual loading, no offline message); (3) admin login on /localhost still works — form loads, email+password (admin@127.be / Admin123!) is accepted and navigates directly to /localhost/dashboard; (4) landing page contains .animated-gradient-bg element and the Koodh footer link (data-testid='koodh-footer-link') is present bottom-left at (32, 1025) with href='https://koodh.com'. The 'keeps loading, need to refresh' bug is fixed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_tools_and_pexels.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "OBSERVATION (not a bug per review scope): logging in via /localhost with admin@127.be / Admin123! went directly to /localhost/dashboard with no TOTP step being asked. If TOTP 2FA is intended to be enforced (as noted in /app/memory/test_credentials.md and backend/.env TOTP_SECRET), the backend login response should require a 6-digit code before issuing the admin_token. Please confirm whether 2FA is intentionally optional or whether an enforcement step is missing.",
+    "Pre-existing (already flagged in iteration_1): React warning on /password page — 'Received true for a non-boolean attribute jsx' — boolean prop being passed to a non-boolean HTML attribute on a <style> tag. Convert to string or use styled-jsx conventions."
+  ],
+  "critical_code_review_comments": [
+    "App.js checkSetup useEffect: AbortController + 5s timeout is good, but the checkingSetup state is still initialized to true and only the ProtectedRoute uses it. Consider initializing checkingSetup=false and only setting it true when actually needed for admin routes, to avoid a brief false loading state on ProtectedRoute if navigated to /localhost/* before the fetch resolves.",
+    "App.js line 153: the /localhost route renders AdminSetup vs AdminLogin based on needsSetup, but during the initial 5s window needsSetup is still false (default). If the site truly needs setup and the fetch is slow, the user briefly sees the login form instead of the setup form. Minor UX edge case.",
+    "LandingPage.jsx still imports useMemo but the Pexels video playlist logic was removed — verify useMemo is still used elsewhere; if not, remove the unused import to silence lint warnings.",
+    "server.py still 1375 lines (from iteration_1) — split into routers/modules recommended."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not_tested_this_iteration", "frontend": "100%"},
+  "test_credentials": "Admin login /localhost tested with admin@127.be / Admin123! — reached dashboard directly (no TOTP prompt observed).",
+  "seed_data_creation": "None.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Loading-gate bug is fixed. Key file changes this iteration: App.js (checkSetup uses AbortController + 5s timeout; global checkingSetup blocking removed — only ProtectedRoute now uses it). LandingPage.jsx uses div.animated-gradient-bg instead of Pexels video. Use wait_until='domcontentloaded' when testing '/' — networkidle never fires. Admin login form at /localhost accepts admin@127.be / Admin123! and (in current preview env) navigates straight to /localhost/dashboard without a TOTP step — flag this if 2FA is expected to be mandatory.",
+  "rca of the issue": "Root cause of 'website keeps loading — must refresh manually': The previous App.js had a global gate `if (checkingSetup) return <Loading />` at the top level of AppContent (before <Routes>). Any slow/failed /api/admin/needs-setup request blocked the ENTIRE app (including public /, /dpd, etc.) behind a full-screen 'Loading...' div until setCheckingSetup(false) fired. On flaky first-fetch situations or when the request hung, users saw a permanent loading screen and had to hard refresh. Fix applied: (a) removed the global checkingSetup gate — public Routes always render; (b) added an AbortController with a 5s timeout on the fetch so setCheckingSetup(false) is guaranteed to fire; (c) ProtectedRoute (admin-only) still uses checkingSetup for the brief window while needs-setup resolves — this is correct scoping. Verified via Playwright cold navigation: search input appears in <5s, body is not stuck on 'Loading...'."
+}
