@@ -2,47 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ToolStatusWrapper = ({ toolId, children }) => {
-  const [status, setStatus] = useState({ loading: true, enabled: true });
+  // Optimistic: render the tool immediately and only flip to the offline
+  // screen if the backend explicitly reports the tool as disabled.
+  const [enabled, setEnabled] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let cancelled = false;
     const checkToolStatus = async () => {
       try {
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/api/tools/${toolId}/status`
         );
-        
-        if (!response.ok) {
-          // Fail-open: don't mark a tool offline just because the status
-          // check failed (e.g. DB not seeded). Only an explicit disable counts.
-          setStatus({ loading: false, enabled: true });
-          return;
-        }
-        
+        if (!response.ok) return; // fail-open
         const data = await response.json();
-        setStatus({ loading: false, enabled: data.enabled, name: data.name });
+        if (!cancelled && data.enabled === false) {
+          setEnabled(false);
+        }
       } catch (error) {
-        console.error('Error checking tool status:', error);
-        // If there's an error fetching status, allow the tool to load
-        setStatus({ loading: false, enabled: true });
+        // Network error -> keep the tool available (fail-open)
       }
     };
 
     checkToolStatus();
+    return () => { cancelled = true; };
   }, [toolId]);
 
-  if (status.loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#202124] to-[#292a2d] flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#8ab4f8] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-[#9aa0a6] text-lg">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!status.enabled) {
+  if (!enabled) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#202124] to-[#292a2d] flex items-center justify-center p-4">
         <div className="text-center max-w-md">

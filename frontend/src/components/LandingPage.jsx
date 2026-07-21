@@ -17,8 +17,9 @@ const LandingPage = () => {
   const [showChangelog, setShowChangelog] = useState(false);
   const [showToolSuggestion, setShowToolSuggestion] = useState(false);
   const [showResults, setShowResults] = useState(false);
-  const [enabledToolIds, setEnabledToolIds] = useState([]);
-  const [loadingTools, setLoadingTools] = useState(true);
+  // Optimistic default: show all known tools instantly, then reconcile with backend.
+  const [enabledToolIds, setEnabledToolIds] = useState(['dpd', 'printer', 'sscreen', 'wea', 'password']);
+  const [loadingTools, setLoadingTools] = useState(false);
 
   // Icon mapping for tools
   const iconMap = {

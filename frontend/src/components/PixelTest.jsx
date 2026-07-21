@@ -66,7 +66,7 @@ const PixelTest = () => {
 
   // Loading animation (1 second)
   useEffect(() => {
-    const duration = 1000;
+    const duration = 300;
     const interval = 30;
     const steps = duration / interval;
     let step = 0;
@@ -77,7 +77,7 @@ const PixelTest = () => {
 
       if (step >= steps) {
         clearInterval(timer);
-        setTimeout(() => setIsLoading(false), 200);
+        setTimeout(() => setIsLoading(false), 50);
       }
     }, interval);
 
