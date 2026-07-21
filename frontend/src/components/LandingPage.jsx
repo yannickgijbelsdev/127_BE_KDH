@@ -152,12 +152,9 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="min-h-screen relative overflow-hidden">
-        {/* Subtle animated multi-color gradient background */}
-        <div className="absolute inset-0 z-0 animated-gradient-bg">
-          {/* Soft dark overlay for readability */}
-          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        </div>
+      <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#0b0f19' }}>
+        {/* Solid dark (toolbox) background */}
+        <div className="absolute inset-0 z-0" style={{ backgroundColor: '#0b0f19' }}></div>
 
         {/* Language Toggle */}
         <LanguageToggle />

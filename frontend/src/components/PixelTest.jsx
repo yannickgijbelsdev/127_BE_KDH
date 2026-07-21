@@ -23,32 +23,7 @@ const PixelTest = () => {
   const [showChangelog, setShowChangelog] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  // Fetch random background image from Pexels
-  useEffect(() => {
-    const fetchBackgroundImage = async () => {
-      try {
-        // Random page between 1-10 for variety - tech/working/networking theme
-        const randomPage = Math.floor(Math.random() * 10) + 1;
-        const backendUrl = process.env.REACT_APP_BACKEND_URL;
-        const response = await fetch(
-          `${backendUrl}/api/pexels/photos?query=technology+data+circuit+board+server+network+digital&orientation=landscape&per_page=15&page=${randomPage}`
-        );
-        
-        if (response.ok) {
-          const data = await response.json();
-          if (data.photos && data.photos.length > 0) {
-            const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)];
-            setBackgroundImage(randomPhoto.src.large);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching Pexels image:', error);
-        setBackgroundImage('');
-      }
-    };
-
-    fetchBackgroundImage();
-  }, []);
+  // Solid dark (toolbox) background — no external image fetch.
 
   // Log page visit on mount
   useEffect(() => {
@@ -250,7 +225,7 @@ const PixelTest = () => {
             <div
               className="w-full h-full"
               style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: '#0b0f19',
                 filter: 'blur(1.5px) brightness(0.95)',
                 transform: 'scale(1.05)'
               }}
@@ -323,7 +298,7 @@ const PixelTest = () => {
         onClick={handleClick}
         className="relative min-h-screen no-transition"
         style={{ 
-          backgroundColor: currentColorObj.hex,
+          backgroundColor: isFullscreen ? currentColorObj.hex : '#0b0f19',
           cursor: isFullscreen ? 'none' : 'pointer'
         }}
       >
