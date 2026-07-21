@@ -20,6 +20,8 @@ Dutch IT-tools web app ("127"). Suite of browser-based hardware/diagnostic tools
 - Frontend env: `REACT_APP_BACKEND_URL`. Backend env keys: MONGO_URL, DB_NAME, CORS_ORIGINS, JWT_SECRET_KEY, ADMIN_EMAIL, TOTP_SECRET, PEXELS_API_KEY.
 
 ## Implemented (log)
+- 2026-06: Fixed "website keeps loading / must refresh manually" — `App.js` had a global `if (checkingSetup) return <Loading/>` that blocked the ENTIRE app (incl. public pages) behind the `/api/admin/needs-setup` fetch; a hung request left a permanent loading screen. Removed the global gate (public routes render immediately; ProtectedRoute still gates admin), added AbortController 5s timeout. Verified iteration_2.json.
+- 2026-06: Landing page background changed from Pexels video → subtle animated multi-color CSS gradient (`.animated-gradient-bg` + `@keyframes subtle-gradient-shift` in App.css). Removed video-playlist fetch logic (also reduced loading noise).
 - 2026-06: Koodh logo added bottom-left of landing page (white, links to koodh.com), no pill.
 - 2026-06: Fixed "tools offline" bug — `/api/tools/{id}/status` now fail-opens (200 + enabled:true) instead of 404 when tool not seeded; `ToolStatusWrapper.jsx` also fail-opens on non-2xx.
 - 2026-06: Pexels proxy now cached (TTL 3600s) + graceful empty fallback → faster, more resilient tools.
