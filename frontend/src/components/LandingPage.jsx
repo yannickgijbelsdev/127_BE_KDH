@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Monitor, Printer, Video, Lock, Plus, Wrench } from 'lucide-react';
 import FloatingFeedbackButton from './FloatingFeedbackButton';
+import FloatingVideoTiles from './FloatingVideoTiles';
 import ChangelogModal from './ChangelogModal';
 import ToolSuggestionModal from './ToolSuggestionModal';
 import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
@@ -152,6 +153,9 @@ const LandingPage = () => {
       <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: '#0b0f19' }}>
         {/* Solid dark (toolbox) background */}
         <div className="absolute inset-0 z-0" style={{ backgroundColor: '#0b0f19' }}></div>
+
+        {/* Floating Pexels IT video tiles (behind the central card) */}
+        <FloatingVideoTiles />
 
         {/* Language Toggle */}
         {/* language toggle removed */}
