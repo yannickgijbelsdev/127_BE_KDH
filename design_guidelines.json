@@ -1,0 +1,103 @@
+{
+  "project_name": "Tool127",
+  "theme": "dark_and_light_toggle",
+  "design_archetype": "Swiss & High-Contrast (Authority, Clarity) mixed with Developer Terminal aesthetics",
+  "typography": {
+    "headings": "Cabinet Grotesk (for marketing/landing moments) or IBM Plex Sans (for application UI)",
+    "body": "IBM Plex Sans",
+    "monospace": "JetBrains Mono or Fira Code",
+    "scale_rules": {
+      "h1": "text-3xl md:text-4xl tracking-tight font-semibold",
+      "h2": "text-xl md:text-2xl tracking-tight font-medium",
+      "body": "text-sm md:text-base leading-relaxed",
+      "mono": "text-[13px] tracking-tight leading-loose",
+      "labels": "text-xs font-semibold uppercase tracking-[0.1em]"
+    }
+  },
+  "colors": {
+    "strategy": "Stark structural monochrome with a single, highly visible accent color (Vercel/Raycast style).",
+    "light_mode": {
+      "background": "#FAFAFA",
+      "surface": "#FFFFFF",
+      "border": "#EAEAEA",
+      "text_primary": "#111111",
+      "text_secondary": "#666666",
+      "accent": "#0070F3",
+      "muted": "#F3F4F6"
+    },
+    "dark_mode": {
+      "background": "#0A0A0A",
+      "surface": "#111111",
+      "border": "#222222",
+      "text_primary": "#EDEDED",
+      "text_secondary": "#888888",
+      "accent": "#3291FF",
+      "muted": "#1F2937"
+    }
+  },
+  "visual enhancers": {
+    "borders": "1px solid crisp borders everywhere. Avoid soft drop shadows. Use inner glow (box-shadow inset) for depth on dark mode.",
+    "glassmorphism": "Used ONLY for Command Palette and Sticky Headers. MUST include saturation boost and subtle border. e.g., backdrop-blur-xl bg-background/80.",
+    "code_blocks": "Slightly darkened/tinted backgrounds (e.g., bg-[#111] in dark mode) with syntax highlighting colors that meet 4.5:1 contrast."
+  },
+  "component name": [
+    "Shadcn Command (for global search cmdk)",
+    "Shadcn Sidebar (customized for navigation)",
+    "Shadcn Tabs (for switching between settings/tools)",
+    "Shadcn Resizable (for draggable split panes between Input/Output)",
+    "Shadcn Switch (for toggles)",
+    "Sonner (for toast notifications like 'Copied!')"
+  ],
+  "grids": {
+    "home": "High Density Grid. grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6. Cardless or minimal outline cards for tools.",
+    "tool_workspace": "Two-pane split layout. h-[calc(100vh-64px)]. flex flex-col lg:flex-row w-full gap-4."
+  },
+  "layouts": {
+    "app_shell": "Left Sidebar (w-64) + Right Main Content. Mobile uses hamburger menu to trigger sidebar sheet.",
+    "sidebar": "Dense list with category headers. Active states should have subtle bg highlight and an accent left-border indicator.",
+    "command_palette": "Centered overlay, max-w-2xl, triggered globally via Cmd+K. Must have a backdrop-blur and semi-opaque background. NO transparent background.",
+    "tool_workspace_header": "Flex row, left-aligned title, right-aligned actions (Copy, Download, Clear) inside a toolbar."
+  },
+  "motion": {
+    "transitions": "Snappy and precise. Use duration-150 ease-out. BAN transition-all.",
+    "hover_states": "Cards lift slightly (-translate-y-[2px]) with a shadow. Buttons dim slightly or invert colors.",
+    "microinteractions": "Copy button should temporarily change icon to a checkmark and scale up slightly when clicked."
+  },
+  "accessibility": {
+    "contrast": "Strict adherence to APCA / WCAG AA. Text over backgrounds must be clearly readable.",
+    "testing_attributes": "EVERY interactive element must have data-testid. e.g., data-testid='sidebar-json-formatter', data-testid='copy-btn'.",
+    "keyboard_navigation": "Full support for Tab/Shift+Tab with visible focus-visible ring-2 ring-accent ring-offset-background.",
+    "shortcuts": "Use <kbd> tags visually for shortcuts. e.g., Cmd + K, Cmd + S, Cmd + Enter to format."
+  },
+  "media": "Use Lucide-React icons for UI elements. Ensure stroke-width is consistent (1.5 or 2).",
+  "3d libraries": "None required. Keep it flat, fast, and 2D for maximum performance.",
+  "image_urls": {
+    "empty_state": "No external images needed for developer utilities. Use typographic empty states or simple SVG icons."
+  },
+  "component_path": {
+    "ui": "src/components/ui",
+    "tools": "src/tools",
+    "layouts": "src/layouts"
+  },
+  "instructions_to_main_agent": [
+    "Build the application using React (.js/.jsx files only, NO .tsx).",
+    "Implement a robust client-side routing setup react-router-dom.",
+    "Ensure theme toggling works by modifying the .dark class on the HTML element.",
+    "Integrate 'cmdk' (command palette) accessible from anywhere via keyboard shortcut.",
+    "Build a Split Pane view for tools like JSON Formatter (Input on left, Output on right).",
+    "All tools must execute synchronously or via Web Workers completely in-browser. Do not mock API calls, implement actual JS logic (JSON.parse, btoa, atob, etc).",
+    "Ensure 'Copy to Clipboard' and 'Download File' utility functions are reusable across all tools.",
+    "Use Shadcn components but style them strictly to match the high-contrast developer aesthetic described.",
+    "DO NOT use transparent backgrounds on dropdowns, select menus, or command palettes."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic outputs. Avoid 'AI slop' aesthetic. Create crisp, professional devtools.",
+    "Do not use dark colors as gradient backgrounds. Stick to solid monochromes with bright accents.",
+    "Do NOT center align the app container. Keep text strictly left-aligned for data/code.",
+    "Never use AI assistant Emojis (🤖🧠💡) for icons. Use clean Lucide icons.",
+    "You MUST NOT apply universal transition (transition: all). Target specific properties.",
+    "Customize the scrollbars in index.css to be thin, trackless, and unobtrusive (developer style).",
+    "Every button, input, and interactive tool MUST have a data-testid attribute.",
+    "Use Sonner for all toast notifications, configured to bottom-right."
+  ]
+}
