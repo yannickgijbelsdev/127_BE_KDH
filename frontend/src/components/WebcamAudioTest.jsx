@@ -14,7 +14,7 @@ import { logPageVisit, logButtonClick, logAction, logError } from '../utils/anal
 const BUILD_VERSION = '1.8.3';
 
 const WebcamAudioTest = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
   const [showPermissionRequest, setShowPermissionRequest] = useState(false);

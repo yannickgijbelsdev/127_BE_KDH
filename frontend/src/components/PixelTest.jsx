@@ -15,7 +15,7 @@ const BUILD_VERSION = '1.8.3';
 
 const PixelTest = () => {
   const { t } = useLanguage();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [currentColor, setCurrentColor] = useState('red');
   const [isFullscreen, setIsFullscreen] = useState(false);

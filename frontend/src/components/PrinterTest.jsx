@@ -19,7 +19,7 @@ const BUILD_VERSION = '1.8.3';
 
 const PrinterTest = () => {
   const { t } = useLanguage();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showInstructions, setShowInstructions] = useState(true);
   const [showConfig, setShowConfig] = useState(false);

@@ -13,10 +13,8 @@ const ToolboxLayout = () => {
 
   return (
     <div className="toolbox-root relative min-h-screen text-white" data-testid="toolbox-root">
-      {/* 127 homepage-style animated gradient background */}
-      <div className="fixed inset-0 -z-10 animated-gradient-bg">
-        <div className="absolute inset-0 bg-black/45" />
-      </div>
+      {/* Solid dark-mode background */}
+      <div className="fixed inset-0 -z-10 bg-[#0b0f19]" />
 
       {/* Top bar */}
       <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 border-b border-white/10 bg-black/30 px-4 backdrop-blur-xl">

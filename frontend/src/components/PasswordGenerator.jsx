@@ -12,7 +12,7 @@ import { logPageVisit, logAction, logButtonClick } from '../utils/analytics';
 const BUILD_VERSION = '1.8.3';
 
 const PasswordGenerator = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [password, setPassword] = useState('');
   const [length, setLength] = useState(16);

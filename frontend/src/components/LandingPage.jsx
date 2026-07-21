@@ -386,19 +386,18 @@ const LandingPage = () => {
                     {t('Tool Voorstellen', 'Suggest Tool')}
                   </button>
 
-                  {/* Developer Toolbox entry - prominent */}
+                  {/* Developer Toolbox entry */}
                   <Link to="/tools" data-testid="open-toolbox-link" className="block">
                     <button
-                      className="group w-full px-6 py-4 rounded-full font-semibold text-base text-white flex items-center justify-center gap-2.5 transition-transform duration-150 hover:scale-[1.02]"
+                      className="w-full px-6 py-4 rounded-full font-medium text-sm text-white flex items-center justify-center gap-2 transition-colors"
                       style={{
                         background: '#000000',
                         border: '1px solid rgba(255, 255, 255, 0.18)',
                         fontFamily: 'Inter, sans-serif'
                       }}
                     >
-                      <Wrench className="w-5 h-5" />
-                      {t('Open de Developer Toolbox', 'Open the Developer Toolbox')}
-                      <span className="transition-transform duration-150 group-hover:translate-x-1">→</span>
+                      <Wrench className="w-4 h-4" />
+                      Toolbox
                     </button>
                   </Link>
                 </div>
