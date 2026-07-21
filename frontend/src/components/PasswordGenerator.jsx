@@ -414,7 +414,7 @@ const PasswordGenerator = () => {
 
             {/* Generated Password Display */}
             <div className="mb-6">
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <input
                   type="text"
                   value={password}

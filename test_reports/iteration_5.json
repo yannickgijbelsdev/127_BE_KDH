@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only visual regression test of button-spacing fix on Tool127 (Homepage, /dpd, /printer, /password, /wea). DOM inspection + bounding-box measurements show fix works ONLY on Homepage (16px v_gap) and PasswordGenerator (12px h_gap). On /dpd, /printer, /wea the second pill button is still glued to the first (0px vertical gap) because the second button is wrapped in <Link to='/'> which renders as an inline <a>; Tailwind space-y-4 applies margin-top:16px but vertical margins on display:inline elements are IGNORED, so the fix has NO visual effect on those 3 tools.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "PixelTest.jsx (/dpd)", "issue": "Start Test and 'Check out other tools' buttons still touching (0px vertical gap). Container has space-y-4 but the second button is inside <Link to='/'> which is display:inline, so margin-top is ignored. Fix: add className='block' to <Link> (or use w-full block).", "selector": "[data-testid='dpd-start-test'] + a", "priority": "HIGH"},
+      {"component": "PrinterTest.jsx (/printer)", "issue": "'Generate and Print' and 'Check out other tools' buttons still touching (0px vertical gap). Same inline <a> root cause.", "selector": "button:has-text('Generate and Print') + a", "priority": "HIGH"},
+      {"component": "WebcamAudioTest.jsx (/wea permission screen)", "issue": "'Grant Permission' and 'Cancel' buttons still touching (0px vertical gap). Same inline <a> root cause.", "selector": "button:has-text('Grant Permission') + a", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/dpd, /printer, /wea action button groups", "issues": ["Adjacent pill buttons visually glued together (rounded pills sharing edge). Homepage has correct 16px separation; three tools do NOT match the homepage standard."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Add className='block' to the <Link to='/'> wrapping the second pill button in PixelTest.jsx (~L385), PrinterTest.jsx (~L711), WebcamAudioTest.jsx (~L727). Alternative: wrap the inner <button> in a <div className='block'> or move w-full/block onto the Link. This is the ONLY change needed — space-y-4 is already present and will then take effect.",
+    "After fix, re-verify with bounding-box measurement: vertical gap between the two buttons should be 16px (not 0)."
+  ],
+  "critical_code_review_comments": [
+    "Root cause is a common CSS gotcha: Tailwind's space-y-* uses margin-top on siblings, which does not push inline elements vertically. Any place that stacks a react-router Link inside a space-y-* container must have the Link set to display:block/flex/grid.",
+    "Consider replacing space-y-* with flex flex-col gap-4 on these containers — gap works regardless of child display type, avoiding future repetitions of this bug.",
+    "The pattern <Link><button className='w-full ...' /></Link> is used in many places; verify no other tool pages share the same regression."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested)", "frontend": "50% (3 of 6 scenarios failed — button-spacing fix ineffective on /dpd, /printer, /wea)"},
+  "test_credentials": "N/A — all tested routes are public",
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Measure vertical gap between the two buttons via bounding-box after re-fix. Expect 16px (space-y-4). Playwright locators used: '[data-testid=dpd-start-test]' + 'text=\"Check out other tools\"'; 'text=\"Generate and Print\"' + 'text=\"Check out other tools\"'; 'text=\"Grant Permission\"' + 'text=\"Cancel\"'. Also verify the wrapping <a> element has computed display != inline (should be block).",
+  "rca_of_the_issue": "Symptom: 'buttons glued together' on /dpd, /printer, /wea despite space-y-4 class. Reproduction: open each URL, inspect the button-group container's children — first child is <button>, second is <a> (react-router Link). Computed styles show <a> has display:inline and marginTop:16px, but browsers ignore vertical margins on inline non-replaced elements, hence 0px effective spacing. Fix: force the Link to a block-level display (className='block' or 'block w-full'), or restructure with flex+gap. Verified working on Homepage where the equivalent Link has className='block'."
+}

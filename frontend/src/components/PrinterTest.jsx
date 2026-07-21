@@ -686,7 +686,7 @@ const PrinterTest = () => {
               </div>
 
               {/* Action buttons */}
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <button 
                   onClick={handlePrint}
                   className="w-full px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2"
