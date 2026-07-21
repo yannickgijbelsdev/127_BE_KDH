@@ -656,32 +656,47 @@ const WebcamAudioTest = () => {
   if (showPermissionRequest) {
     return (
       <>
-      <div className="min-h-screen bg-[#0b0f19] flex items-center justify-center px-6">
-        <div className="w-full max-w-md">
-          <div className="bg-[#303134] backdrop-blur-sm rounded-lg shadow-2xl p-8 border border-[#5f6368]">
+      <div className="min-h-screen relative overflow-hidden bg-[#0b0f19] flex items-center justify-center px-6">
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-30">
+          <Link to="/">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              alt="127 Logo" 
+              className="h-8 sm:h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
+              draggable="false"
+            />
+          </Link>
+        </div>
+        <div className="w-full max-w-md relative z-10">
+          <div 
+            className="rounded-3xl shadow-2xl p-8"
+            style={{
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)'
+            }}
+          >
             <div className="mb-6 flex flex-col items-center">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
-                alt="127 Logo" 
-                className="w-32 h-auto mb-4 brightness-110"
-               draggable="false"/>
-              <h2 className="text-2xl font-bold text-[#e8eaed] mb-2">Permission Required</h2>
-              <p className="text-[#9aa0a6] text-center">We need access to your camera and microphone</p>
+              <h2 className="text-2xl font-bold text-white mb-2">Permission Required</h2>
+              <p className="text-white text-opacity-70 text-center">We need access to your camera and microphone</p>
             </div>
 
-            <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 mb-4">
+            <div 
+              className="rounded-2xl p-4 mb-4"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}
+            >
               <div className="flex items-start gap-3 mb-3">
                 <Video className="w-5 h-5 text-[#8ab4f8] mt-0.5" />
                 <div>
-                  <p className="text-[#e8eaed] font-medium text-sm">Camera</p>
-                  <p className="text-[#9aa0a6] text-xs">For video preview and recording</p>
+                  <p className="text-white font-medium text-sm">Camera</p>
+                  <p className="text-white text-opacity-60 text-xs">For video preview and recording</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mic className="w-5 h-5 text-[#8ab4f8] mt-0.5" />
                 <div>
-                  <p className="text-[#e8eaed] font-medium text-sm">Microphone</p>
-                  <p className="text-[#9aa0a6] text-xs">For audio recording</p>
+                  <p className="text-white font-medium text-sm">Microphone</p>
+                  <p className="text-white text-opacity-60 text-xs">For audio recording</p>
                 </div>
               </div>
             </div>
@@ -695,25 +710,32 @@ const WebcamAudioTest = () => {
             <div className="space-y-3">
               <button 
                 onClick={requestPermissions}
-                className="w-full px-6 py-4 rounded-full font-medium transition-all"
+                className="w-full px-6 py-4 rounded-full font-medium text-sm transition-all"
                 style={{
-                  background: 'rgba(150, 180, 255, 0.3)',
-                  color: '#cfe1ff'
+                  background: 'rgba(150, 180, 255, 0.25)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(150, 180, 255, 0.15)',
+                  color: '#cfe1ff',
+                  fontFamily: 'Inter, sans-serif'
                 }}
-                onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
-                onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.35)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.25)'}
               >
                 Grant Permission
               </button>
               <Link to="/" onClick={(e) => e.stopPropagation()}>
                 <button 
-                  className="w-full px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2"
+                  className="w-full px-6 py-4 rounded-full font-medium text-sm text-white transition-all flex items-center justify-center gap-2"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    color: 'white'
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    fontFamily: 'Inter, sans-serif'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
-                  onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Cancel
@@ -721,7 +743,7 @@ const WebcamAudioTest = () => {
               </Link>
             </div>
 
-            <p className="text-xs text-[#9aa0a6] mt-4 text-center">
+            <p className="text-xs text-white text-opacity-60 mt-4 text-center">
               Your privacy matters. This tool does not store recordings on our servers.
             </p>
           </div>
@@ -747,44 +769,52 @@ const WebcamAudioTest = () => {
     <>
     <div className="min-h-screen bg-[#0b0f19] flex flex-col">
       {/* Control Panel */}
-      <div className="bg-[#303134] border-b border-[#5f6368] p-6">
+      <div className="border-b border-white border-opacity-10 p-6" style={{ background: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Video className="w-8 h-8 text-[#8ab4f8]" />
               <div>
-                <h1 className="text-2xl font-bold text-[#e8eaed]">Webcam & Audio Test</h1>
-                <p className="text-sm text-[#9aa0a6]">Test your camera and microphone</p>
+                <h1 className="text-2xl font-bold text-white">Webcam & Audio Test</h1>
+                <p className="text-sm text-white text-opacity-70">Test your camera and microphone</p>
                 {/* build number removed */}
               </div>
             </div>
             <Link to="/">
-              <Button 
-                variant="outline"
-                className="border-[#5f6368] text-[#e8eaed] hover:bg-[#3c4043]"
+              <button 
+                className="px-6 py-3 rounded-full font-medium text-sm text-white transition-all flex items-center justify-center gap-2"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  fontFamily: 'Inter, sans-serif'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-4 h-4" />
                 Back
-              </Button>
+              </button>
             </Link>
           </div>
 
           {/* Device Info */}
-          <div className="bg-[#202124] border border-[#5f6368] rounded-lg p-4 mb-4">
+          <div className="rounded-2xl p-4 mb-4" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
             <h3 className="text-sm font-semibold text-[#8ab4f8] mb-3">Device Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center gap-3">
                 <Video className="w-5 h-5 text-[#8ab4f8]" />
                 <div>
-                  <p className="text-[#9aa0a6] text-xs">Camera</p>
-                  <p className="text-[#e8eaed] text-sm font-medium">{devices.camera}</p>
+                  <p className="text-white text-opacity-60 text-xs">Camera</p>
+                  <p className="text-white text-sm font-medium">{devices.camera}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Mic className="w-5 h-5 text-[#8ab4f8]" />
                 <div>
-                  <p className="text-[#9aa0a6] text-xs">Microphone</p>
-                  <p className="text-[#e8eaed] text-sm font-medium">{devices.microphone}</p>
+                  <p className="text-white text-opacity-60 text-xs">Microphone</p>
+                  <p className="text-white text-sm font-medium">{devices.microphone}</p>
                 </div>
               </div>
             </div>
@@ -829,26 +859,31 @@ const WebcamAudioTest = () => {
               <>
                 <button 
                   onClick={downloadVideo}
-                  className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2"
+                  className="px-6 py-3 rounded-full font-medium text-sm transition-all flex items-center gap-2"
                   style={{
-                    background: 'rgba(150, 180, 255, 0.3)',
+                    background: 'rgba(150, 180, 255, 0.25)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(150, 180, 255, 0.15)',
                     color: '#cfe1ff'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.4)'}
-                  onMouseLeave={(e) => e.target.style.background = 'rgba(150, 180, 255, 0.3)'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.35)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.25)'}
                 >
                   <Download className="w-4 h-4" />
                   Download Video
                 </button>
                 <button 
                   onClick={downloadAudio}
-                  className="px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2"
+                  className="px-6 py-3 rounded-full font-medium text-sm text-white transition-all flex items-center gap-2"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    color: 'white'
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.15)'}
-                  onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.1)'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
                 >
                   <Download className="w-4 h-4" />
                   Download Audio
@@ -868,7 +903,7 @@ const WebcamAudioTest = () => {
             autoPlay
             playsInline
             muted
-            className="w-full border-4 border-[#5f6368] rounded-lg shadow-2xl bg-[#000]"
+            className="w-full border-2 border-white border-opacity-10 rounded-2xl shadow-2xl bg-[#000]"
             style={{ aspectRatio: '16/9' }}
           />
           {isRecording && (
@@ -881,11 +916,11 @@ const WebcamAudioTest = () => {
 
         {/* Audio Visualizer */}
         <div className="w-full max-w-4xl">
-          <div className="bg-[#303134] p-6 rounded-lg border border-[#5f6368]">
+          <div className="p-6 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Mic className="w-5 h-5 text-[#8ab4f8]" />
-                <span className="text-[#e8eaed] font-medium">Audio Level</span>
+                <span className="text-white font-medium">Audio Level</span>
               </div>
               <span className="text-[#8ab4f8] font-mono text-lg">{audioLevel}%</span>
             </div>
@@ -893,7 +928,7 @@ const WebcamAudioTest = () => {
               ref={canvasRef}
               width={800}
               height={100}
-              className="w-full h-24 rounded border border-[#5f6368]"
+              className="w-full h-24 rounded-lg border border-white border-opacity-10"
             />
           </div>
         </div>

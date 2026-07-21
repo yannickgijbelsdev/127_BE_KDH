@@ -300,22 +300,27 @@ const PixelTest = () => {
       >
         {/* Instructions when not in fullscreen */}
         {!isFullscreen && (
+        <>
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-30">
+          <Link to="/">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              alt="127 Logo" 
+              className="h-8 sm:h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
+              draggable="false"
+            />
+          </Link>
+        </div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 text-center">
           <div 
             className="rounded-3xl shadow-2xl p-8 max-w-md"
             style={{
-              background: 'rgba(0, 0, 0, 0.7)',
+              background: 'rgba(0, 0, 0, 0.5)',
               backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)'
+              WebkitBackdropFilter: 'blur(20px)'
             }}
           >
             <div className="mb-6 flex flex-col items-center">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
-                alt="127 Logo" 
-                className="w-32 h-auto mb-4 brightness-110"
-               draggable="false"/>
               <h2 className="text-2xl font-bold text-white mb-2">Dead Pixel Detector</h2>
               <p className="text-white text-opacity-70">{'Test your screen for dead or stuck pixels'}</p>
             </div>
@@ -363,19 +368,32 @@ const PixelTest = () => {
               <button
                 onClick={handleClick}
                 data-testid="dpd-start-test"
-                className="w-full px-4 py-3 rounded-full font-semibold text-white transition-transform duration-150 hover:scale-[1.02]"
-                style={{ background: 'linear-gradient(135deg, #3291FF 0%, #1e6fd6 100%)' }}
+                className="w-full px-6 py-4 rounded-full font-medium text-sm transition-all"
+                style={{
+                  background: 'rgba(150, 180, 255, 0.25)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(150, 180, 255, 0.15)',
+                  color: '#cfe1ff',
+                  fontFamily: 'Inter, sans-serif'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.35)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(150, 180, 255, 0.25)'}
               >
                 {'Start Test'}
               </button>
               <Link to="/">
                 <button 
-                  className="w-full px-4 py-3 rounded-full font-medium transition-colors flex items-center justify-center gap-2"
+                  className="w-full px-6 py-4 rounded-full font-medium text-sm text-white transition-all flex items-center justify-center gap-2"
                   style={{
                     background: 'rgba(255, 255, 255, 0.08)',
-                    color: '#cfe1ff',
-                    border: '1px solid rgba(255,255,255,0.12)'
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    fontFamily: 'Inter, sans-serif'
                   }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
                 >
                   <ArrowLeft className="w-4 h-4" />
                   {'Check out other tools'}
@@ -384,6 +402,7 @@ const PixelTest = () => {
             </div>
           </div>
         </div>
+        </>
       )}
       </div>
       
