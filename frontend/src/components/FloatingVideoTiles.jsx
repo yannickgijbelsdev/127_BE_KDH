@@ -27,18 +27,43 @@ const FloatingVideoTiles = () => {
 
   useEffect(() => {
     let cancelled = false;
+    const QUERIES = [
+      'server room',
+      'data center',
+      'network cables',
+      'programming code',
+      'cyber security',
+      'circuit board',
+    ];
     (async () => {
       try {
-        const res = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/pexels/videos?query=it&per_page=15&orientation=landscape`
+        const results = await Promise.all(
+          QUERIES.map((q) =>
+            fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/api/pexels/videos?query=${encodeURIComponent(
+                q
+              )}&per_page=6&orientation=landscape`
+            )
+              .then((r) => r.json())
+              .catch(() => ({ videos: [] }))
+          )
         );
-        const data = await res.json();
-        const vids = (data.videos || [])
-          .map((v) => {
+        const seen = new Set();
+        const vids = [];
+        results.forEach((data) => {
+          (data.videos || []).forEach((v) => {
             const src = pickSrc(v);
-            return src ? { src, poster: v.image || '' } : null;
-          })
-          .filter(Boolean);
+            if (src && !seen.has(src)) {
+              seen.add(src);
+              vids.push({ src, poster: v.image || '' });
+            }
+          });
+        });
+        // shuffle for a fresh mix each visit
+        for (let i = vids.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [vids[i], vids[j]] = [vids[j], vids[i]];
+        }
         if (!cancelled) setSources(vids.slice(0, TILES.length));
       } catch (e) {
         // fail silently — homepage still works without tiles
@@ -109,12 +134,12 @@ const FloatingVideoTiles = () => {
               className="fvt-inner rounded-2xl overflow-hidden"
               style={{
                 animation: `fvtFloat ${t.dur}s ease-in-out ${t.delay}s infinite`,
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 boxShadow: '0 20px 45px rgba(0, 0, 0, 0.55)',
-                opacity: 0.4,
+                opacity: 0.72,
               }}
             >
-              <div className="relative aspect-video bg-black">
+              <div className="relative aspect-video bg-[#11151f]">
                 <video
                   src={item.src}
                   poster={item.poster}
@@ -124,10 +149,11 @@ const FloatingVideoTiles = () => {
                   playsInline
                   preload="auto"
                   className="absolute inset-0 w-full h-full object-cover"
+                  style={{ filter: 'brightness(1.45) saturate(1.15) contrast(1.02)' }}
                 />
                 <div
                   className="absolute inset-0"
-                  style={{ background: 'radial-gradient(120% 120% at 50% 50%, rgba(11,15,25,0) 40%, rgba(11,15,25,0.55) 100%)' }}
+                  style={{ background: 'radial-gradient(120% 120% at 50% 50%, rgba(11,15,25,0) 65%, rgba(11,15,25,0.22) 100%)' }}
                 />
               </div>
             </div>
