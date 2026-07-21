@@ -364,7 +364,7 @@ const PixelTest = () => {
                 {'Current color:'} <span className="font-bold text-white">{currentColorObj.name}</span>
               </p>
             </div>
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 flex flex-col gap-4">
               <button
                 onClick={handleClick}
                 data-testid="dpd-start-test"

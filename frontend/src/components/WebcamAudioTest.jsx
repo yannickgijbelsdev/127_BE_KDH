@@ -707,7 +707,7 @@ const WebcamAudioTest = () => {
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               <button 
                 onClick={requestPermissions}
                 className="w-full px-6 py-4 rounded-full font-medium text-sm transition-all"
