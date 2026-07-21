@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CommandDialog, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '../ui/command';
+import { DialogTitle } from '../ui/dialog';
 import { CATEGORIES, TOOLS } from '../../tools/registry';
 
 export const CommandPalette = ({ open, onOpenChange }) => {
@@ -21,6 +22,7 @@ export const CommandPalette = ({ open, onOpenChange }) => {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
+      <DialogTitle className="sr-only">Search tools</DialogTitle>
       <CommandInput placeholder="Search tools…" data-testid="command-input" />
       <CommandList>
         <CommandEmpty>No tools found.</CommandEmpty>
