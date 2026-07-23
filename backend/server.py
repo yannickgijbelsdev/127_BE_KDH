@@ -363,12 +363,13 @@ async def pexels_media_proxy(url: str, request: Request):
     for h in ("content-type", "content-length", "content-range", "accept-ranges", "etag", "last-modified"):
         if h in upstream.headers:
             passthrough[h] = upstream.headers[h]
-    passthrough.setdefault("Accept-Ranges", "bytes")
-    passthrough["Cache-Control"] = "public, max-age=86400"
+    if "accept-ranges" not in passthrough:
+        passthrough["accept-ranges"] = "bytes"
+    passthrough["cache-control"] = "public, max-age=86400"
 
     async def body():
         try:
-            async for chunk in upstream.aiter_bytes(65536):
+            async for chunk in upstream.aiter_raw(65536):
                 yield chunk
         finally:
             await upstream.aclose()
