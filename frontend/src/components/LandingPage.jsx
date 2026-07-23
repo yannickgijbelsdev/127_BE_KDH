@@ -163,7 +163,7 @@ const LandingPage = () => {
         {/* 127 Logo Top Left */}
         <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-30">
           <img 
-            src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+            src="/assets/logo-127.png" 
             alt="127 Logo" 
             className="h-8 sm:h-12 w-auto brightness-110"
             draggable="false"
@@ -405,7 +405,7 @@ const LandingPage = () => {
             className="inline-flex items-center transition-opacity hover:opacity-80"
           >
             <img
-              src="https://customer-assets-agu9un31.emergentagent.net/job_c356018c-cf17-411c-a1d0-23a56c5d3773/artifacts/8bwbwtt6_koodh-logo.png"
+              src="/assets/koodh-logo.png"
               alt="Koodh"
               className="h-6 w-auto"
               draggable="false"

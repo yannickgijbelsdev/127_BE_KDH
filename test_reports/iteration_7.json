@@ -1,0 +1,66 @@
+{
+  "summary": "Tested asset localization and /api/pexels/media-proxy endpoint (both backend + frontend). Backend proxy is fully functional: 9/9 pytest assertions pass (full stream 200 video/mp4, Range → 206 with content-range, non-pexels host → 400, http scheme → 400, image jpeg → 200, and 4 local assets all 200). Byte-identical mp4 verified via curl (3,848,579 bytes, ftyp header intact) vs direct pexels download. Frontend: all 9 floating tiles have src+poster prefixed with /api/pexels/media-proxy, 24 proxy requests observed. All 3 localized logos (127, Koodh, Autosoft) and favicon.png/ico load locally with HTTP 200. Only external emergent hit is assets.emergent.sh/scripts/emergent-main.js (intentional per index.html comment) — zero customer-assets.emergentagent.com hits. Central card + chips + Suggest Tool + Toolbox remain readable on top of tiles. Video PLAYBACK inside the tests could NOT be observed because Playwright's headless Chromium ships without proprietary H.264 codec (navigator canPlayType('video/mp4; codecs=avc1...') = ''); when tested with a DIRECT videos.pexels.com URL in the same browser, it also failed with the identical DEMUXER_ERROR_NO_SUPPORTED_STREAMS. Real user browsers (Chrome/Safari/Firefox) will decode the H.264 mp4 fine — the poster JPEGs already render correctly in the tile screenshots.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/pexels/media-proxy", "issue": "Response has duplicated header 'accept-ranges: bytes, bytes' because passthrough dict mixes lowercase 'accept-ranges' (from upstream) with title-case 'Accept-Ranges' (setdefault fallback) — dict keys are case-sensitive so both survive. Harmless for browsers but not clean. Fix: normalize keys or drop the setdefault when the header is already present."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "asset_verification": {
+    "/assets/logo-127.png": "200 image/png (via HTML img alt='127 Logo')",
+    "/assets/koodh-logo.png": "200 image/png (footer)",
+    "/assets/autosoft-it-solutions.png": "200 image/png 77329 bytes (admin, verified via fetch)",
+    "/favicon.png": "200 image/png",
+    "/favicon.ico": "200 (7285 bytes)",
+    "og:image_meta": "https://127.be/assets/logo-127.png (canonical, not fetched by preview)"
+  },
+  "proxy_verification": {
+    "video_full_stream_200": "PASS — content-type video/mp4, streams 3,848,579 bytes, byte-identical to direct Pexels download, ftyp box at offset 4",
+    "video_range_206": "PASS — content-range 'bytes 0-1023/3848579', body <=1024 bytes",
+    "non_pexels_url_400": "PASS",
+    "http_scheme_400": "PASS",
+    "image_jpeg_200": "PASS",
+    "proxy_request_count_from_homepage": 24,
+    "tiles_using_proxy_src": "9/9",
+    "tiles_using_proxy_poster": "9/9"
+  },
+  "external_hosts_seen": {
+    "customer-assets.emergentagent.com": 0,
+    "assets.emergent.sh": 1,
+    "note": "Only assets.emergent.sh/scripts/emergent-main.js — kept intentionally by index.html comment 'please do not edit or remove'. Not part of the localization scope. Also observed us-assets.i.posthog.com (analytics, in-code), unpkg.com + cloudfront (rrweb testing scripts, intentional per index.html), fonts.googleapis.com, static.cloudflareinsights.com. All acceptable."
+  },
+  "video_playback_finding": {
+    "observed": "All 9 <video> elements report readyState=0, videoWidth=0, paused=true, error.code=4 with message 'PipelineStatus::DEMUXER_ERROR_NO_SUPPORTED_STREAMS: FFmpegDemuxer: no supported streams'.",
+    "root_cause": "Playwright's HeadlessChrome/145 is compiled from open-source Chromium without proprietary H.264 codec. Confirmed via video.canPlayType('video/mp4; codecs=avc1.42E01E, mp4a.40.2') returning '' (empty = cannot play).",
+    "control_experiment": "Loaded a DIRECT https://videos.pexels.com/.../*.mp4 URL in the SAME headless browser — it also failed with error.code=4. So the failure is codec-side, not proxy-side.",
+    "proxy_correctness_evidence": "1) curl full download of mp4 through proxy = 3,848,579 bytes, byte-identical to direct Pexels (sha match). 2) Range 0-4095 returns 206 with correct content-range: bytes 0-4095/3848579 and 4096-byte body starting with valid ftyp box. 3) Backend logs show all upstream requests returning 200/206 with no errors. 4) Poster JPEGs (which do not need codec) DO render inside the tiles in Playwright — visible in screenshots.",
+    "impact": "None for real users — Chrome/Edge/Safari/Firefox all include H.264 licensed codec and will play the mp4s. The E1 concern about screenshot tool not confirming playback is intrinsic to the tool environment; this is not a bug to fix."
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_media_proxy.py",
+    "/app/backend/tests/test_tools_and_pexels.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "OPTIONAL cleanup: normalize header keys in pexels_media_proxy to avoid the duplicated 'accept-ranges' header (case-sensitive dict merge bug). Harmless in practice but not clean."
+  ],
+  "critical_code_review_comments": [
+    "server.py pexels_media_proxy — passthrough dict lowercases upstream headers ('accept-ranges') then calls setdefault('Accept-Ranges', 'bytes'); Python dict keys are case-sensitive so both survive → duplicated header in response. Recommend building headers with a single canonical case (e.g., all lowercase) or using Starlette MutableHeaders which is case-insensitive.",
+    "server.py pexels_media_proxy — passes upstream Content-Length through even though httpx aiter_bytes() may decode Content-Encoding. Not an active issue for Pexels (mp4/jpg are not compressed) but if upstream ever returns gzip'd content the Content-Length would be wrong. Consider using aiter_raw() to preserve raw bytes matching Content-Length, or drop Content-Length when Content-Encoding is present.",
+    "server.py pexels_media_proxy — good: host allowlist (endswith '.pexels.com' + scheme=='https') prevents SSRF."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_media_proxy.py (new file)"
+  ],
+  "success_rate": {"backend": "100% (9/9 pytest passing)", "frontend": "100% for assets + integration wiring; video decoding unverifiable in test env but proven correct at byte level"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The homepage video-tile feature is production-ready. Do NOT chase 'videos don't play' as a bug — Playwright Chromium lacks H.264. Verify playback by opening the URL in a real Chrome/Safari window instead. Backend proxy is proven byte-identical to Pexels and passes Range/status/host-allowlist tests (see test_media_proxy.py). Only minor code hygiene: duplicated 'accept-ranges' header in proxy response.",
+  "rca of the issue": "N/A — no user-facing bug. The E1 concern (headless screenshot tool cannot confirm video playback) is inherent to open-source Chromium missing the H.264 codec. Proven by loading a direct Pexels URL in the same browser and reproducing the exact same DEMUXER_ERROR_NO_SUPPORTED_STREAMS."
+}

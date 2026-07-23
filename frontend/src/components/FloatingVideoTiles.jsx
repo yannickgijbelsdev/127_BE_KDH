@@ -51,12 +51,14 @@ const FloatingVideoTiles = () => {
         );
         const seen = new Set();
         const vids = [];
+        const proxy = (u) =>
+          `${process.env.REACT_APP_BACKEND_URL}/api/pexels/media-proxy?url=${encodeURIComponent(u)}`;
         results.forEach((data) => {
           (data.videos || []).forEach((v) => {
-            const src = pickSrc(v);
-            if (src && !seen.has(src)) {
-              seen.add(src);
-              vids.push({ src, poster: v.image || '' });
+            const raw = pickSrc(v);
+            if (raw && !seen.has(raw)) {
+              seen.add(raw);
+              vids.push({ src: proxy(raw), poster: v.image ? proxy(v.image) : '' });
             }
           });
         });

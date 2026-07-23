@@ -335,6 +335,52 @@ async def get_pexels_photos(query: str, orientation: str = "landscape", per_page
     """Proxy endpoint for Pexels photo API to keep API key secure"""
     return await _fetch_pexels("https://api.pexels.com/v1/search", query, orientation, per_page, page)
 
+@api_router.get("/pexels/media-proxy")
+async def pexels_media_proxy(url: str, request: Request):
+    """Stream Pexels media (videos/images) through our API so it is always reachable
+    in production regardless of CSP / cross-origin / ad-block restrictions. Supports HTTP Range."""
+    from urllib.parse import urlparse
+    parsed = urlparse(url)
+    host = (parsed.hostname or "")
+    if parsed.scheme != "https" or not (host == "pexels.com" or host.endswith(".pexels.com")):
+        raise HTTPException(status_code=400, detail="Only https pexels.com URLs are allowed")
+
+    fwd_headers = {}
+    range_header = request.headers.get("range")
+    if range_header:
+        fwd_headers["Range"] = range_header
+
+    client = httpx.AsyncClient(timeout=httpx.Timeout(30.0, read=None))
+    try:
+        req = client.build_request("GET", url, headers=fwd_headers)
+        upstream = await client.send(req, stream=True)
+    except httpx.HTTPError as e:
+        await client.aclose()
+        logger.warning(f"Pexels media proxy error: {str(e)}")
+        raise HTTPException(status_code=502, detail="Failed to fetch media")
+
+    passthrough = {}
+    for h in ("content-type", "content-length", "content-range", "accept-ranges", "etag", "last-modified"):
+        if h in upstream.headers:
+            passthrough[h] = upstream.headers[h]
+    passthrough.setdefault("Accept-Ranges", "bytes")
+    passthrough["Cache-Control"] = "public, max-age=86400"
+
+    async def body():
+        try:
+            async for chunk in upstream.aiter_bytes(65536):
+                yield chunk
+        finally:
+            await upstream.aclose()
+            await client.aclose()
+
+    return StreamingResponse(
+        body(),
+        status_code=upstream.status_code,
+        headers=passthrough,
+        media_type=passthrough.get("content-type"),
+    )
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()

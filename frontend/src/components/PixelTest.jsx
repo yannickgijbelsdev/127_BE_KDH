@@ -235,7 +235,7 @@ const PixelTest = () => {
         <div className="absolute top-8 left-8 z-30">
           <Link to="/">
             <img 
-              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              src="/assets/logo-127.png" 
               alt="127 Logo" 
               className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
               draggable="false"
@@ -304,7 +304,7 @@ const PixelTest = () => {
         <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-30">
           <Link to="/">
             <img 
-              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              src="/assets/logo-127.png" 
               alt="127 Logo" 
               className="h-8 sm:h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
               draggable="false"

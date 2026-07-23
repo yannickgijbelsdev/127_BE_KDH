@@ -77,14 +77,14 @@ const AdminNavBar = () => {
             <div className="flex items-center justify-center">
               {isCollapsed ? (
                 <img 
-                  src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+                  src="/assets/logo-127.png" 
                   alt="127 Logo" 
                   className="h-10 w-auto brightness-110"
                   draggable="false"
                 />
               ) : (
                 <img 
-                  src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+                  src="/assets/logo-127.png" 
                   alt="127 Logo" 
                   className="h-12 w-auto brightness-110"
                   draggable="false"

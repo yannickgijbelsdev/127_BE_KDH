@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../components/ui/sheet';
 import { SidebarContent } from '../components/toolbox/Sidebar';
 import { CommandPalette } from '../components/toolbox/CommandPalette';
 
-const LOGO_127 = 'https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png';
+const LOGO_127 = '/assets/logo-127.png';
 
 const ToolboxLayout = () => {
   const [paletteOpen, setPaletteOpen] = useState(false);

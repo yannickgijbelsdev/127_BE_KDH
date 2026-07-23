@@ -451,7 +451,7 @@ const AutosoftDashboard = () => {
             <!-- Header -->
             <div class="header">
               <div class="header-left">
-                <img src="https://customer-assets.emergentagent.com/job_pixel-diagnostics/artifacts/2r9adp9r_Autosoft%20IT%20Solutions%20BV.png" alt="Autosoft Logo" />
+                <img src="/assets/autosoft-it-solutions.png" alt="Autosoft Logo" />
               </div>
               <div class="header-right">
                 <strong>Autosoft IT Solutions BV</strong><br>

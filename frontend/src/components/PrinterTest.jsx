@@ -201,7 +201,7 @@ const PrinterTest = () => {
       content += `<div class="page">`;
       content += `
         <div class="header">
-          <img src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" alt="127 Logo"  draggable="false"/>
+          <img src="/assets/logo-127.png" alt="127 Logo"  draggable="false"/>
           <h1>Printer Quality Test</h1>
           <p><strong>Page ${i} of ${numPages}</strong></p>
         </div>
@@ -367,7 +367,7 @@ const PrinterTest = () => {
         <div className="absolute top-8 left-8 z-30">
           <Link to="/">
             <img 
-              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              src="/assets/logo-127.png" 
               alt="127 Logo" 
               className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
               draggable="false"
@@ -454,7 +454,7 @@ const PrinterTest = () => {
         <div className="absolute top-8 left-8 z-30">
           <Link to="/">
             <img 
-              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              src="/assets/logo-127.png" 
               alt="127 Logo" 
               className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
               draggable="false"
@@ -558,7 +558,7 @@ const PrinterTest = () => {
         <div className="absolute top-8 left-8 z-30">
           <Link to="/">
             <img 
-              src="https://customer-assets.emergentagent.com/job_tool-metrics/artifacts/w5126i9x_127_2025_Official_Logo.png" 
+              src="/assets/logo-127.png" 
               alt="127 Logo" 
               className="h-12 w-auto brightness-110 cursor-pointer hover:brightness-125 transition-all"
               draggable="false"
